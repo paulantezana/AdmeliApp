@@ -3,9 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AdmeliApp"
              x:Class="AdmeliApp.MainPage">
+    
+    <ScrollView>
+        <StackLayout BackgroundColor="White">
+            <Image Source="LoginHeader.png"></Image>
+            <StackLayout WidthRequest="200" HorizontalOptions="Center">
+                
+                <Label 
+                    Text="LOGIN"
+                    FontSize="Large"
+                    HorizontalOptions="Center"/>
+                
+                <Entry 
+                    Placeholder="Nombre de usuario"
+                    Keyboard="Email"
+                    Text="{Binding UserName}" 
+                    IsEnabled="{Binding IsNotBusy}"/>
+                
+                <Entry 
+                    Placeholder="Contraseña"
+                    IsPassword="True"
+                    Text="{Binding Password}"
+                    IsEnabled="{Binding IsNotBusy}"/>
+                
+                <Button 
+                    Style="{StaticResource buttonSuccess}"
+                    Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Text="Ingresar"/>
+                
+                <Button 
+                    Style="{StaticResource button}"
+                    Command="{Binding CancelCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Text="Cancelar"/>
 
-	<Label Text="Welcome to Xamarin.Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
-
+                <ActivityIndicator 
+                    IsRunning="{Binding IsRunning}"/>
+                
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

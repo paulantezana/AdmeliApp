@@ -2,9 +2,74 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.App">
-	<Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Colores del proyecto -->
+            <Color x:Key="color-1">#0066B7</Color>
+            <Color x:Key="color-2">#328DFB</Color>
+            <Color x:Key="color-3">#4DACFF</Color>
+            <Color x:Key="inverse">#74C93B</Color>
 
-		<!-- Application resource dictionary -->
+            <!-- Colores de alerta -->
+            <Color x:Key="alert">#FF3860</Color>
+            <Color x:Key="info">#209CEF</Color>
+            <Color x:Key="success">#23D260</Color>
+            <Color x:Key="warning">#FFDE57</Color>
 
+            <!-- Scala de grises -->
+            <Color x:Key="grey-lighter">#F5F5F5</Color>
+            <Color x:Key="grey-light">#DCDCDC</Color>
+            <Color x:Key="grey">#7A7A7A</Color>
+            <Color x:Key="grey-dark">#4A4A4A</Color>
+
+            <!-- 
+            ==================================================================================
+               BUTTON STYLES
+            -->
+            <Style x:Key="button" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource grey-lighter}" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="TextColor" Value="{DynamicResource grey-dark}" />
+            </Style>
+
+            <Style x:Key="buttonInfo" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource info}" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="TextColor" Value="white" />
+            </Style>
+
+
+            <Style x:Key="buttonSuccess" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource success}" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="TextColor" Value="white" />
+            </Style>
+
+
+            <Style x:Key="buttonWarning" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource warning}" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="TextColor" Value="#4C421A" />
+            </Style>
+
+            <Style x:Key="buttonAlert" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource alert}" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="TextColor" Value="white" />
+            </Style>
+
+
+
+        </ResourceDictionary>
 	</Application.Resources>
 </Application>

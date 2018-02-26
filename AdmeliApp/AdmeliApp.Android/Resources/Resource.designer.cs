@@ -1173,44 +1173,44 @@ namespace AdmeliApp.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c004a
-			public const int abc_background_cache_hint_selector_material_dark = 2131492938;
-			
-			// aapt resource value: 0x7f0c004b
-			public const int abc_background_cache_hint_selector_material_light = 2131492939;
-			
-			// aapt resource value: 0x7f0c004c
-			public const int abc_btn_colored_borderless_text_material = 2131492940;
-			
 			// aapt resource value: 0x7f0c004d
-			public const int abc_btn_colored_text_material = 2131492941;
+			public const int abc_background_cache_hint_selector_material_dark = 2131492941;
 			
 			// aapt resource value: 0x7f0c004e
-			public const int abc_color_highlight_material = 2131492942;
+			public const int abc_background_cache_hint_selector_material_light = 2131492942;
 			
 			// aapt resource value: 0x7f0c004f
-			public const int abc_hint_foreground_material_dark = 2131492943;
+			public const int abc_btn_colored_borderless_text_material = 2131492943;
 			
 			// aapt resource value: 0x7f0c0050
-			public const int abc_hint_foreground_material_light = 2131492944;
+			public const int abc_btn_colored_text_material = 2131492944;
+			
+			// aapt resource value: 0x7f0c0051
+			public const int abc_color_highlight_material = 2131492945;
+			
+			// aapt resource value: 0x7f0c0052
+			public const int abc_hint_foreground_material_dark = 2131492946;
+			
+			// aapt resource value: 0x7f0c0053
+			public const int abc_hint_foreground_material_light = 2131492947;
 			
 			// aapt resource value: 0x7f0c0005
 			public const int abc_input_method_navigation_guard = 2131492869;
 			
-			// aapt resource value: 0x7f0c0051
-			public const int abc_primary_text_disable_only_material_dark = 2131492945;
-			
-			// aapt resource value: 0x7f0c0052
-			public const int abc_primary_text_disable_only_material_light = 2131492946;
-			
-			// aapt resource value: 0x7f0c0053
-			public const int abc_primary_text_material_dark = 2131492947;
-			
 			// aapt resource value: 0x7f0c0054
-			public const int abc_primary_text_material_light = 2131492948;
+			public const int abc_primary_text_disable_only_material_dark = 2131492948;
 			
 			// aapt resource value: 0x7f0c0055
-			public const int abc_search_url_text = 2131492949;
+			public const int abc_primary_text_disable_only_material_light = 2131492949;
+			
+			// aapt resource value: 0x7f0c0056
+			public const int abc_primary_text_material_dark = 2131492950;
+			
+			// aapt resource value: 0x7f0c0057
+			public const int abc_primary_text_material_light = 2131492951;
+			
+			// aapt resource value: 0x7f0c0058
+			public const int abc_search_url_text = 2131492952;
 			
 			// aapt resource value: 0x7f0c0006
 			public const int abc_search_url_text_normal = 2131492870;
@@ -1221,32 +1221,35 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f0c0008
 			public const int abc_search_url_text_selected = 2131492872;
 			
-			// aapt resource value: 0x7f0c0056
-			public const int abc_secondary_text_material_dark = 2131492950;
-			
-			// aapt resource value: 0x7f0c0057
-			public const int abc_secondary_text_material_light = 2131492951;
-			
-			// aapt resource value: 0x7f0c0058
-			public const int abc_tint_btn_checkable = 2131492952;
-			
 			// aapt resource value: 0x7f0c0059
-			public const int abc_tint_default = 2131492953;
+			public const int abc_secondary_text_material_dark = 2131492953;
 			
 			// aapt resource value: 0x7f0c005a
-			public const int abc_tint_edittext = 2131492954;
+			public const int abc_secondary_text_material_light = 2131492954;
 			
 			// aapt resource value: 0x7f0c005b
-			public const int abc_tint_seek_thumb = 2131492955;
+			public const int abc_tint_btn_checkable = 2131492955;
 			
 			// aapt resource value: 0x7f0c005c
-			public const int abc_tint_spinner = 2131492956;
+			public const int abc_tint_default = 2131492956;
 			
 			// aapt resource value: 0x7f0c005d
-			public const int abc_tint_switch_thumb = 2131492957;
+			public const int abc_tint_edittext = 2131492957;
 			
 			// aapt resource value: 0x7f0c005e
-			public const int abc_tint_switch_track = 2131492958;
+			public const int abc_tint_seek_thumb = 2131492958;
+			
+			// aapt resource value: 0x7f0c005f
+			public const int abc_tint_spinner = 2131492959;
+			
+			// aapt resource value: 0x7f0c0060
+			public const int abc_tint_switch_thumb = 2131492960;
+			
+			// aapt resource value: 0x7f0c0061
+			public const int abc_tint_switch_track = 2131492961;
+			
+			// aapt resource value: 0x7f0c004c
+			public const int accent = 2131492940;
 			
 			// aapt resource value: 0x7f0c0009
 			public const int accent_material_dark = 2131492873;
@@ -1305,8 +1308,8 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f0c003f
 			public const int design_bottom_navigation_shadow_color = 2131492927;
 			
-			// aapt resource value: 0x7f0c005f
-			public const int design_error = 2131492959;
+			// aapt resource value: 0x7f0c0062
+			public const int design_error = 2131492962;
 			
 			// aapt resource value: 0x7f0c0040
 			public const int design_fab_shadow_end_color = 2131492928;
@@ -1338,8 +1341,8 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f0c0049
 			public const int design_textinput_error_color_light = 2131492937;
 			
-			// aapt resource value: 0x7f0c0060
-			public const int design_tint_password_toggle = 2131492960;
+			// aapt resource value: 0x7f0c0063
+			public const int design_tint_password_toggle = 2131492963;
 			
 			// aapt resource value: 0x7f0c0017
 			public const int dim_foreground_disabled_material_dark = 2131492887;
@@ -1410,6 +1413,12 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f0c002c
 			public const int notification_material_background_media_default_color = 2131492908;
 			
+			// aapt resource value: 0x7f0c004a
+			public const int primary = 2131492938;
+			
+			// aapt resource value: 0x7f0c004b
+			public const int primaryDark = 2131492939;
+			
 			// aapt resource value: 0x7f0c002d
 			public const int primary_dark_material_dark = 2131492909;
 			
@@ -1458,11 +1467,11 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f0c003c
 			public const int switch_thumb_disabled_material_light = 2131492924;
 			
-			// aapt resource value: 0x7f0c0061
-			public const int switch_thumb_material_dark = 2131492961;
+			// aapt resource value: 0x7f0c0064
+			public const int switch_thumb_material_dark = 2131492964;
 			
-			// aapt resource value: 0x7f0c0062
-			public const int switch_thumb_material_light = 2131492962;
+			// aapt resource value: 0x7f0c0065
+			public const int switch_thumb_material_light = 2131492965;
 			
 			// aapt resource value: 0x7f0c003d
 			public const int switch_thumb_normal_material_dark = 2131492925;
@@ -2192,26 +2201,26 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f02010f
-			public const int avd_hide_password_1 = 2130837775;
-			
-			// aapt resource value: 0x7f020110
-			public const int avd_hide_password_2 = 2130837776;
-			
 			// aapt resource value: 0x7f020111
-			public const int avd_hide_password_3 = 2130837777;
+			public const int avd_hide_password_1 = 2130837777;
+			
+			// aapt resource value: 0x7f020112
+			public const int avd_hide_password_2 = 2130837778;
+			
+			// aapt resource value: 0x7f020113
+			public const int avd_hide_password_3 = 2130837779;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020112
-			public const int avd_show_password_1 = 2130837778;
-			
-			// aapt resource value: 0x7f020113
-			public const int avd_show_password_2 = 2130837779;
-			
 			// aapt resource value: 0x7f020114
-			public const int avd_show_password_3 = 2130837780;
+			public const int avd_show_password_1 = 2130837780;
+			
+			// aapt resource value: 0x7f020115
+			public const int avd_show_password_2 = 2130837781;
+			
+			// aapt resource value: 0x7f020116
+			public const int avd_show_password_3 = 2130837782;
 			
 			// aapt resource value: 0x7f020055
 			public const int design_bottom_navigation_item_background = 2130837589;
@@ -2673,103 +2682,109 @@ namespace AdmeliApp.Droid
 			public const int LoginHeader = 2130837741;
 			
 			// aapt resource value: 0x7f0200ee
-			public const int mr_button_connected_dark = 2130837742;
+			public const int logo = 2130837742;
 			
 			// aapt resource value: 0x7f0200ef
-			public const int mr_button_connected_light = 2130837743;
+			public const int mr_button_connected_dark = 2130837743;
 			
 			// aapt resource value: 0x7f0200f0
-			public const int mr_button_connecting_dark = 2130837744;
+			public const int mr_button_connected_light = 2130837744;
 			
 			// aapt resource value: 0x7f0200f1
-			public const int mr_button_connecting_light = 2130837745;
+			public const int mr_button_connecting_dark = 2130837745;
 			
 			// aapt resource value: 0x7f0200f2
-			public const int mr_button_dark = 2130837746;
+			public const int mr_button_connecting_light = 2130837746;
 			
 			// aapt resource value: 0x7f0200f3
-			public const int mr_button_light = 2130837747;
+			public const int mr_button_dark = 2130837747;
 			
 			// aapt resource value: 0x7f0200f4
-			public const int mr_dialog_close_dark = 2130837748;
+			public const int mr_button_light = 2130837748;
 			
 			// aapt resource value: 0x7f0200f5
-			public const int mr_dialog_close_light = 2130837749;
+			public const int mr_dialog_close_dark = 2130837749;
 			
 			// aapt resource value: 0x7f0200f6
-			public const int mr_dialog_material_background_dark = 2130837750;
+			public const int mr_dialog_close_light = 2130837750;
 			
 			// aapt resource value: 0x7f0200f7
-			public const int mr_dialog_material_background_light = 2130837751;
+			public const int mr_dialog_material_background_dark = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
-			public const int mr_group_collapse = 2130837752;
+			public const int mr_dialog_material_background_light = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
-			public const int mr_group_expand = 2130837753;
+			public const int mr_group_collapse = 2130837753;
 			
 			// aapt resource value: 0x7f0200fa
-			public const int mr_media_pause_dark = 2130837754;
+			public const int mr_group_expand = 2130837754;
 			
 			// aapt resource value: 0x7f0200fb
-			public const int mr_media_pause_light = 2130837755;
+			public const int mr_media_pause_dark = 2130837755;
 			
 			// aapt resource value: 0x7f0200fc
-			public const int mr_media_play_dark = 2130837756;
+			public const int mr_media_pause_light = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int mr_media_play_light = 2130837757;
+			public const int mr_media_play_dark = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int mr_media_stop_dark = 2130837758;
+			public const int mr_media_play_light = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int mr_media_stop_light = 2130837759;
+			public const int mr_media_stop_dark = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int mr_vol_type_audiotrack_dark = 2130837760;
+			public const int mr_media_stop_light = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int mr_vol_type_audiotrack_light = 2130837761;
+			public const int mr_vol_type_audiotrack_dark = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int navigation_empty_icon = 2130837762;
+			public const int mr_vol_type_audiotrack_light = 2130837762;
 			
 			// aapt resource value: 0x7f020103
-			public const int notification_action_background = 2130837763;
+			public const int navigation_empty_icon = 2130837763;
 			
 			// aapt resource value: 0x7f020104
-			public const int notification_bg = 2130837764;
+			public const int notification_action_background = 2130837764;
 			
 			// aapt resource value: 0x7f020105
-			public const int notification_bg_low = 2130837765;
+			public const int notification_bg = 2130837765;
 			
 			// aapt resource value: 0x7f020106
-			public const int notification_bg_low_normal = 2130837766;
+			public const int notification_bg_low = 2130837766;
 			
 			// aapt resource value: 0x7f020107
-			public const int notification_bg_low_pressed = 2130837767;
+			public const int notification_bg_low_normal = 2130837767;
 			
 			// aapt resource value: 0x7f020108
-			public const int notification_bg_normal = 2130837768;
+			public const int notification_bg_low_pressed = 2130837768;
 			
 			// aapt resource value: 0x7f020109
-			public const int notification_bg_normal_pressed = 2130837769;
+			public const int notification_bg_normal = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int notification_icon_background = 2130837770;
-			
-			// aapt resource value: 0x7f02010d
-			public const int notification_template_icon_bg = 2130837773;
-			
-			// aapt resource value: 0x7f02010e
-			public const int notification_template_icon_low_bg = 2130837774;
+			public const int notification_bg_normal_pressed = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int notification_tile_bg = 2130837771;
+			public const int notification_icon_background = 2130837771;
+			
+			// aapt resource value: 0x7f02010f
+			public const int notification_template_icon_bg = 2130837775;
+			
+			// aapt resource value: 0x7f020110
+			public const int notification_template_icon_low_bg = 2130837776;
 			
 			// aapt resource value: 0x7f02010c
-			public const int notify_panel_notification_icon_bg = 2130837772;
+			public const int notification_tile_bg = 2130837772;
+			
+			// aapt resource value: 0x7f02010d
+			public const int notify_panel_notification_icon_bg = 2130837773;
+			
+			// aapt resource value: 0x7f02010e
+			public const int splash = 2130837774;
 			
 			static Drawable()
 			{
@@ -3842,8 +3857,8 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f0b0170
 			public const int Animation_Design_BottomSheetDialog = 2131427696;
 			
-			// aapt resource value: 0x7f0b018b
-			public const int AppCompatDialogStyle = 2131427723;
+			// aapt resource value: 0x7f0b018c
+			public const int AppCompatDialogStyle = 2131427724;
 			
 			// aapt resource value: 0x7f0b00b2
 			public const int Base_AlertDialog_AppCompat = 2131427506;
@@ -4319,11 +4334,11 @@ namespace AdmeliApp.Droid
 			// aapt resource value: 0x7f0b000e
 			public const int CardView_Light = 2131427342;
 			
-			// aapt resource value: 0x7f0b0189
-			public const int MainTheme = 2131427721;
-			
 			// aapt resource value: 0x7f0b018a
-			public const int MainTheme_Base = 2131427722;
+			public const int MainTheme = 2131427722;
+			
+			// aapt resource value: 0x7f0b018b
+			public const int MainTheme_Base = 2131427723;
 			
 			// aapt resource value: 0x7f0b002d
 			public const int Platform_AppCompat = 2131427373;
@@ -4408,6 +4423,9 @@ namespace AdmeliApp.Droid
 			
 			// aapt resource value: 0x7f0b004d
 			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131427405;
+			
+			// aapt resource value: 0x7f0b0189
+			public const int SplashTheme = 2131427721;
 			
 			// aapt resource value: 0x7f0b00dd
 			public const int TextAppearance_AppCompat = 2131427549;

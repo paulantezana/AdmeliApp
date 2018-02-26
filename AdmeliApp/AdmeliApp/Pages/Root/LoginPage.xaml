@@ -1,51 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:AdmeliApp"
-             x:Class="AdmeliApp.MainPage">
-    
-    <ScrollView>
-        <StackLayout BackgroundColor="White">
-            <Image Source="LoginHeader.png"></Image>
-            <StackLayout WidthRequest="200" HorizontalOptions="Center">
-                
-                <Label 
+             x:Class="AdmeliApp.Pages.Root.LoginPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout BackgroundColor="White">
+                <Image Source="LoginHeader.png"></Image>
+                <StackLayout WidthRequest="200" HorizontalOptions="Center">
+
+                    <Label 
                     Text="LOGIN"
                     FontSize="Large"
                     HorizontalOptions="Center"/>
-                
-                <Entry 
+
+                    <Entry 
                     Placeholder="Nombre de usuario"
                     Keyboard="Email"
                     Text="{Binding UserName}" 
                     IsEnabled="{Binding IsNotBusy}"/>
-                
-                <Entry 
+
+                    <Entry 
                     Placeholder="Contraseña"
                     IsPassword="True"
                     Text="{Binding Password}"
                     IsEnabled="{Binding IsNotBusy}"/>
-                
-                <Button 
+
+                    <Button 
                     Style="{StaticResource buttonSuccess}"
                     Command="{Binding LoginCommand}"
                     IsEnabled="{Binding IsNotBusy}"
                     Text="Ingresar"/>
-                
-                <Button 
+
+                    <Button 
                     Style="{StaticResource button}"
                     Command="{Binding CancelCommand}"
                     IsEnabled="{Binding IsNotBusy}"
                     Text="Cancelar"/>
 
-                <ActivityIndicator 
+                    <ActivityIndicator 
                     IsRunning="{Binding IsRunning}">
-                    <ActivityIndicator.Color>
-                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource info}"/>
-                    </ActivityIndicator.Color>
-                </ActivityIndicator>
-                
+                        <ActivityIndicator.Color>
+                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource info}"/>
+                        </ActivityIndicator.Color>
+                    </ActivityIndicator>
+
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-    </ScrollView>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

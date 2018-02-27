@@ -38,10 +38,9 @@
                     <ViewCell>
                         <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                             <Image Source="{Binding Icon}"></Image>
-                            <Label VerticalOptions="FillAndExpand" 
-                            VerticalTextAlignment="Center" 
-                            Text="{Binding Title}" 
-                            FontSize="24"/>
+                            <Label  VerticalOptions="FillAndExpand" 
+                                    VerticalTextAlignment="Center" 
+                                    Text="{Binding Title}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

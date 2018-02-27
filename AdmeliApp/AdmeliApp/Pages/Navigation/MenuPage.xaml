@@ -5,9 +5,13 @@
              Title="Menu">
     <StackLayout>
         <ListView x:Name="MenuItemsListView"
-              SeparatorVisibility="None"
-              HasUnevenRows="true"
-              ItemsSource="{Binding MenuTiendaItems}">
+            SeparatorVisibility="None"
+            HasUnevenRows="true"
+            ItemsSource="{Binding MenuTiendaItems}"
+            GroupDisplayBinding="{Binding Heading}"
+            GroupShortNameBinding="{Binding Heading}"
+            IsGroupingEnabled="true">
+            
             <ListView.Header>
                 <Grid BackgroundColor="#03A9F4">
                     <Grid.ColumnDefinitions>
@@ -27,18 +31,22 @@
                         Text="AppName"/>
                 </Grid>
             </ListView.Header>
+
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+                        <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                            <Image Source="{Binding Icon}"></Image>
                             <Label VerticalOptions="FillAndExpand" 
-                    VerticalTextAlignment="Center" 
-                    Text="{Binding Title}" 
-                    FontSize="24"/>
+                            VerticalTextAlignment="Center" 
+                            Text="{Binding Title}" 
+                            FontSize="24"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            
         </ListView>
     </StackLayout>
 </ContentPage>

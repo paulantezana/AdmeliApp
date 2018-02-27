@@ -9,18 +9,32 @@ namespace AdmeliApp.Pages.Navigation
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<MenuTienda> MenuTiendaItems { get; set; }
+        public ObservableCollection<MenuGrouping> MenuTiendaItems { get; set; }
 
         public MenuViewModel()
         {
-            MenuTiendaItems = new ObservableCollection<MenuTienda>(new[]
+            MenuTiendaItems = new ObservableCollection<MenuGrouping>()
             {
-                new MenuTienda { Id = 0, Title = "Page 1" },
-                new MenuTienda { Id = 1, Title = "Page 2" },
-                new MenuTienda { Id = 2, Title = "Page 3" },
-                new MenuTienda { Id = 3, Title = "Page 4" },
-                new MenuTienda { Id = 4, Title = "Page 5" },
-            });
+                new MenuGrouping("Grupo 1")
+                {
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 1" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 2" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 3" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 4" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 5" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 6" }
+                },
+
+                new MenuGrouping("Grupo 2")
+                {
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 1" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 2" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 3" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 4" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 5" },
+                    new MenuTienda() { Id = 1, Icon = "icon.png", Title = "Menu 6" }
+                }
+            };
         }
 
         #region INotifyPropertyChanged Implementation

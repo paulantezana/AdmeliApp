@@ -5,7 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Colores del proyecto -->
-            <Color x:Key="color-1">#0066B7</Color>
+            <Color x:Key="color-1">#1A232F</Color>
             <Color x:Key="color-2">#328DFB</Color>
             <Color x:Key="color-3">#4DACFF</Color>
             <Color x:Key="inverse">#74C93B</Color>

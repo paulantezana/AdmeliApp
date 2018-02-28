@@ -9,7 +9,7 @@ namespace AdmeliApp.Pages.Navigation
     {
         public MenuTienda()
         {
-            TargetType = typeof(HomePage);
+            TargetType = typeof(HomePage); /// Mostrar página por defecto
         }
         public int Id { get; set; }
         public string Title { get; set; }

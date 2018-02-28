@@ -11,7 +11,6 @@ namespace AdmeliApp.Pages.Navigation
         {
             Heading = heading;
         }
-
         public string Heading { get; set; }
     }
 }

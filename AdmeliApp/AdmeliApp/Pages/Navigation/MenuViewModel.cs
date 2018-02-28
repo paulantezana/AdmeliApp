@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.Pages.ProductoPages;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -32,10 +33,10 @@ namespace AdmeliApp.Pages.Navigation
 
                 new MenuGrouping("Productos")
                 {
-                    new MenuTienda() { Id = 301, Icon = "producto_icon.png", Title = "Listado de productos" },
-                    new MenuTienda() { Id = 302, Icon = "marca_icon.png", Title = "Marcas" },
-                    new MenuTienda() { Id = 303, Icon = "unidadMedida_icon.png", Title = "Unidades de medida" },
-                    new MenuTienda() { Id = 304, Icon = "categoria_icon.png", Title = "Categorias" }
+                    new MenuTienda() { Id = 301, Icon = "producto_icon.png", Title = "Listado de productos", TargetType = typeof(ProductosPage) },
+                    new MenuTienda() { Id = 302, Icon = "marca_icon.png", Title = "Marcas", TargetType = typeof(MarcaPage) },
+                    new MenuTienda() { Id = 303, Icon = "unidadMedida_icon.png", Title = "Unidades de medida", TargetType = typeof(UnidadMedidaPage) },
+                    new MenuTienda() { Id = 304, Icon = "categoria_icon.png", Title = "Categorias", TargetType = typeof(CategoriaPage) }
                 },
 
                 new MenuGrouping("Almacen")

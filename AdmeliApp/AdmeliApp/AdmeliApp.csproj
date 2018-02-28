@@ -21,6 +21,18 @@
     <EmbeddedResource Update="Pages\Navigation\MenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ProductoPages\CategoriaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ProductoPages\MarcaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ProductoPages\ProductosPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ProductoPages\UnidadMedidaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Root\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -34,5 +46,11 @@
 
   <ItemGroup>
     <Folder Include="Pages\Helpers\" />
+    <Folder Include="Pages\ConfiguracionPages\" />
+    <Folder Include="Pages\CompraPages\" />
+    <Folder Include="Pages\AlmacenPages\" />
+    <Folder Include="Pages\CajaPages\" />
+    <Folder Include="Pages\HerramientaPages\" />
+    <Folder Include="Pages\VentaPages\" />
   </ItemGroup>
 </Project>

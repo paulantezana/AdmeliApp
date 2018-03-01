@@ -3,10 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ProductoPages.CategoriaPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Estamos en categorias"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ListView 
+            ItemsSource="{Binding CategoriaItems}"
+            HasUnevenRows="True"
+            IsPullToRefreshEnabled="True"
+            RefreshCommand="{Binding RefreshCategoriaCommand}"
+            IsRefreshing="{Binding IsRefreshingCategoria, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Anular" Command="{Binding Editar}"/>
+                            <MenuItem Text="Eliminar"/>
+                        </ViewCell.ContextActions>
+                        <StackLayout  BackgroundColor="White" Padding="15,12">
+                            <Label Text="{Binding nombreCategoria}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

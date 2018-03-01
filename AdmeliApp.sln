@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmeliApp.iOS", "AdmeliApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmeliApp.UWP", "AdmeliApp\AdmeliApp.UWP\AdmeliApp.UWP.csproj", "{EA2AC623-58D3-40FC-89BC-20283C21B474}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmeliApp", "AdmeliApp\AdmeliApp\AdmeliApp.csproj", "{BB19F112-F3EF-45E2-8727-490A4762D00B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmeliApp", "AdmeliApp\AdmeliApp\AdmeliApp.csproj", "{BB19F112-F3EF-45E2-8727-490A4762D00B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

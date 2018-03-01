@@ -1,4 +1,5 @@
-﻿using AdmeliApp.ViewModel;
+﻿using AdmeliApp.MainViewModel;
+using AdmeliApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace AdmeliApp.Pages.ProductoPages
 		public CategoriaPage ()
 		{
 			InitializeComponent ();
-            BindingContext = new MainViewModel();
+            BindingContext = new CategoriaMainViewModel();
         }
 	}
 }

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:infra="clr-namespace:AdmeliApp.Insfrastructure"
              x:Class="AdmeliApp.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -68,14 +67,7 @@
                 <Setter Property="BorderRadius" Value="5" />
                 <Setter Property="TextColor" Value="white" />
             </Style>
-
-            <!-- 
-            ================================================================================================================
-               INSTANCE LOCATOR ===== Se usa para conectar con los view models que estas asu ves consumen el web service
-            -->
-
-            <infra:InstanceLocator x:Key="Locator"/>
-
+            
         </ResourceDictionary>
 	</Application.Resources>
 </Application>

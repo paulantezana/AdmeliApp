@@ -2,12 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.Root.HomePage"
+             xmlns:Float="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
              Title="Home">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Home Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Float:FloatingActionButton 
+                x:Name="FAB" 
+                HorizontalOptions="End" 
+                WidthRequest="50" 
+                HeightRequest="50"  
+                VerticalOptions="End" 
+                Image="floatAdd_icon.png" 
+                ButtonColor="#03A9F4"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

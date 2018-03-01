@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using SuaveControls.FloatingActionButton.iOS.Renderers;
 using UIKit;
 
 namespace AdmeliApp.iOS
@@ -24,6 +25,9 @@ namespace AdmeliApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            // Permite renderizar los botones flotantes que se usan en andrid
+            FloatingActionButtonRenderer.InitRenderer();
 
             return base.FinishedLaunching(app, options);
         }

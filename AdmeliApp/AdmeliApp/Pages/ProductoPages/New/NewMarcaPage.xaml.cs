@@ -1,5 +1,4 @@
-﻿using AdmeliApp.MainViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AdmeliApp.Pages.ProductoPages
+namespace AdmeliApp.Pages.ProductoPages.New
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProductosPage : ContentPage
+	public partial class NewMarcaPage : ContentPage
 	{
-		public ProductosPage ()
+		public NewMarcaPage ()
 		{
 			InitializeComponent ();
-            BindingContext = new ProductoMainViewModel();
-        }
+		}
 	}
 }

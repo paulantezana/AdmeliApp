@@ -13,7 +13,7 @@ namespace AdmeliApp
 		{
 			InitializeComponent();
 
-            MainPage = new AdmeliApp.Pages.Root.RootPage();
+            MainPage = new AdmeliApp.Pages.Root.LoginPage();
 		}
 
 		protected override void OnStart ()

@@ -10,6 +10,12 @@
             <ContentView
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+
+                <SearchBar
+                        Text="{Binding SearchText, Mode=TwoWay}"
+                        SearchCommand="{Binding SearchCommand}"
+                        Placeholder="Buscar..."/>
+
                 <ListView 
                     ItemsSource="{Binding UnidadMedidaItems}"
                     HasUnevenRows="True"

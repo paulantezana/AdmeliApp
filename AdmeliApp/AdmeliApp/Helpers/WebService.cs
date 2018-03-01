@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -27,6 +28,39 @@ namespace AdmeliApp.Helpers
 
             this.urlBase = String.Format("{0}/{1}", domainName, directory);
         }
+
+        /// <summary>
+        /// Verificar la conexion de internet
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Response> CheckConnection()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    msj = "Por favor encienda su configuración de internet.",
+                };
+            }
+
+            var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+            if (!isReachable)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    msj = "Comprueba tu conexión a Internet.",
+                };
+            }
+
+            return new Response
+            {
+                IsSuccess = true,
+                msj = "Ok",
+            };
+        }
+
 
         /// <summary>
         /// Enviar y recivir datos mediante el metodo POST

@@ -5,40 +5,50 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="White">
-                <Image Source="LoginHeader.png"></Image>
-                <StackLayout WidthRequest="200" HorizontalOptions="Center">
+                <!--<Image Source="LoginHeader.png"></Image>-->
+                <StackLayout Padding="40,0,40,0" VerticalOptions="CenterAndExpand">
 
                     <Label 
-                    Text="LOGIN"
-                    FontSize="Large"
-                    HorizontalOptions="Center"/>
+                        Text="ADMELI"
+                        FontSize="50"
+                        HorizontalOptions="Center"/>
 
                     <Entry 
-                    Placeholder="Nombre de usuario"
-                    Keyboard="Email"
-                    Text="{Binding UserName}" 
-                    IsEnabled="{Binding IsNotBusy}"/>
+                        Placeholder="Nombre de usuario"
+                        Keyboard="Email"
+                        Text="{Binding UserName}" 
+                        IsEnabled="{Binding IsEnabled}"/>
 
                     <Entry 
-                    Placeholder="Contraseña"
-                    IsPassword="True"
-                    Text="{Binding Password}"
-                    IsEnabled="{Binding IsNotBusy}"/>
+                        Placeholder="Contraseña"
+                        IsPassword="True"
+                        Text="{Binding Password}"
+                        IsEnabled="{Binding IsEnabled}"/>
+
+                    <StackLayout
+                        Margin="10,0"
+                        Orientation="Horizontal"
+                        VerticalOptions="CenterAndExpand">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Recordar"
+                            VerticalOptions="Center">
+                        </Label>
+                        <Switch
+                            IsToggled="{Binding IsRemembered, Mode=TwoWay}"
+                            HorizontalOptions="End">
+                        </Switch>
+                    </StackLayout>
 
                     <Button 
-                    Style="{StaticResource buttonSuccess}"
-                    Command="{Binding LoginCommand}"
-                    IsEnabled="{Binding IsNotBusy}"
-                    Text="Ingresar"/>
-
-                    <Button 
-                    Style="{StaticResource button}"
-                    Command="{Binding CancelCommand}"
-                    IsEnabled="{Binding IsNotBusy}"
-                    Text="Cancelar"/>
+                        Style="{StaticResource buttonSuccess}"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Ingresar"/>
 
                     <ActivityIndicator 
-                    IsRunning="{Binding IsRunning}">
+                        IsRunning="{Binding IsRunning}">
                         <ActivityIndicator.Color>
                             <OnPlatform x:TypeArguments="Color" Android="{StaticResource info}"/>
                         </ActivityIndicator.Color>

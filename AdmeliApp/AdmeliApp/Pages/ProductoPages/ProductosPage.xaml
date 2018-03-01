@@ -1,12 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Float="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductosPage">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Estamos en productos"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <RelativeLayout>
+
+            <!-- Listar registros en el listview -->
+            <ContentView
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+                <StackLayout>
+                    <SearchBar
+                        Text="{Binding SearchText, Mode=TwoWay}"
+                        SearchCommand="{Binding SearchCommand}"
+                        Placeholder="Buscar..."/>
+                    <ListView 
+                        ItemsSource="{Binding ProductoItems}"
+                        HasUnevenRows="True"
+                        IsPullToRefreshEnabled="True"
+                        RefreshCommand="{Binding RefreshProductoCommand}"
+                        IsRefreshing="{Binding IsRefreshingProducto, Mode=TwoWay}">
+
+                        <!-- Template Para Los items de la lista -->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem Text="Anular" Command="{Binding AnularCommand}"/>
+                                        <MenuItem Text="Eliminar" Command="{Binding EliminarCommand}"/>
+                                    </ViewCell.ContextActions>
+                                    <StackLayout  BackgroundColor="White" Padding="15,12">
+                                        <Label Text="{Binding nombreProducto}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ContentView>
+
+            <!-- Botton flotante para agregar un nuevo registro -->
+            <Float:FloatingActionButton 
+                x:Name="FAB"
+                ButtonColor="#0097F6"
+                BackgroundColor="White"
+                WidthRequest="65"
+                HeightRequest="65"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"  
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}"
+                Image="floatAdd_icon.png"/>
+        </RelativeLayout>
+
     </ContentPage.Content>
 </ContentPage>

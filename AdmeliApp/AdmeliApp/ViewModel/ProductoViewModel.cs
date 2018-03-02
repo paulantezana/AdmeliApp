@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,32 +7,94 @@ namespace AdmeliApp.ViewModel
 {
     public class ProductoViewModel
     {
-        public int idProducto { get; set; }
-        public bool cantidadFraccion { get; set; }
-        public string codigoBarras { get; set; }
-        public string codigoProducto { get; set; }
-        public string controlSinStock { get; set; }
-        public string descripcionCorta { get; set; }
-        public string descripcionLarga { get; set; }
-        public bool enCategoriaEstrella { get; set; }
-        public bool enPortada { get; set; }
-        public bool enUso { get; set; }
-        public bool estado { get; set; }
-        public int idMarca { get; set; }
-        public int idUnidadMedida { get; set; }
-        public string keywords { get; set; }
-        public string limiteMaximo { get; set; }
-        public string limiteMinimo { get; set; }
-        public bool mostrarPrecioWeb { get; set; }
-        public bool mostrarVideo { get; set; }
-        public bool mostrarWeb { get; set; }
-        public string nombreMarca { get; set; }
-        public string nombreProducto { get; set; }
-        public string nombreUnidad { get; set; }
-        public dynamic precioCompra { get; set; }
-        public string urlVideo { get; set; }
-        public bool ventaVarianteSinStock { get; set; }
-        public string nombre { get; set; }
-        public string codigo { get; set; }
+        internal WebService webService = new WebService();
+
+        public ObservableCollection<ProductoViewModel> ProductoItems { get; set; }
+
+        public string SearchText { get; set; }
+
+        private bool isRefreshingProducto { get; set; }
+        public bool IsRefreshingProducto
+        {
+            set
+            {
+                if (isRefreshingProducto != value)
+                {
+                    isRefreshingProducto = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRefreshingProducto"));
+                }
+            }
+            get
+            {
+                return isRefreshingProducto;
+            }
+        }
+
+        public ICommand RefreshProductoCommand { get; private set; }
+
+        public ICommand SearchCommand { get; set; }
+
+        public ProductoMainViewModel()
+        {
+            ProductoItems = new ObservableCollection<ProductoViewModel>();
+
+            Dictionary<string, int> list = new Dictionary<string, int>();
+            list.Add("id0", 0);
+            //Dictionary<string, int> sendList = (ConfigModel.currentProductoCategory.Count == 0) ? list : ConfigModel.currentProductoCategory;
+            LoadProducto(list, 1, 30);
+
+            RefreshProductoCommand = new Command(() =>
+            {
+                ProductoItems.Clear();
+                Dictionary<string, int> listReSend = new Dictionary<string, int>();
+                listReSend.Add("id0", 0);
+                //Dictionary<string, int> sendList = (ConfigModel.currentProductoCategory.Count == 0) ? list : ConfigModel.currentProductoCategory;
+                LoadProducto(list, 1, 30);
+            });
+
+
+            SearchCommand = new Command(() =>
+            {
+                App.Current.MainPage.DisplayAlert("Hpña", "buscando", "Cancelar");
+            });
+        }
+
+        private async void LoadProducto(Dictionary<string, int> dictionary, int page, int items)
+        {
+            try
+            {
+                IsRefreshingProducto = true;
+                // www.lineatienda.com/services.php/productos/categoria/1/100
+                Dictionary<string, int>[] dataSend = { dictionary };
+
+                RootObject<ProductoViewModel> rootData = await webService.POST<Dictionary<string, int>[], RootObject<ProductoViewModel>>("productos", String.Format("categoria/{0}/{1}", page, items), dataSend);
+                foreach (ProductoViewModel item in rootData.datos)
+                {
+                    ProductoItems.Add(new ProductoViewModel()
+                    {
+                        nombreProducto = item.nombreProducto,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                IsRefreshingProducto = false;
+            }
+        }
+
+        #region INotifyPropertyChanged Implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

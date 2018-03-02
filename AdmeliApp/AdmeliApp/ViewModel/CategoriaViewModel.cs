@@ -10,35 +10,77 @@ namespace AdmeliApp.ViewModel
 {
     public class CategoriaViewModel
     {
-        public int idCategoria { get; set; }
-        public string nombreCategoria { get; set; }
-        public int idPadreCategoria { get; set; }
-        public string padre { get; set; }
-        public int ordenVisualizacionProductos { get; set; }
-        public int mostrarProductosEn { get; set; }
-        public int numeroColumnas { get; set; }
-        public string tituloCategoriaSeo { get; set; }
-        public string urlCategoriaSeo { get; set; }
-        public string metaTagsSeo { get; set; }
-        public string cabeceraPagina { get; set; }
-        public string piePagina { get; set; }
-        public int orden { get; set; }
-        public int estado { get; set; }
-        public int mostrarWeb { get; set; }
-        public string tieneRegistros { get; set; }
-        public bool relacionPrincipal { get; set; }
-        public bool afecta { get; set; }
+        internal WebService webService = new WebService();
 
+        public ObservableCollection<CategoriaViewModel> CategoriaItems { get; set; }
 
-        public ICommand Editar { get; private set; }
-
-        public CategoriaViewModel()
+        private bool isRefreshingCategoria { get; set; }
+        public bool IsRefreshingCategoria
         {
-
-            Editar = new Command(() =>
+            set
             {
-                App.Current.MainPage.DisplayAlert("Eliminar", "¿Desea eliminar a: ? ", "Aceptar", "Cancelar");
+                if (isRefreshingCategoria != value)
+                {
+                    isRefreshingCategoria = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRefreshingCategoria"));
+                }
+            }
+            get
+            {
+                return isRefreshingCategoria;
+            }
+        }
+
+
+        public ICommand RefreshCategoriaCommand { get; private set; }
+
+        public CategoriaMainViewModel()
+        {
+            CategoriaItems = new ObservableCollection<CategoriaViewModel>();
+            LoadCategoria();
+
+            RefreshCategoriaCommand = new Command(() =>
+            {
+                CategoriaItems.Clear();
+                LoadCategoria();
             });
         }
+
+
+        private async void LoadCategoria()
+        {
+            try
+            {
+                IsRefreshingCategoria = true;
+                // www.lineatienda.com/services.php/categoriastree
+                RootObject<CategoriaViewModel> rootData = await webService.GET<RootObject<CategoriaViewModel>>("categoriastree");
+                foreach (CategoriaViewModel item in rootData.datos)
+                {
+                    CategoriaItems.Add(new CategoriaViewModel()
+                    {
+                        nombreCategoria = item.nombreCategoria,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                IsRefreshingCategoria = false;
+            }
+        }
+
+        #region INotifyPropertyChanged Implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

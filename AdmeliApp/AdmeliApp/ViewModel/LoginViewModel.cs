@@ -35,6 +35,8 @@ namespace AdmeliApp.ViewModel
         {
             this.IsRunning = false;
             this.IsEnabled = true;
+            Password = "admin";
+            UserName = "admin";
         }
 
         async Task ExecuteLoginAsync()

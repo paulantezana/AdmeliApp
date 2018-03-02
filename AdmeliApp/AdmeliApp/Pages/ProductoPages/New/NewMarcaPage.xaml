@@ -3,10 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ProductoPages.New.NewMarcaPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Estamos en marca nuevo"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="20,40,20,40" Spacing="30">
+                
+                <StackLayout>
+                    <Label Text="Nombre marca"></Label>
+                    <Entry Text="{Binding NombreMarca}"/>
+                </StackLayout>
+                
+                <StackLayout>
+                    <Label Text="Sitio web (Opcional)"/>
+                    <Entry Text="{Binding SitioWeb}"/>
+                </StackLayout>
+                
+                <StackLayout>
+                    <Label Text="Descripción (Opcional)"></Label>
+                    <Editor Text="{Binding Descripcion}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <StackLayout
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
+                        <Label
+                                HorizontalOptions="StartAndExpand"
+                                Text="Activo"
+                                VerticalOptions="Center">
+                        </Label>
+                        <Switch
+                                IsToggled="{Binding Estado, Mode=TwoWay}"
+                                IsEnabled="{Binding IsEnabled}"
+                                HorizontalOptions="End">
+                        </Switch>
+                    </StackLayout>
+                    <Label Text="Si esta Desmarcado, no se mostrara esta marca en la página"/>
+                </StackLayout>
+
+                <ActivityIndicator 
+                        IsRunning="{Binding IsRunning}">
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource info}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+
+                <StackLayout>
+                    <Button 
+                        Text="Guardar" 
+                        Command="{Binding GuardarCommand}"
+                        Style="{StaticResource ButtonSuccess}"
+                        HorizontalOptions="FillAndExpand"/>
+                    <Button
+                        Text="Eliminar" 
+                        Command="{Binding EliminarCommand}"
+                        Style="{StaticResource ButtonAlert}"
+                        HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

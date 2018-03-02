@@ -1,11 +1,11 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.ItemViewModel;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ProductoPages.New;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -16,32 +16,49 @@ namespace AdmeliApp.ViewModel
         internal WebService webService = new WebService();
 
         private List<Marca> marcaList { get; set; }
-        private ObservableCollection<MarcaItemViewModel> marcaItems;
+        private ObservableCollection<MarcaItemViewModel> _MarcaItems;
         public ObservableCollection<MarcaItemViewModel> MarcaItems
         {
-            get { return this.marcaItems; }
-            set { SetValue(ref this.marcaItems, value); }
+            get { return this._MarcaItems; }
+            set { SetValue(ref this._MarcaItems, value); }
         }
 
-        private string searchText;
+        private string _SearchText;
         public string SearchText
         {
-            get { return this.searchText; }
+            get { return this._SearchText; }
             set
             {
-                SetValue(ref this.searchText, value);
+                SetValue(ref this._SearchText, value);
                 this.ExecuteSearch();
             }
         }
 
         #region ================= COMMANDS =================
-        private ICommand refreshCommand;
+        private ICommand _RefreshCommand;
         public ICommand RefreshCommand =>
-            refreshCommand ?? (refreshCommand = new Command(() => ExecuteRefresh()));
+            _RefreshCommand ?? (_RefreshCommand = new Command(() => ExecuteRefresh()));
 
-        private ICommand searchCommand;
+        private ICommand _SearchCommand;
         public ICommand SearchCommand =>
-            searchCommand ?? (searchCommand = new Command(() => ExecuteSearch())); 
+            _SearchCommand ?? (_SearchCommand = new Command(() => ExecuteSearch()));
+
+        private ICommand _NuevoCommand;
+        public ICommand NuevoCommand =>
+            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
+
+        private ICommand _EditarCommand;
+        public ICommand EditarCommand =>
+            _EditarCommand ?? (_EditarCommand = new Command(() => ExecuteEditar()));
+
+        private ICommand _AnularCommand;
+        public ICommand AnularCommand =>
+            _AnularCommand ?? (_AnularCommand = new Command(() => ExecuteAnular()));
+
+
+        private ICommand _EliminarCommand;
+        public ICommand EliminarCommand =>
+            _EliminarCommand ?? (_EliminarCommand = new Command(() => ExecuteEliminar()));
         #endregion
 
         #region ================= CONSTRUCTOR =================
@@ -68,9 +85,34 @@ namespace AdmeliApp.ViewModel
             {
                 this.MarcaItems = new ObservableCollection<MarcaItemViewModel>(
                     this.ToMarcaItemViewModel().Where(
-                        m => m.nombreMarca.ToLower().Contains(this.SearchText.ToLower())));
+                        m => m.NombreMarca.ToLower().Contains(this.SearchText.ToLower())));
             }
         }
+
+        private void ExecuteNuevo()
+        {
+            App.MarcaPage.Navigation.PushAsync(new NewMarcaPage());
+        }
+
+        private void ExecuteEditar()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteAnular()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteEliminar()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
 
         private async void LoadMarca(int page, int items)
         {
@@ -98,7 +140,7 @@ namespace AdmeliApp.ViewModel
         {
             return marcaList.Select(m => new MarcaItemViewModel
             {
-                nombreMarca = m.nombreMarca,
+                NombreMarca = m.NombreMarca,
             });
         }
     }

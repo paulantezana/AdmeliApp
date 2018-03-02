@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using AdmeliApp.Pages.ProductoPages;
 using Xamarin.Forms;
 
 namespace AdmeliApp
 {
 	public partial class App : Application
 	{
-		public App ()
+        public static MarcaPage MarcaPage { get; internal set; }
+
+        public App ()
 		{
 			InitializeComponent();
 

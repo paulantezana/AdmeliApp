@@ -15,7 +15,7 @@
                         Text="{Binding SearchText, Mode=TwoWay}"
                         SearchCommand="{Binding SearchCommand}"
                         Placeholder="Buscar..."/>
-                    
+
                     <ListView 
                         ItemsSource="{Binding MarcaItems}"
                         HasUnevenRows="True"
@@ -23,7 +23,7 @@
                         CachingStrategy="RecycleElement"
                         RefreshCommand="{Binding RefreshCommand}"
                         IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
-                        
+
                         <!-- Template de los items -->
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -34,16 +34,19 @@
                                     </ViewCell.ContextActions>
                                     <StackLayout  BackgroundColor="White" Padding="15,12">
                                         <Label Text="{Binding nombreMarca}"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EditarCommand}"/>
+                                        </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                        
-                        <!-- Footer del listview -->
+
+                        <!-- "Cargando..." se visualiza, con visibilidad vinculada a IsRunning -->
                         <ListView.Footer>
-                            <StackLayout>
-                                <Entry Text="Hola"></Entry>
-                            </StackLayout>
+                            <Grid Padding="6" IsVisible="{Binding IsRunning}">
+                                <Label Text="Cargando..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                            </Grid>
                         </ListView.Footer>
                     </ListView>
                 </StackLayout>
@@ -56,6 +59,7 @@
                 BackgroundColor="White"
                 WidthRequest="65"
                 HeightRequest="65"
+                Command="{Binding NuevoCommand}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"  
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}"
                 Image="floatAdd_icon.png"/>

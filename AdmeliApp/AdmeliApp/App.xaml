@@ -27,7 +27,7 @@
             ==================================================================================
                BUTTON STYLES
             -->
-            <Style x:Key="button" TargetType="Button">
+            <Style x:Key="Button" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="BackgroundColor" Value="{DynamicResource grey-lighter}" />
@@ -35,7 +35,7 @@
                 <Setter Property="TextColor" Value="{DynamicResource grey-dark}" />
             </Style>
 
-            <Style x:Key="buttonInfo" TargetType="Button">
+            <Style x:Key="ButtonInfo" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="BackgroundColor" Value="{DynamicResource info}" />
@@ -44,7 +44,7 @@
             </Style>
 
 
-            <Style x:Key="buttonSuccess" TargetType="Button">
+            <Style x:Key="ButtonSuccess" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="BackgroundColor" Value="{DynamicResource success}" />
@@ -53,7 +53,7 @@
             </Style>
 
 
-            <Style x:Key="buttonWarning" TargetType="Button">
+            <Style x:Key="ButtonWarning" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="BackgroundColor" Value="{DynamicResource warning}" />
@@ -61,7 +61,7 @@
                 <Setter Property="TextColor" Value="#4C421A" />
             </Style>
 
-            <Style x:Key="buttonAlert" TargetType="Button">
+            <Style x:Key="ButtonAlert" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="BackgroundColor" Value="{DynamicResource alert}" />

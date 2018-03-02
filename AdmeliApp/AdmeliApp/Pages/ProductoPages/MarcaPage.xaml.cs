@@ -18,5 +18,11 @@ namespace AdmeliApp.Pages.ProductoPages
 			InitializeComponent ();
             BindingContext = new MarcaViewModel();
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.MarcaPage = this;
+        }
+    }
 }

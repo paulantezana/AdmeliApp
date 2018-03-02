@@ -20,7 +20,7 @@ namespace AdmeliApp.Helpers
         public WebService()
         {
             //this.domainName = "http://www.lineatienda.com";
-            this.domainName = "http://192.168.1.116:8080";
+            this.domainName = "http://192.168.1.101:8080";
             //this.domainName = "http://192.168.1.45:8080";
 
             //this.directory = "services.php";

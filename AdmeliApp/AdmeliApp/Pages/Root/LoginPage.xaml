@@ -42,7 +42,7 @@
                     </StackLayout>
 
                     <Button 
-                        Style="{StaticResource buttonSuccess}"
+                        Style="{StaticResource ButtonSuccess}"
                         Command="{Binding LoginCommand}"
                         IsEnabled="{Binding IsEnabled}"
                         HorizontalOptions="FillAndExpand"

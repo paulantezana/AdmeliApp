@@ -10,25 +10,25 @@ namespace AdmeliApp.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private bool isRunning;
+        private bool _IsRunning;
         public bool IsRunning
         {
-            get { return this.isRunning; }
-            set { SetValue(ref this.isRunning, value); }
+            get { return this._IsRunning; }
+            set { SetValue(ref this._IsRunning, value); }
         }
 
-        private bool isEnabled;
+        private bool _IsEnabled;
         public bool IsEnabled
         {
-            get { return this.isEnabled; }
-            set { SetValue(ref this.isEnabled, value); }
+            get { return this._IsEnabled; }
+            set { SetValue(ref this._IsEnabled, value); }
         }
 
-        private bool isRefreshing;
+        private bool _IsRefreshing;
         public bool IsRefreshing
         {
-            get { return this.isRefreshing; }
-            set { SetValue(ref this.isRefreshing, value); }
+            get { return this._IsRefreshing; }
+            set { SetValue(ref this._IsRefreshing, value); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

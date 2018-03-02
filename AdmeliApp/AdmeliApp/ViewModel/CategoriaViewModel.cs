@@ -1,62 +1,48 @@
 ﻿using AdmeliApp.Helpers;
+using AdmeliApp.ItemViewModel;
+using AdmeliApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class CategoriaViewModel
+    public class CategoriaViewModel : BaseViewModel
     {
         internal WebService webService = new WebService();
 
-        public ObservableCollection<CategoriaViewModel> CategoriaItems { get; set; }
+        public ObservableCollection<CategoriaItemViewModel> CategoriaItems { get; set; }
 
-        private bool isRefreshingCategoria { get; set; }
-        public bool IsRefreshingCategoria
+        private ICommand refreshCategoriaCommand;
+        public ICommand RefreshCategoriaCommand =>
+            refreshCategoriaCommand ?? (refreshCategoriaCommand = new Command(() => ExecuteRefreshCategoriaAsync()));
+
+        public CategoriaViewModel()
         {
-            set
-            {
-                if (isRefreshingCategoria != value)
-                {
-                    isRefreshingCategoria = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRefreshingCategoria"));
-                }
-            }
-            get
-            {
-                return isRefreshingCategoria;
-            }
-        }
-
-
-        public ICommand RefreshCategoriaCommand { get; private set; }
-
-        public CategoriaMainViewModel()
-        {
-            CategoriaItems = new ObservableCollection<CategoriaViewModel>();
+            CategoriaItems = new ObservableCollection<CategoriaItemViewModel>();
             LoadCategoria();
-
-            RefreshCategoriaCommand = new Command(() =>
-            {
-                CategoriaItems.Clear();
-                LoadCategoria();
-            });
         }
 
+        private void ExecuteRefreshCategoriaAsync()
+        {
+            CategoriaItems.Clear();
+            LoadCategoria();
+        }
 
         private async void LoadCategoria()
         {
             try
             {
-                IsRefreshingCategoria = true;
+                IsRefreshing = true;
                 // www.lineatienda.com/services.php/categoriastree
-                RootObject<CategoriaViewModel> rootData = await webService.GET<RootObject<CategoriaViewModel>>("categoriastree");
-                foreach (CategoriaViewModel item in rootData.datos)
+                RootObject<Categoria> rootData = await webService.GET<RootObject<Categoria>>("categoriastree");
+                foreach (Categoria item in rootData.datos)
                 {
-                    CategoriaItems.Add(new CategoriaViewModel()
+                    CategoriaItems.Add(new CategoriaItemViewModel()
                     {
                         nombreCategoria = item.nombreCategoria,
                     });
@@ -68,19 +54,8 @@ namespace AdmeliApp.ViewModel
             }
             finally
             {
-                IsRefreshingCategoria = false;
+                IsRefreshing = false;
             }
         }
-
-        #region INotifyPropertyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged == null)
-                return;
-
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

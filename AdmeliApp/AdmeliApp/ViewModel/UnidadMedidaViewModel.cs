@@ -1,58 +1,47 @@
 ﻿using AdmeliApp.Helpers;
+using AdmeliApp.ItemViewModel;
+using AdmeliApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class UnidadMedidaViewModel
+    public class UnidadMedidaViewModel : BaseViewModel
     {
         internal WebService webService = new WebService();
 
-        public ObservableCollection<UnidadMedidaViewModel> UnidadMedidaItems { get; set; }
+        public ObservableCollection<UnidadMedidaItemViewModel> UnidadMedidaItems { get; set; }
 
-        private bool isRefreshingUnidadMedida { get; set; }
-        public bool IsRefreshingUnidadMedida
+        private ICommand refreshUnidadMedidaCommand;
+        public ICommand RefreshUnidadMedidaCommand =>
+            refreshUnidadMedidaCommand ?? (refreshUnidadMedidaCommand = new Command(() => ExecuteRefreshUnidadMedidaAsync()));
+
+        private void ExecuteRefreshUnidadMedidaAsync()
         {
-            set
-            {
-                if (isRefreshingUnidadMedida != value)
-                {
-                    isRefreshingUnidadMedida = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRefreshingUnidadMedida"));
-                }
-            }
-            get
-            {
-                return isRefreshingUnidadMedida;
-            }
+            UnidadMedidaItems.Clear();
+            LoadUnidadMedida(1, 30);
         }
 
-        public ICommand RefreshUnidadMedidaCommand { get; private set; }
-
-        public UnidadMedidaMainViewModel()
+        public UnidadMedidaViewModel()
         {
-            UnidadMedidaItems = new ObservableCollection<UnidadMedidaViewModel>();
+            UnidadMedidaItems = new ObservableCollection<UnidadMedidaItemViewModel>();
             LoadUnidadMedida(1, 30);
-
-            RefreshUnidadMedidaCommand = new Command(() =>
-            {
-                UnidadMedidaItems.Clear();
-                LoadUnidadMedida(1, 30);
-            });
         }
 
         private async void LoadUnidadMedida(int page, int items)
         {
             try
             {
-                IsRefreshingUnidadMedida = true;
+                IsRefreshing = true;
                 // www.lineatienda.com/services.php/unimedidas/estado/1/100
-                RootObject<UnidadMedidaViewModel> rootData = await webService.GET<RootObject<UnidadMedidaViewModel>>("unimedidas", String.Format("estado/{0}/{1}", page, items));
-                foreach (UnidadMedidaViewModel item in rootData.datos)
+                RootObject<UnidadMedida> rootData = await webService.GET<RootObject<UnidadMedida>>("unimedidas", String.Format("estado/{0}/{1}", page, items));
+                foreach (UnidadMedida item in rootData.datos)
                 {
-                    UnidadMedidaItems.Add(new UnidadMedidaViewModel()
+                    UnidadMedidaItems.Add(new UnidadMedidaItemViewModel()
                     {
                         nombreUnidad = item.nombreUnidad,
                     });
@@ -64,19 +53,8 @@ namespace AdmeliApp.ViewModel
             }
             finally
             {
-                IsRefreshingUnidadMedida = false;
+                IsRefreshing = false;
             }
         }
-
-        #region INotifyPropertyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged == null)
-                return;
-
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

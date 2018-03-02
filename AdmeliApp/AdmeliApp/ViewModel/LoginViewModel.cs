@@ -13,13 +13,6 @@ namespace AdmeliApp.ViewModel
     {
         internal WebService webService = new WebService();
 
-        private string message;
-        public string Message
-        {
-            get { return message; }
-            set { SetValue(ref message, value); }
-        }
-
         private string userName;
         public string UserName
         {
@@ -56,6 +49,7 @@ namespace AdmeliApp.ViewModel
             if (string.IsNullOrEmpty(this.Password))
             {
                 await Application.Current.MainPage.DisplayAlert("Alerta", "Ingrese la contraseña :(", "Aceptar");
+                Password = "";
                 return;
             }
 
@@ -69,7 +63,7 @@ namespace AdmeliApp.ViewModel
             {
                 this.IsRunning = false;
                 this.IsEnabled = true;
-                await Application.Current.MainPage.DisplayAlert("Alerta", connection.msj, "Aceptar");
+                await Application.Current.MainPage.DisplayAlert("Alerta", connection.Message, "Aceptar");
                 return;
             }
 

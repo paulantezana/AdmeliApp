@@ -40,7 +40,7 @@ namespace AdmeliApp.Helpers
                 return new Response
                 {
                     IsSuccess = false,
-                    msj = "Por favor encienda su configuración de internet.",
+                    Message = "Por favor encienda su configuración de internet.",
                 };
             }
 
@@ -50,14 +50,14 @@ namespace AdmeliApp.Helpers
                 return new Response
                 {
                     IsSuccess = false,
-                    msj = "Comprueba tu conexión a Internet.",
+                    Message = "Comprueba tu conexión a Internet.",
                 };
             }
 
             return new Response
             {
                 IsSuccess = true,
-                msj = "Ok",
+                Message = "Ok",
             };
         }
 

@@ -1,4 +1,4 @@
-﻿using AdmeliApp.MainViewModel;
+﻿using AdmeliApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace AdmeliApp.Pages.ProductoPages
 		{
 			InitializeComponent ();
 
-            BindingContext = new UnidadMedidaMainViewModel();
+            BindingContext = new UnidadMedidaViewModel();
         }
 	}
 }

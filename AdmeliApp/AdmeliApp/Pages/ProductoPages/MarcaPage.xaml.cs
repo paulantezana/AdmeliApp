@@ -1,4 +1,4 @@
-﻿using AdmeliApp.MainViewModel;
+﻿using AdmeliApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace AdmeliApp.Pages.ProductoPages
 		public MarcaPage ()
 		{
 			InitializeComponent ();
-            BindingContext = new MarcaMainViewModel();
+            BindingContext = new MarcaViewModel();
 		}
 	}
 }

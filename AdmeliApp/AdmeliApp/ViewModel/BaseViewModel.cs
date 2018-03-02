@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
@@ -22,8 +24,14 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this.isEnabled, value); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get { return this.isRefreshing; }
+            set { SetValue(ref this.isRefreshing, value); }
+        }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

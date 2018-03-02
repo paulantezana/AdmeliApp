@@ -10,26 +10,43 @@
             <ContentView
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
-                <ListView 
-                    ItemsSource="{Binding MarcaItems}"
-                    HasUnevenRows="True"
-                    IsPullToRefreshEnabled="True"
-                    RefreshCommand="{Binding RefreshMarcaCommand}"
-                    IsRefreshing="{Binding IsRefreshingMarca, Mode=TwoWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.ContextActions>
-                                    <MenuItem Text="Anular" Command="{Binding AnularCommand}"/>
-                                    <MenuItem Text="Eliminar" Command="{Binding EliminarCommand}"/>
-                                </ViewCell.ContextActions>
-                                <StackLayout  BackgroundColor="White" Padding="15,12">
-                                    <Label Text="{Binding nombreMarca}"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <StackLayout>
+                    <SearchBar
+                        Text="{Binding SearchText, Mode=TwoWay}"
+                        SearchCommand="{Binding SearchCommand}"
+                        Placeholder="Buscar..."/>
+                    
+                    <ListView 
+                        ItemsSource="{Binding MarcaItems}"
+                        HasUnevenRows="True"
+                        IsPullToRefreshEnabled="True"
+                        CachingStrategy="RecycleElement"
+                        RefreshCommand="{Binding RefreshCommand}"
+                        IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
+                        
+                        <!-- Template de los items -->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem Text="Anular" Command="{Binding AnularCommand}"/>
+                                        <MenuItem Text="Eliminar" Command="{Binding EliminarCommand}"/>
+                                    </ViewCell.ContextActions>
+                                    <StackLayout  BackgroundColor="White" Padding="15,12">
+                                        <Label Text="{Binding nombreMarca}"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        
+                        <!-- Footer del listview -->
+                        <ListView.Footer>
+                            <StackLayout>
+                                <Entry Text="Hola"></Entry>
+                            </StackLayout>
+                        </ListView.Footer>
+                    </ListView>
+                </StackLayout>
             </ContentView>
 
             <!-- Botton flotante para agregar un nuevo registro -->

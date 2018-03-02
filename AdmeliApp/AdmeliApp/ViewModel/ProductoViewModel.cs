@@ -1,56 +1,46 @@
 ﻿using AdmeliApp.Helpers;
+using AdmeliApp.ItemViewModel;
+using AdmeliApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class ProductoViewModel
+    public class ProductoViewModel : BaseViewModel
     {
         internal WebService webService = new WebService();
 
-        public ObservableCollection<ProductoViewModel> ProductoItems { get; set; }
+        public ObservableCollection<ProductoItemViewModel> ProductoItems { get; set; }
 
         public string SearchText { get; set; }
 
-        private bool isRefreshingProducto { get; set; }
-        public bool IsRefreshingProducto
-        {
-            set
-            {
-                if (isRefreshingProducto != value)
-                {
-                    isRefreshingProducto = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRefreshingProducto"));
-                }
-            }
-            get
-            {
-                return isRefreshingProducto;
-            }
-        }
+        private ICommand refreshProductoCommand;
+        public ICommand RefreshProductoCommand =>
+            refreshProductoCommand ?? (refreshProductoCommand = new Command(() => ExecuteRefreshProductoAsync()));
 
-        public ICommand RefreshProductoCommand { get; private set; }
+        private void ExecuteRefreshProductoAsync()
+        {
+            ProductoItems.Clear();
+            Dictionary<string, int> listReSend = new Dictionary<string, int>();
+            listReSend.Add("id0", 0);
+            //Dictionary<string, int> sendList = (ConfigModel.currentProductoCategory.Count == 0) ? list : ConfigModel.currentProductoCategory;
+            LoadProducto(listReSend, 1, 30);
+        }
 
         public ICommand SearchCommand { get; set; }
 
-        public ProductoMainViewModel()
+        public ProductoViewModel()
         {
-            ProductoItems = new ObservableCollection<ProductoViewModel>();
+            ProductoItems = new ObservableCollection<ProductoItemViewModel>();
 
             Dictionary<string, int> list = new Dictionary<string, int>();
             list.Add("id0", 0);
             //Dictionary<string, int> sendList = (ConfigModel.currentProductoCategory.Count == 0) ? list : ConfigModel.currentProductoCategory;
             LoadProducto(list, 1, 30);
-
-            RefreshProductoCommand = new Command(() =>
-            {
-                ProductoItems.Clear();
-                Dictionary<string, int> listReSend = new Dictionary<string, int>();
-                listReSend.Add("id0", 0);
-                //Dictionary<string, int> sendList = (ConfigModel.currentProductoCategory.Count == 0) ? list : ConfigModel.currentProductoCategory;
-                LoadProducto(list, 1, 30);
-            });
 
 
             SearchCommand = new Command(() =>
@@ -63,14 +53,14 @@ namespace AdmeliApp.ViewModel
         {
             try
             {
-                IsRefreshingProducto = true;
+                IsRefreshing = true;
                 // www.lineatienda.com/services.php/productos/categoria/1/100
                 Dictionary<string, int>[] dataSend = { dictionary };
 
-                RootObject<ProductoViewModel> rootData = await webService.POST<Dictionary<string, int>[], RootObject<ProductoViewModel>>("productos", String.Format("categoria/{0}/{1}", page, items), dataSend);
-                foreach (ProductoViewModel item in rootData.datos)
+                RootObject<Producto> rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/{0}/{1}", page, items), dataSend);
+                foreach (Producto item in rootData.datos)
                 {
-                    ProductoItems.Add(new ProductoViewModel()
+                    ProductoItems.Add(new ProductoItemViewModel()
                     {
                         nombreProducto = item.nombreProducto,
                     });
@@ -82,19 +72,8 @@ namespace AdmeliApp.ViewModel
             }
             finally
             {
-                IsRefreshingProducto = false;
+                IsRefreshing = false;
             }
         }
-
-        #region INotifyPropertyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged == null)
-                return;
-
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

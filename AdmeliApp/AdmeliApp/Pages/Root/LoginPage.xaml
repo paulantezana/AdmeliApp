@@ -16,13 +16,13 @@
                     <Entry 
                         Placeholder="Nombre de usuario"
                         Keyboard="Email"
-                        Text="{Binding UserName}" 
+                        Text="{Binding UserName, Mode=TwoWay}" 
                         IsEnabled="{Binding IsEnabled}"/>
 
                     <Entry 
                         Placeholder="Contraseña"
                         IsPassword="True"
-                        Text="{Binding Password}"
+                        Text="{Binding Password, Mode=TwoWay}"
                         IsEnabled="{Binding IsEnabled}"/>
 
                     <StackLayout
@@ -36,6 +36,7 @@
                         </Label>
                         <Switch
                             IsToggled="{Binding IsRemembered, Mode=TwoWay}"
+                            IsEnabled="{Binding IsEnabled}"
                             HorizontalOptions="End">
                         </Switch>
                     </StackLayout>

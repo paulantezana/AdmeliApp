@@ -1,81 +1,105 @@
 ﻿using AdmeliApp.Helpers;
+using AdmeliApp.ItemViewModel;
+using AdmeliApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class MarcaViewModel
+    public class MarcaViewModel : BaseViewModel
     {
         internal WebService webService = new WebService();
 
-        public ObservableCollection<MarcaViewModel> MarcaItems { get; set; }
-
-        private bool isRefreshingMarca { get; set; }
-        public bool IsRefreshingMarca
+        private List<Marca> marcaList { get; set; }
+        private ObservableCollection<MarcaItemViewModel> marcaItems;
+        public ObservableCollection<MarcaItemViewModel> MarcaItems
         {
+            get { return this.marcaItems; }
+            set { SetValue(ref this.marcaItems, value); }
+        }
+
+        private string searchText;
+        public string SearchText
+        {
+            get { return this.searchText; }
             set
             {
-                if (isRefreshingMarca != value)
-                {
-                    isRefreshingMarca = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRefreshingMarca"));
-                }
-            }
-            get
-            {
-                return isRefreshingMarca;
+                SetValue(ref this.searchText, value);
+                this.ExecuteSearch();
             }
         }
 
-        public ICommand RefreshMarcaCommand { get; private set; }
+        #region ================= COMMANDS =================
+        private ICommand refreshCommand;
+        public ICommand RefreshCommand =>
+            refreshCommand ?? (refreshCommand = new Command(() => ExecuteRefresh()));
 
-        public MarcaMainViewModel()
+        private ICommand searchCommand;
+        public ICommand SearchCommand =>
+            searchCommand ?? (searchCommand = new Command(() => ExecuteSearch())); 
+        #endregion
+
+        #region ================= CONSTRUCTOR =================
+        public MarcaViewModel()
         {
-            MarcaItems = new ObservableCollection<MarcaViewModel>();
             LoadMarca(1, 30);
+        } 
+        #endregion
 
-            RefreshMarcaCommand = new Command(() =>
+        private void ExecuteRefresh()
+        {
+            MarcaItems.Clear();
+            LoadMarca(1, 30);
+        }
+
+        private void ExecuteSearch()
+        {
+            if (string.IsNullOrEmpty(SearchText))
             {
-                MarcaItems.Clear();
-                LoadMarca(1, 30);
-            });
+                this.MarcaItems = new ObservableCollection<MarcaItemViewModel>(
+                    this.ToMarcaItemViewModel());
+            }
+            else
+            {
+                this.MarcaItems = new ObservableCollection<MarcaItemViewModel>(
+                    this.ToMarcaItemViewModel().Where(
+                        m => m.nombreMarca.ToLower().Contains(this.SearchText.ToLower())));
+            }
         }
 
         private async void LoadMarca(int page, int items)
         {
             try
             {
-                IsRefreshingMarca = true;
+                IsRefreshing = true;
                 // www.lineatienda.com/services.php/marcas/estado/1/100
-                RootObject<MarcaViewModel> rootData = await webService.GET<RootObject<MarcaViewModel>>("marcas", String.Format("estado/{0}/{1}", page, items));
-                foreach (MarcaViewModel item in rootData.datos)
-                {
-                    MarcaItems.Add(new MarcaViewModel()
-                    {
-                        nombreMarca = item.nombreMarca,
-                    });
-                }
+                RootObject<Marca> rootData = await webService.GET<RootObject<Marca>>("marcas", String.Format("estado/{0}/{1}", page, items));
+                marcaList = rootData.datos;
+
+                this.MarcaItems = new ObservableCollection<MarcaItemViewModel>(
+                    this.ToMarcaItemViewModel());
             }
             catch (Exception ex)
             {
-                throw ex;
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
             }
             finally
             {
-                IsRefreshingMarca = false;
+                IsRefreshing = false;
             }
         }
 
-        #region INotifyPropertyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        private IEnumerable<MarcaItemViewModel> ToMarcaItemViewModel()
         {
-            if (PropertyChanged == null)
-                return;
-
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return marcaList.Select(m => new MarcaItemViewModel
+            {
+                nombreMarca = m.nombreMarca,
+            });
         }
-        #endregion
     }
 }

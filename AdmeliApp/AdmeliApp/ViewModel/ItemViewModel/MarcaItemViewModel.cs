@@ -12,51 +12,48 @@ namespace AdmeliApp.ViewModel.ItemViewModel
     public class MarcaItemViewModel : Marca
     {
         internal WebService webService = new WebService();
+        public bool Nuevo { get; set; }
 
-        private string _BorraBorrita;
-        public string BorraBorrita
-        {
-            get { return this._BorraBorrita; }
-            set { SetValue(ref this._BorraBorrita, value); }
-        }
-
-
+        #region ================================= COMMANDS =================================
         private ICommand _GuardarCommand;
-        public ICommand GuardarCommand =>
+        internal ICommand GuardarCommand =>
             _GuardarCommand ?? (_GuardarCommand = new Command(() => ExecuteGuardarAsync()));
 
         private ICommand _EditarCommand;
-        public ICommand EditarCommand =>
+        internal ICommand EditarCommand =>
             _EditarCommand ?? (_EditarCommand = new Command(() => ExecuteEditar()));
 
         private ICommand _AnularCommand;
-        public ICommand AnularCommand =>
+        internal ICommand AnularCommand =>
             _AnularCommand ?? (_AnularCommand = new Command(() => ExecuteAnular()));
+        #endregion
 
+        #region ================================ CONSTRUCTOR ================================
+        public MarcaItemViewModel()
+        {
+            // Estados
+            this.IsRunning = false;
+            this.IsEnabled = true;
+        } 
+        #endregion
+
+        #region =============================== COMMAND EXECUTE ===============================
         private void ExecuteEditar()
         {
             MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
-            /*MarcaItemViewModel marcaItemViewModel = new MarcaItemViewModel()
-            {
-                IdMarca = this.IdMarca,
-                NombreMarca = this.NombreMarca,
-                Descripcion = this.Descripcion,
-                SitioWeb = this.SitioWeb,
-                UbicacionLogo = this.UbicacionLogo,
-                CaptionImagen = this.CaptionImagen,
-                Estado = this.Estado,
-                TieneRegistros = this.TieneRegistros,
-                BorraBorrita = "Borando test borra borrita"
-            };*/
-            this.BorraBorrita = "Borrame cosa";
             marcaViewModel.SetCurrentMarca(this);
-            App.MarcaPage.Navigation.PushAsync(new MarcaItemPage());
+            this.Nuevo = false; /// Importante indicaque se modificara el registro actual
+            App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
         }
 
         private async void ExecuteAnular()
         {
             try
             {
+                // Estados
+                this.IsRunning = true;
+                this.IsEnabled = false;
+
                 /// Verificacion si el registro esta anulado
                 if (this.Estado == 0)
                 {
@@ -75,12 +72,19 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 // localhost:8080/admeli/xcore2/xcore/services.php/marca/desactivar
                 Response response = await webService.POST<Marca, Response>("marca", "desactivar", marca);
 
-                // Mensaje de respuesta
+                // Message response
                 await App.Current.MainPage.DisplayAlert("Anular", response.Message, "Aceptar");
             }
             catch (Exception ex)
             {
+                // Error message
                 await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                // Estados
+                this.IsRunning = false;
+                this.IsEnabled = true;
             }
         }
 
@@ -88,29 +92,58 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         {
             try
             {
-                // localhost:8080/admeli/xcore2/xcore/services.php/marca/guardar
-                Marca marca = new Marca();
-                marca.NombreMarca = this.NombreMarca;
+                // Estados
+                this.IsRunning = true;
+                this.IsEnabled = false;
+
+                // Preparando el objeto para enviar
+                //Marca marca = new Marca();
+                if (this.Nuevo)
+                {
+                    this.CaptionImagen = "";
+                    this.UbicacionLogo = "";
+                    this.TieneRegistros = "";
+                }
+                /*else
+                {
+                    marca.IdMarca = IdMarca;
+                }*/
+               /* marca.NombreMarca = this.NombreMarca;
                 marca.SitioWeb = this.SitioWeb;
                 marca.Descripcion = this.Descripcion;
-                marca.Estado = this.Estado;
-                marca.CaptionImagen = "";
-                marca.UbicacionLogo = "";
-                marca.TieneRegistros = "";
+                marca.Estado = this.Estado;*/
 
+                if (this.Nuevo)
+                {
+                    // localhost:8080/admeli/xcore2/xcore/services.php/marca/guardar
+                    Response response = await webService.POST<Marca, Response>("marca", "guardar", (Marca)this);
+                    await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
+                }
+                else
+                {
+                    // localhost:8080/admeli/xcore2/xcore/services.php/marca/modificar
+                    Response response = await webService.POST<Marca, Response>("marca", "modificar", (Marca)this);
+                    await App.Current.MainPage.DisplayAlert("Modificar", response.Message, "Aceptar");
+                }
 
-                Response response = await webService.POST<Marca, Response>("marca", "guardar", marca);
-                await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
-                marca.NombreMarca = string.Empty;
+                // Limpiando los campos
+                /*marca.NombreMarca = string.Empty;
                 marca.SitioWeb = string.Empty;
                 marca.Descripcion = string.Empty;
-                marca.Estado = 1;
+                marca.Estado = 1;*/
             }
             catch (Exception ex)
             {
+                // Error message
                 await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
             }
-        }
-
+            finally
+            {
+                // Estados
+                this.IsRunning = false;
+                this.IsEnabled = true;
+            }
+        } 
+        #endregion
     }
 }

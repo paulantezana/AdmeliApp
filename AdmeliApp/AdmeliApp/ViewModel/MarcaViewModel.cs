@@ -15,8 +15,7 @@ namespace AdmeliApp.ViewModel
     {
         internal WebService webService = new WebService();
 
-        public MarcaItemViewModel CurrentMarca { get; set; }
-
+        #region =================================== COLLECTIONS ===================================
         private List<Marca> marcaList { get; set; }
         private ObservableCollection<MarcaItemViewModel> _MarcaItems;
         public ObservableCollection<MarcaItemViewModel> MarcaItems
@@ -24,7 +23,10 @@ namespace AdmeliApp.ViewModel
             get { return this._MarcaItems; }
             set { SetValue(ref this._MarcaItems, value); }
         }
+        #endregion
 
+        #region =============================== PROPERTIES ===============================
+        public MarcaItemViewModel CurrentMarca { get; set; }
         private string _SearchText;
         public string SearchText
         {
@@ -34,36 +36,33 @@ namespace AdmeliApp.ViewModel
                 SetValue(ref this._SearchText, value);
                 this.ExecuteSearch();
             }
-        }
+        } 
+        #endregion
 
-        internal void SetCurrentMarca(MarcaItemViewModel marcaItemViewModel)
-        {
-            this.CurrentMarca = marcaItemViewModel;
-        }
-
-        #region ================= COMMANDS =================
+        #region ================================ COMMANDS ================================
         private ICommand _RefreshCommand;
-        public ICommand RefreshCommand =>
+        internal ICommand RefreshCommand =>
             _RefreshCommand ?? (_RefreshCommand = new Command(() => ExecuteRefresh()));
 
         private ICommand _SearchCommand;
-        public ICommand SearchCommand =>
+        internal ICommand SearchCommand =>
             _SearchCommand ?? (_SearchCommand = new Command(() => ExecuteSearch()));
 
         private ICommand _NuevoCommand;
-        public ICommand NuevoCommand =>
+        internal ICommand NuevoCommand =>
             _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
         #endregion
 
-        #region ================= CONSTRUCTOR =================
+        #region =========================== CONSTRUCTOR ===========================
         public MarcaViewModel()
         {
             instance = this;
             CurrentMarca = new MarcaItemViewModel();
             LoadMarca(1, 30);
-        } 
+        }
         #endregion
 
+        #region =========================== COMMAND EXECUTE ===========================
         private void ExecuteRefresh()
         {
             MarcaItems.Clear();
@@ -87,9 +86,12 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            App.MarcaPage.Navigation.PushAsync(new MarcaItemPage());
-        }
+            CurrentMarca.Nuevo = true; /// Importante indicaque se agregara un nuevo registro
+            App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
+        } 
+        #endregion
 
+        #region ===================================== LOADS =====================================
         private async void LoadMarca(int page, int items)
         {
             try
@@ -112,6 +114,13 @@ namespace AdmeliApp.ViewModel
             }
         }
 
+        internal void SetCurrentMarca(MarcaItemViewModel marcaItemViewModel)
+        {
+            this.CurrentMarca = marcaItemViewModel;
+        }
+        #endregion
+
+        #region ============================= CREATE OBJECT LIST =============================
         private IEnumerable<MarcaItemViewModel> ToMarcaItemViewModel()
         {
             return marcaList.Select(m => new MarcaItemViewModel
@@ -128,8 +137,8 @@ namespace AdmeliApp.ViewModel
                 BackgroundItem = (m.Estado == 0) ? (Color)App.Current.Resources["AlertLight"] : Color.Transparent,
                 TextColorItem = (m.Estado == 0) ? (Color)App.Current.Resources["Alert"] : (Color)App.Current.Resources["GreyDark"],
             });
-        }
-
+        } 
+        #endregion
 
         #region =============================== SINGLETON ===============================
         private static MarcaViewModel instance;
@@ -143,8 +152,5 @@ namespace AdmeliApp.ViewModel
             return instance;
         }
         #endregion
-
-
-
     }
 }

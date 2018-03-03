@@ -33,8 +33,7 @@
                                         <MenuItem Text="Editar" Command="{Binding EditarCommand}"/>
                                     </ViewCell.ContextActions>
                                     <StackLayout Padding="15,12" BackgroundColor="{Binding BackgroundItem}">
-                                        <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}" FontAttributes="Bold"/>
-                                        <Label Text="{Binding Descripcion}" TextColor="{Binding TextColorItem}" />
+                                        <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}"/>
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding EditarCommand}"/>
                                         </StackLayout.GestureRecognizers>

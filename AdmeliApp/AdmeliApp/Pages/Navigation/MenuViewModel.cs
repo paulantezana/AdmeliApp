@@ -1,19 +1,44 @@
-﻿using AdmeliApp.Pages.ProductoPages;
+﻿using AdmeliApp.Helpers;
+using AdmeliApp.Pages.ProductoPages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AdmeliApp.Pages.Navigation
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<MenuGrouping> MenuTiendaItems { get; set; }
+        private DataService dataService = new DataService();
+
+        private string _UserName;
+        public string UserName
+        {
+            get { return this._UserName; }
+            set { SetValue(ref this._UserName, value); }
+        }
+
+        private string _UserDocument;
+        public string UserDocument
+        {
+            get { return this._UserDocument; }
+            set { SetValue(ref this._UserDocument, value); }
+        }
+
+        private ICommand _LogoutCommand;
+        public ICommand LogoutCommand =>
+            _LogoutCommand ?? (_LogoutCommand = new Command(() => ExecuteLogoutAsync()));
 
         public MenuViewModel()
         {
+            this.UserName = App.personal.usuario;
+            this.UserDocument = App.personal.numeroDocumento;
+
             MenuTiendaItems = new ObservableCollection<MenuGrouping>()
             {
                 new MenuGrouping("Ventas")
@@ -94,14 +119,29 @@ namespace AdmeliApp.Pages.Navigation
             };
         }
 
+        private void ExecuteLogoutAsync()
+        {
+            dataService.DeletePersonal(App.personal);
+            App.Current.MainPage = new AdmeliApp.Pages.Root.LoginPage();
+        }
+
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged == null)
-                return;
 
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected void SetValue<T>(ref T backingField, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingField, value))
+            {
+                return;
+            }
+
+            backingField = value;
+            OnPropertyChanged(propertyName);
         }
         #endregion
     }

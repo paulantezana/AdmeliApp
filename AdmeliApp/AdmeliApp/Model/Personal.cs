@@ -1,4 +1,5 @@
-﻿using SQLite.Net.Attributes;
+﻿using Newtonsoft.Json;
+using SQLite.Net.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,8 @@ namespace AdmeliApp.Model
 
         public string nombres { get; set; }
         public string apellidos { get; set; }
+
+        [Ignore]
         public Fecha fechaNacimiento { get; set; }
         public string tipoDocumento { get; set; }
         public string numeroDocumento { get; set; }
@@ -25,5 +28,8 @@ namespace AdmeliApp.Model
         public int estado { get; set; }
         public int idUbicacionGeografica { get; set; }
         public int idDocumento { get; set; }
+
+        [JsonIgnore]
+        public bool IsRemembered { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using AdmeliApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,35 +15,52 @@ namespace AdmeliApp.ViewModel
         internal WebService webService = new WebService();
         internal DataService dataService = new DataService();
 
-        private string userName;
+        private string _UserName;
         public string UserName
         {
-            get { return userName; }
-            set { SetValue(ref userName, value); }
+            get { return _UserName; }
+            set { SetValue(ref _UserName, value); }
         }
 
-        private string password;
+        private string _Password;
         public string Password
         {
-            get { return password; }
-            set { SetValue(ref password, value); }
+            get { return _Password; }
+            set { SetValue(ref _Password, value); }
         }
+
+        private bool _IsRemembered;
+        public bool IsRemembered
+        {
+            get { return _IsRemembered; }
+            set { SetValue(ref _IsRemembered, value); }
+        }
+
+        private int nLoads;
 
         private ICommand loginCommand;
         public ICommand LoginCommand =>
-            loginCommand ?? (loginCommand = new Command(async () => await ExecuteLoginAsync()));
+            loginCommand ?? (loginCommand = new Command(() => ExecuteLoginAsync()));
 
         public LoginViewModel()
         {
             this.IsRunning = false;
             this.IsEnabled = true;
-            Password = "admin";
-            UserName = "admin";
+
+            /// Recuperando la contraseña si fue guardada
+            Personal OldPersonal = dataService.GetPersonal();
+            if (OldPersonal != null && OldPersonal.IsRemembered)
+            {
+                this.Password = OldPersonal.password;
+                this.UserName = OldPersonal.usuario;
+                this.IsRemembered = OldPersonal.IsRemembered;
+                this.ExecuteLoginAsync();
+            }
         }
 
-        async Task ExecuteLoginAsync()
+        private async void ExecuteLoginAsync()
         {
-            /// Verificar los campos
+            /// validacion de los campos
             if (string.IsNullOrEmpty(this.UserName))
             {
                 await Application.Current.MainPage.DisplayAlert("Alerta", "Ingrese el nombre de usuario :(", "Aceptar");
@@ -70,29 +88,45 @@ namespace AdmeliApp.ViewModel
                 return;
             }
 
-            /// Reciviendo el token de seguridad desde el web service
-            ///
-
-
-            /// Logueando El Usuario
-            Personal personal = new Personal();
-            personal.usuario = this.UserName;
-            personal.password = this.Password;
             try
             {
+                /// Logueando El Usuario
+                Personal personal = new Personal();
+                personal.usuario = this.UserName;
+                personal.password = this.Password;
+
+                // Login del personal
                 List<Personal> user = await webService.POST<Personal, List<Personal>>("personal", "buscar", personal);
-                if (user.Count == 0)
+                if (user.Count == 0) // Contraseña y usuario incorrecta
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "El nombre de usuario o contraseña es incorrecta!!", "Aceptar");
                     return;
+                }
+                App.personal = user[0];
+
+                // Lamacenando en una base de datos local si el usuario indico recordar contraseña
+                if (IsRemembered)
+                {
+                    App.personal.IsRemembered = this.IsRemembered;
+                    App.personal.password = this.Password;
+                    dataService.InsertPersonal(App.personal);
                 }
 
                 // cargar componentes desde el webservice
                 await cargarComponente();
 
-                /// Cargando todo los datos necesarios para el funcionamiento del sistema
-
-
+                // esperar a que cargen todo los web service
+                await Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        Thread.Sleep(50);
+                        if (nLoads >= 10) // IMPORTANTE IMPORTANTE el numero tiene que ser igual al numero de web service que se este llamando
+                        {
+                            break;
+                        }
+                    }
+                });
 
                 App.Current.MainPage = new AdmeliApp.Pages.Root.RootPage();
             }
@@ -105,63 +139,117 @@ namespace AdmeliApp.ViewModel
                 this.IsRunning = false;
                 this.IsEnabled = true;
             }
-
-            /// Almacenando el usuario logueado en una base de datos local
-            dataService.InsertPersonal(personal);
-
-
-            /// Traendo todo los campos necesarios
         }
 
         private async Task cargarComponente()
         {
-            // www.lineatienda.com/services.php/generales
-            List<DatosGenerales> list = await webService.GET<List<DatosGenerales>>("generales");
-
-            // www.lineatienda.com/services.php/configeneral
-            List<ConfiguracionGeneral> list = await webService.GET<List<ConfiguracionGeneral>>("configeneral");
-            configuracionGeneral = list[0];
+            loadDatosGenerales();
 
             // www.lineatienda.com/services.php/sucursalespersonal/8
-            List<Sucursal> list = await webService.GET<List<Sucursal>>("sucursalespersonal", idPersonal.ToString());
-            if (list.Count == 0) throw new Exception("Usted no pertenece a una sucursal no podrá ingresar al sistema.");
-            sucursal = list[0];
+            List<Sucursal> sList = await webService.GET<List<Sucursal>>("sucursalespersonal", App.personal.idPersonal.ToString());
+            if (sList.Count == 0) throw new Exception("Usted no pertenece a una sucursal no podrá ingresar al sistema.");
+            App.sucursal = sList[0];
+            this.nLoads++;
 
             // www.lineatienda.com/services.php/personales/asignacionpersonal/per/8/suc/1
-            AsignacionPersonal datos = await webService.GET<AsignacionPersonal>("personales", String.Format("asignacionpersonal/per/{0}/suc/{1}", idPersonal, idSucursal));
-            asignacionPersonal = datos;
+            App.asignacionPersonal = await webService.GET<AsignacionPersonal>("personales", String.Format("asignacionpersonal/per/{0}/suc/{1}", App.personal.idPersonal, App.sucursal.idSucursal));
+            this.nLoads++;
 
+            loadConfiGeneral();
+
+            loadMonedas();
+
+            loadTipoCambioMonedas();
+
+            loadTipoDocumento();
+
+            loadAlmacenes();
+
+            loadPuntoDeVenta();
+
+            loadCajaSesion();
+
+           // await configModel.loadCierreIngresoEgreso(1, ConfigModel.cajaSesion.idCajaSesion); // Falta Buscar de donde viene el primer parametro
+
+        }
+
+        private async void loadDatosGenerales()
+        {
+            // www.lineatienda.com/services.php/generales
+            App.datosGeneralesList = await webService.GET<List<DatosGenerales>>("generales");
+            this.nLoads++;
+            //loadState("datos generales");
+        }
+
+        private async void loadConfiGeneral()
+        {
+            // www.lineatienda.com/services.php/configeneral
+            List<ConfiguracionGeneral> cgList = await webService.GET<List<ConfiguracionGeneral>>("configeneral");
+            App.configuracionGeneral = cgList[0];
+            this.nLoads++;
+            //loadState("configuracion general");
+        }
+
+        private async void loadCajaSesion()
+        {
             // www.lineatienda.com/services.php/cajasesion/idasignarcaja/3
-            List<CajaSesion> list = await webService.GET<List<CajaSesion>>("cajasesion", String.Format("idasignarcaja/{0}", idAsignarCaja));
-            if (list.Count > 0)
+            List<CajaSesion> csList = await webService.GET<List<CajaSesion>>("cajasesion", String.Format("idasignarcaja/{0}", App.asignacionPersonal.idAsignarCaja));
+            if (csList.Count > 0)
             {
-                cajaSesion = list[0];
-                ConfigModel.cajaIniciada = true;
+                App.cajaSesion = csList[0];
+                App.cajaIniciada = true;
             }
             else
             {
-                ConfigModel.cajaIniciada = false;
+                App.cajaIniciada = false;
             }
+            this.nLoads++;
+            //loadState("caja session");
+        }
 
+        private async void loadPuntoDeVenta()
+        {
             // www.lineatienda.com/services.php/asignarpuntoventas/sucursal/1/personal/8
-            List<PuntoDeVenta> list = await webService.GET<List<PuntoDeVenta>>("asignarpuntoventas", String.Format("sucursal/{0}/personal/{1}", idSucursal, idPersonal));
-            puntosDeVenta = list;
+            App.puntosDeVenta = await webService.GET<List<PuntoDeVenta>>("asignarpuntoventas", String.Format("sucursal/{0}/personal/{1}", App.sucursal.idSucursal, App.personal.idPersonal));
 
+            this.nLoads++;
+            //loadState("puntos de venta");
+        }
+
+        private async void loadAlmacenes()
+        {
             // www.lineatienda.com/services.php/personalalmacenes/per/8/suc/1
-            List<Almacen> list = await webService.GET<List<Almacen>>("personalalmacenes", String.Format("per/{0}/suc/{1}", idPersonal, idSucursal));
-            alamacenes = list;
+            App.alamacenes = await webService.GET<List<Almacen>>("personalalmacenes", String.Format("per/{0}/suc/{1}", App.personal.idPersonal, App.sucursal.idSucursal));
 
+            this.nLoads++;
+            //loadState("almacenes");
+        }
+
+        private async void loadTipoDocumento()
+        {
             // www.lineatienda.com/services.php/tipodoc21/estado/1
-            List<TipoDocumento> list = await webService.GET<List<TipoDocumento>>("tipodoc21", "estado/1");
-            tipoDocumento = list;
+            App.tipoDocumentos = await webService.GET<List<TipoDocumento>>("tipodoc21", "estado/1");
 
+            this.nLoads++;
+            //loadState("tipos de documentos");
+        }
+
+        private async void loadTipoCambioMonedas()
+        {
             // www.lineatienda.com/services.php/tipocambiotodasmonedas/hoy
-            List<TipoCambioMoneda> list = await webService.GET<List<TipoCambioMoneda>>("tipocambiotodasmonedas", "hoy");
-            tipoCambioMonedas = list;
+            App.tipoCambioMonedas = await webService.GET<List<TipoCambioMoneda>>("tipocambiotodasmonedas", "hoy");
 
+            this.nLoads++;
+            //loadState("tipos de cambio");
+        }
+
+        private async void loadMonedas()
+        {
             // www.lineatienda.com/services.php/monedas/estado/1
-            List<Moneda> list = await webService.GET<List<Moneda>>("monedas", "estado/1");
-            monedas = list;
+            App.monedas = await webService.GET<List<Moneda>>("monedas", "estado/1");
+
+            this.nLoads++;
+            //loadState("monedas");
         }
     }
 }

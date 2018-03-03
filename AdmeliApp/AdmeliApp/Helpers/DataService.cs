@@ -42,6 +42,20 @@ namespace AdmeliApp.Helpers
             }
         }
 
-        public Response 
+        public Personal GetPersonal()
+        {
+            using(DataAccess da = new DataAccess())
+            {
+                return da.First<Personal>();
+            }
+        }
+
+        internal void DeletePersonal(Personal personal)
+        {
+            using(DataAccess da = new DataAccess())
+            {
+                da.Delete(personal);
+            }
+        }
     }
 }

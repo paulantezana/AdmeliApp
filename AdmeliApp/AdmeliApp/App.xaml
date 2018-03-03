@@ -77,7 +77,7 @@
             ==================================================================================
                Locator del main view model que estas asu ves se conectan con el web service
             -->
-            <infra:InstanceLocator x:Key="Locator"/>
+            <!-- <infra:InstanceLocator x:Key="Locator"/> -->
 
         </ResourceDictionary>
 	</Application.Resources>

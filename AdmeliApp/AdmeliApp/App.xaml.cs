@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AdmeliApp.Model;
 using AdmeliApp.Pages.ProductoPages;
+using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
 using Xamarin.Forms;
 
 namespace AdmeliApp
@@ -24,6 +25,7 @@ namespace AdmeliApp
         internal static Personal personal;
 
         public static MarcaPage MarcaPage { get; internal set; }
+        public static MarcaItemPage MarcaItemPage { get; internal set; }
 
         public App ()
 		{

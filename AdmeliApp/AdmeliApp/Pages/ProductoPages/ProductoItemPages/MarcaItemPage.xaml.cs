@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AdmeliApp.Pages.ProductoPages.ItemPages
+namespace AdmeliApp.Pages.ProductoPages.ProductoItemPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MarcaItemPage : ContentPage
@@ -17,8 +17,14 @@ namespace AdmeliApp.Pages.ProductoPages.ItemPages
 		{
 			InitializeComponent ();
 
-            MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
-            BindingContext = marcaViewModel.CurrentMarca;
+            BindingContext = new MarcaViewModel().CurrentMarca;
+            //BindingContext = marcaViewModel.CurrentMarca;
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.MarcaItemPage = this;
+        }
+    }
 }

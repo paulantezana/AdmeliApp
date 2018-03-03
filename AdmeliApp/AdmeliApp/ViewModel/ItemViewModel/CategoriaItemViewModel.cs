@@ -9,14 +9,10 @@ namespace AdmeliApp.ViewModel.ItemViewModel
 {
     public class CategoriaItemViewModel : Categoria
     {
-
-
-
         public ICommand Editar { get; private set; }
 
         public CategoriaItemViewModel()
         {
-
             Editar = new Command(() =>
             {
                 App.Current.MainPage.DisplayAlert("Eliminar", "¿Desea eliminar a: ? ", "Aceptar", "Cancelar");

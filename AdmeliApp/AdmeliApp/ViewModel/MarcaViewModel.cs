@@ -1,6 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
-using AdmeliApp.Pages.ProductoPages.ItemPages;
+using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -41,15 +41,15 @@ namespace AdmeliApp.ViewModel
 
         #region ================================ COMMANDS ================================
         private ICommand _RefreshCommand;
-        internal ICommand RefreshCommand =>
+        public ICommand RefreshCommand =>
             _RefreshCommand ?? (_RefreshCommand = new Command(() => ExecuteRefresh()));
 
         private ICommand _SearchCommand;
-        internal ICommand SearchCommand =>
+        public ICommand SearchCommand =>
             _SearchCommand ?? (_SearchCommand = new Command(() => ExecuteSearch()));
 
         private ICommand _NuevoCommand;
-        internal ICommand NuevoCommand =>
+        public ICommand NuevoCommand =>
             _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
         #endregion
 
@@ -63,7 +63,7 @@ namespace AdmeliApp.ViewModel
         #endregion
 
         #region =========================== COMMAND EXECUTE ===========================
-        private void ExecuteRefresh()
+        internal void ExecuteRefresh()
         {
             MarcaItems.Clear();
             LoadMarca(1, 30);

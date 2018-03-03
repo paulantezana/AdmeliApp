@@ -1,6 +1,7 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
-using AdmeliApp.Pages.ProductoPages.ItemPages;
+using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,20 +13,28 @@ namespace AdmeliApp.ViewModel.ItemViewModel
     public class MarcaItemViewModel : Marca
     {
         internal WebService webService = new WebService();
-        public bool Nuevo { get; set; }
+        public bool Nuevo;
 
         #region ================================= COMMANDS =================================
         private ICommand _GuardarCommand;
-        internal ICommand GuardarCommand =>
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand GuardarCommand =>
             _GuardarCommand ?? (_GuardarCommand = new Command(() => ExecuteGuardarAsync()));
 
         private ICommand _EditarCommand;
-        internal ICommand EditarCommand =>
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand EditarCommand =>
             _EditarCommand ?? (_EditarCommand = new Command(() => ExecuteEditar()));
 
         private ICommand _AnularCommand;
-        internal ICommand AnularCommand =>
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand AnularCommand =>
             _AnularCommand ?? (_AnularCommand = new Command(() => ExecuteAnular()));
+
+        private ICommand _EliminarCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand EliminarCommand =>
+            _EliminarCommand ?? (_EliminarCommand = new Command(() => ExecuteEliminar()));
         #endregion
 
         #region ================================ CONSTRUCTOR ================================
@@ -74,6 +83,9 @@ namespace AdmeliApp.ViewModel.ItemViewModel
 
                 // Message response
                 await App.Current.MainPage.DisplayAlert("Anular", response.Message, "Aceptar");
+
+                // Refrescar la lista
+                MarcaViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {
@@ -97,21 +109,12 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsEnabled = false;
 
                 // Preparando el objeto para enviar
-                //Marca marca = new Marca();
                 if (this.Nuevo)
                 {
                     this.CaptionImagen = "";
                     this.UbicacionLogo = "";
                     this.TieneRegistros = "";
                 }
-                /*else
-                {
-                    marca.IdMarca = IdMarca;
-                }*/
-               /* marca.NombreMarca = this.NombreMarca;
-                marca.SitioWeb = this.SitioWeb;
-                marca.Descripcion = this.Descripcion;
-                marca.Estado = this.Estado;*/
 
                 if (this.Nuevo)
                 {
@@ -126,11 +129,9 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                     await App.Current.MainPage.DisplayAlert("Modificar", response.Message, "Aceptar");
                 }
 
-                // Limpiando los campos
-                /*marca.NombreMarca = string.Empty;
-                marca.SitioWeb = string.Empty;
-                marca.Descripcion = string.Empty;
-                marca.Estado = 1;*/
+                // Refrescar y regresar a la pagina anterior
+                MarcaViewModel.GetInstance().ExecuteRefresh();
+                await App.MarcaItemPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
@@ -143,7 +144,35 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = false;
                 this.IsEnabled = true;
             }
-        } 
+        }
+
+        private async void ExecuteEliminar()
+        {
+            try
+            {
+                // Estados
+                this.IsRunning = true;
+                this.IsEnabled = false;
+
+                // localhost:8080/admeli/xcore2/xcore/services.php/marca/eliminar
+                Response response = await webService.POST<Marca, Response>("marca", "eliminar", (Marca)this);
+                await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
+
+                // Refrescar la lista
+                MarcaViewModel.GetInstance().ExecuteRefresh();
+            }
+            catch (Exception ex)
+            {
+                // Error message
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                // Estados
+                this.IsRunning = false;
+                this.IsEnabled = true;
+            }
+        }
         #endregion
     }
 }

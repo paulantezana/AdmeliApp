@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class PuntoDeVenta
+    public class PuntoDeVenta : BaseModel
     {
         public int idPuntoVenta { get; set; }
         public string nombre { get; set; }

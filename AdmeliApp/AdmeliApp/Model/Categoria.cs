@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class Categoria
+    public class Categoria : BaseModel
     {
         public int idCategoria { get; set; }
         public string nombreCategoria { get; set; }

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AdmeliApp.ItemViewModel
+namespace AdmeliApp.ViewModel.ItemViewModel
 {
-    public class ProductoItemViewModel : Producto
+    public class UnidadMedidaItemViewModel : UnidadMedida
     {
 
     }

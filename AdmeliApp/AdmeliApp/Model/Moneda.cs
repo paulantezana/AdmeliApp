@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class Moneda
+    public class Moneda : BaseModel
     {
         public int idMoneda { get; set; }
         public int idMonedaPorDefecto { get; set; }

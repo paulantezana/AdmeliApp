@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class UnidadMedida
+    public class UnidadMedida : BaseModel
     {
         public int idUnidadMedida { get; set; }
         public string nombreUnidad { get; set; }

@@ -1,6 +1,6 @@
 ﻿using AdmeliApp.Helpers;
-using AdmeliApp.ItemViewModel;
 using AdmeliApp.Model;
+using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class ProductoViewModel : BaseViewModel
+    public class ProductoViewModel : BaseModel
     {
         internal WebService webService = new WebService();
 

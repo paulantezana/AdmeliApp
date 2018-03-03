@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AdmeliApp.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +7,7 @@ using Xamarin.Forms;
 
 namespace AdmeliApp.Model
 {
-    public class Marca
+    public class Marca : BaseModel
     {
         [JsonProperty(PropertyName = "idMarca")]
         public int IdMarca { get; set; }

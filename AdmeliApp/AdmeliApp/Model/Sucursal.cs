@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class Sucursal
+    public class Sucursal : BaseModel
     {
         public int idSucursal { get; set; }
         public string nombre { get; set; }

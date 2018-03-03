@@ -1,17 +1,25 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
-using AdmeliApp.Pages.ProductoPages.New;
+using AdmeliApp.Pages.ProductoPages.ItemPages;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace AdmeliApp.ItemViewModel
+namespace AdmeliApp.ViewModel.ItemViewModel
 {
     public class MarcaItemViewModel : Marca
     {
         internal WebService webService = new WebService();
+
+        private string _BorraBorrita;
+        public string BorraBorrita
+        {
+            get { return this._BorraBorrita; }
+            set { SetValue(ref this._BorraBorrita, value); }
+        }
+
 
         private ICommand _GuardarCommand;
         public ICommand GuardarCommand =>
@@ -27,7 +35,22 @@ namespace AdmeliApp.ItemViewModel
 
         private void ExecuteEditar()
         {
-            App.MarcaPage.Navigation.PushAsync(new NewMarcaPage());
+            MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
+            /*MarcaItemViewModel marcaItemViewModel = new MarcaItemViewModel()
+            {
+                IdMarca = this.IdMarca,
+                NombreMarca = this.NombreMarca,
+                Descripcion = this.Descripcion,
+                SitioWeb = this.SitioWeb,
+                UbicacionLogo = this.UbicacionLogo,
+                CaptionImagen = this.CaptionImagen,
+                Estado = this.Estado,
+                TieneRegistros = this.TieneRegistros,
+                BorraBorrita = "Borando test borra borrita"
+            };*/
+            this.BorraBorrita = "Borrame cosa";
+            marcaViewModel.SetCurrentMarca(this);
+            App.MarcaPage.Navigation.PushAsync(new MarcaItemPage());
         }
 
         private async void ExecuteAnular()
@@ -35,7 +58,7 @@ namespace AdmeliApp.ItemViewModel
             try
             {
                 /// Verificacion si el registro esta anulado
-                if(this.Estado == 0)
+                if (this.Estado == 0)
                 {
                     await App.Current.MainPage.DisplayAlert("Anular", "Este registro ya esta anulado \n" + this.NombreMarca, "Aceptar");
                     return;
@@ -57,7 +80,7 @@ namespace AdmeliApp.ItemViewModel
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
             }
         }
 
@@ -77,7 +100,7 @@ namespace AdmeliApp.ItemViewModel
 
 
                 Response response = await webService.POST<Marca, Response>("marca", "guardar", marca);
-                await App.Current.MainPage.DisplayAlert("Guardar",response.Message,"Aceptar");
+                await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
                 marca.NombreMarca = string.Empty;
                 marca.SitioWeb = string.Empty;
                 marca.Descripcion = string.Empty;
@@ -85,8 +108,9 @@ namespace AdmeliApp.ItemViewModel
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
             }
         }
+
     }
 }

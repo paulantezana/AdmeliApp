@@ -1,17 +1,14 @@
 ﻿using AdmeliApp.Helpers;
-using AdmeliApp.ItemViewModel;
 using AdmeliApp.Model;
+using AdmeliApp.ViewModel.ItemViewModel;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class CategoriaViewModel : BaseViewModel
+    public class CategoriaViewModel : BaseModel
     {
         internal WebService webService = new WebService();
 

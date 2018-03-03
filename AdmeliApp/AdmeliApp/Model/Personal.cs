@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AdmeliApp.Helpers;
+using Newtonsoft.Json;
 using SQLite.Net.Attributes;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class Personal
+    public class Personal : BaseModel
     {
         [PrimaryKey]                            /// Es importante para poder almacenar en un base de datos sqlite
         public int idPersonal { get; set; }

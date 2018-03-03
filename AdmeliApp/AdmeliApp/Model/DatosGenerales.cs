@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    class DatosGenerales
+    class DatosGenerales : BaseModel
     {
         public int idDatosGenerales { get; set; }
         public string razonSocial { get; set; }

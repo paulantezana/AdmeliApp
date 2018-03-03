@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
+using SQLite.Net.Attributes;
 
-namespace AdmeliApp.ViewModel
+namespace AdmeliApp.Helpers
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseModel : INotifyPropertyChanged
     {
         private bool _IsRunning;
+
+        [Ignore]
+        [JsonIgnore]
         public bool IsRunning
         {
             get { return this._IsRunning; }
@@ -18,6 +19,9 @@ namespace AdmeliApp.ViewModel
         }
 
         private bool _IsEnabled;
+
+        [Ignore]
+        [JsonIgnore]
         public bool IsEnabled
         {
             get { return this._IsEnabled; }
@@ -25,6 +29,9 @@ namespace AdmeliApp.ViewModel
         }
 
         private bool _IsRefreshing;
+
+        [Ignore]
+        [JsonIgnore]
         public bool IsRefreshing
         {
             get { return this._IsRefreshing; }

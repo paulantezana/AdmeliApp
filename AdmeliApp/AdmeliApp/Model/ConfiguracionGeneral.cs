@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class ConfiguracionGeneral
+    public class ConfiguracionGeneral : BaseModel
     {
         public int idConfiguracionGeneral { get; set; }
         public int numeroDecimales { get; set; }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class CajaSesion
+    public class CajaSesion : BaseModel
     {
         public string nombres { get; set; }
         public string apellidos { get; set; }

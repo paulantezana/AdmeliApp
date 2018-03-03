@@ -2,7 +2,6 @@
 using AdmeliApp.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,7 +9,7 @@ using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseModel
     {
         internal WebService webService = new WebService();
         internal DataService dataService = new DataService();

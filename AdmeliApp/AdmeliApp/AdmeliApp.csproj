@@ -29,10 +29,10 @@
     <EmbeddedResource Update="Pages\ProductoPages\CategoriaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ProductoPages\MarcaPage.xaml">
+    <EmbeddedResource Update="Pages\ProductoPages\ItemPages\MarcaItemPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ProductoPages\New\NewMarcaPage.xaml">
+    <EmbeddedResource Update="Pages\ProductoPages\MarcaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ProductoPages\ProductosPage.xaml">
@@ -58,7 +58,6 @@
     <Folder Include="Pages\AlmacenPages\" />
     <Folder Include="Pages\CajaPages\" />
     <Folder Include="Pages\HerramientaPages\" />
-    <Folder Include="Pages\ProductoPages\Detail\" />
     <Folder Include="Pages\VentaPages\" />
   </ItemGroup>
 </Project>

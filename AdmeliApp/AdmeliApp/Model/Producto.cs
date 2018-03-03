@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdmeliApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AdmeliApp.Model
 {
-    public class Producto
+    public class Producto : BaseModel
     {
         public int idProducto { get; set; }
         public bool cantidadFraccion { get; set; }

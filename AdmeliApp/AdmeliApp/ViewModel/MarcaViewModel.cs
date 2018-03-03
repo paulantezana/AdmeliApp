@@ -1,7 +1,7 @@
 ﻿using AdmeliApp.Helpers;
-using AdmeliApp.ItemViewModel;
 using AdmeliApp.Model;
-using AdmeliApp.Pages.ProductoPages.New;
+using AdmeliApp.Pages.ProductoPages.ItemPages;
+using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,9 +11,11 @@ using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel
 {
-    public class MarcaViewModel : BaseViewModel
+    public class MarcaViewModel : BaseModel
     {
         internal WebService webService = new WebService();
+
+        public MarcaItemViewModel CurrentMarca { get; set; }
 
         private List<Marca> marcaList { get; set; }
         private ObservableCollection<MarcaItemViewModel> _MarcaItems;
@@ -34,6 +36,11 @@ namespace AdmeliApp.ViewModel
             }
         }
 
+        internal void SetCurrentMarca(MarcaItemViewModel marcaItemViewModel)
+        {
+            this.CurrentMarca = marcaItemViewModel;
+        }
+
         #region ================= COMMANDS =================
         private ICommand _RefreshCommand;
         public ICommand RefreshCommand =>
@@ -51,6 +58,8 @@ namespace AdmeliApp.ViewModel
         #region ================= CONSTRUCTOR =================
         public MarcaViewModel()
         {
+            instance = this;
+            CurrentMarca = new MarcaItemViewModel();
             LoadMarca(1, 30);
         } 
         #endregion
@@ -78,7 +87,7 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            App.MarcaPage.Navigation.PushAsync(new NewMarcaPage());
+            App.MarcaPage.Navigation.PushAsync(new MarcaItemPage());
         }
 
         private async void LoadMarca(int page, int items)
@@ -120,5 +129,22 @@ namespace AdmeliApp.ViewModel
                 TextColorItem = (m.Estado == 0) ? (Color)App.Current.Resources["Alert"] : (Color)App.Current.Resources["GreyDark"],
             });
         }
+
+
+        #region =============================== SINGLETON ===============================
+        private static MarcaViewModel instance;
+
+        public static MarcaViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                return new MarcaViewModel();
+            }
+            return instance;
+        }
+        #endregion
+
+
+
     }
 }

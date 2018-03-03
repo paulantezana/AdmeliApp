@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace AdmeliApp.ItemViewModel
+namespace AdmeliApp.ViewModel.ItemViewModel
 {
     public class CategoriaItemViewModel : Categoria
     {

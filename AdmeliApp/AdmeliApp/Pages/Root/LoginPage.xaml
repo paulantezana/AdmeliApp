@@ -51,7 +51,7 @@
                     <ActivityIndicator 
                         IsRunning="{Binding IsRunning}">
                         <ActivityIndicator.Color>
-                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource info}"/>
+                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
                         </ActivityIndicator.Color>
                     </ActivityIndicator>
 

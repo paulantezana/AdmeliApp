@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite.Net.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,9 @@ namespace AdmeliApp.Model
 {
     public class Personal
     {
+        [PrimaryKey]                            /// Es importante para poder almacenar en un base de datos sqlite
         public int idPersonal { get; set; }
+
         public string nombres { get; set; }
         public string apellidos { get; set; }
         public Fecha fechaNacimiento { get; set; }

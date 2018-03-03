@@ -6,22 +6,26 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Colores del proyecto -->
-            <Color x:Key="color-1">#1A232F</Color>
-            <Color x:Key="color-2">#328DFB</Color>
-            <Color x:Key="color-3">#4DACFF</Color>
-            <Color x:Key="inverse">#74C93B</Color>
+            <Color x:Key="Color1">#1A232F</Color>
+            <Color x:Key="Color2">#328DFB</Color>
+            <Color x:Key="Color3">#4DACFF</Color>
+            <Color x:Key="Inverse">#74C93B</Color>
 
             <!-- Colores de alerta -->
-            <Color x:Key="alert">#FF3860</Color>
-            <Color x:Key="info">#209CEF</Color>
-            <Color x:Key="success">#23D260</Color>
-            <Color x:Key="warning">#FFDE57</Color>
+            <Color x:Key="Alert">#FF3860</Color>
+            <Color x:Key="AlertLight">#FFE0E0</Color>
+            <Color x:Key="Info">#209CEF</Color>
+            <Color x:Key="InfoLight">#209CEF</Color>
+            <Color x:Key="Success">#23D260</Color>
+            <Color x:Key="SuccessLight">#23D260</Color>
+            <Color x:Key="Warning">#FFDE57</Color>
+            <Color x:Key="WarningLight">#FFDE57</Color>
 
             <!-- Scala de grises -->
-            <Color x:Key="grey-lighter">#F5F5F5</Color>
-            <Color x:Key="grey-light">#DCDCDC</Color>
-            <Color x:Key="grey">#7A7A7A</Color>
-            <Color x:Key="grey-dark">#4A4A4A</Color>
+            <Color x:Key="GreyLighter">#F5F5F5</Color>
+            <Color x:Key="GreyLight">#DCDCDC</Color>
+            <Color x:Key="Grey">#7A7A7A</Color>
+            <Color x:Key="GreyDark">#4A4A4A</Color>
 
             <!-- 
             ==================================================================================
@@ -30,15 +34,15 @@
             <Style x:Key="Button" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource grey-lighter}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource GreyLighter}" />
                 <Setter Property="BorderRadius" Value="5" />
-                <Setter Property="TextColor" Value="{DynamicResource grey-dark}" />
+                <Setter Property="TextColor" Value="{DynamicResource GreyDark}" />
             </Style>
 
             <Style x:Key="ButtonInfo" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource info}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Info}" />
                 <Setter Property="BorderRadius" Value="5" />
                 <Setter Property="TextColor" Value="white" />
             </Style>
@@ -47,7 +51,7 @@
             <Style x:Key="ButtonSuccess" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource success}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Success}" />
                 <Setter Property="BorderRadius" Value="5" />
                 <Setter Property="TextColor" Value="white" />
             </Style>
@@ -56,7 +60,7 @@
             <Style x:Key="ButtonWarning" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource warning}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Warning}" />
                 <Setter Property="BorderRadius" Value="5" />
                 <Setter Property="TextColor" Value="#4C421A" />
             </Style>
@@ -64,7 +68,7 @@
             <Style x:Key="ButtonAlert" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource alert}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Alert}" />
                 <Setter Property="BorderRadius" Value="5" />
                 <Setter Property="TextColor" Value="white" />
             </Style>

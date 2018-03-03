@@ -46,19 +46,6 @@ namespace AdmeliApp.ViewModel
         private ICommand _NuevoCommand;
         public ICommand NuevoCommand =>
             _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
-
-        private ICommand _EditarCommand;
-        public ICommand EditarCommand =>
-            _EditarCommand ?? (_EditarCommand = new Command(() => ExecuteEditar()));
-
-        private ICommand _AnularCommand;
-        public ICommand AnularCommand =>
-            _AnularCommand ?? (_AnularCommand = new Command(() => ExecuteAnular()));
-
-
-        private ICommand _EliminarCommand;
-        public ICommand EliminarCommand =>
-            _EliminarCommand ?? (_EliminarCommand = new Command(() => ExecuteEliminar()));
         #endregion
 
         #region ================= CONSTRUCTOR =================
@@ -94,26 +81,6 @@ namespace AdmeliApp.ViewModel
             App.MarcaPage.Navigation.PushAsync(new NewMarcaPage());
         }
 
-        private void ExecuteEditar()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ExecuteAnular()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ExecuteEliminar()
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
-
         private async void LoadMarca(int page, int items)
         {
             try
@@ -140,7 +107,17 @@ namespace AdmeliApp.ViewModel
         {
             return marcaList.Select(m => new MarcaItemViewModel
             {
+                IdMarca = m.IdMarca,
                 NombreMarca = m.NombreMarca,
+                SitioWeb = m.SitioWeb,
+                Descripcion = m.Descripcion,
+                Estado = m.Estado,
+                CaptionImagen = m.CaptionImagen,
+                UbicacionLogo = m.UbicacionLogo,
+                TieneRegistros = m.TieneRegistros,
+
+                BackgroundItem = (m.Estado == 0) ? (Color)App.Current.Resources["AlertLight"] : Color.Transparent,
+                TextColorItem = (m.Estado == 0) ? (Color)App.Current.Resources["Alert"] : (Color)App.Current.Resources["GreyDark"],
             });
         }
     }

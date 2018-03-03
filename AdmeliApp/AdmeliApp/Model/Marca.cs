@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace AdmeliApp.Model
 {
     public class Marca
     {
         [JsonProperty(PropertyName = "idMarca")]
-        public int idMarca { get; set; }
+        public int IdMarca { get; set; }
 
         [JsonProperty(PropertyName = "nombreMarca")]
         public string NombreMarca { get; set; }
@@ -30,5 +31,11 @@ namespace AdmeliApp.Model
 
         [JsonProperty(PropertyName = "tieneRegistros")]
         public string TieneRegistros { get; set; }
+
+        [JsonIgnore]
+        public Color BackgroundItem { get; set; }
+
+        [JsonIgnore]
+        public Color TextColorItem { get; set; }
     }
 }

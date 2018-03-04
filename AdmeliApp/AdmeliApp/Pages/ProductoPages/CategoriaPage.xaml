@@ -31,17 +31,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </ContentView>
-
-            <!-- Botton flotante para agregar un nuevo registro -->
-            <Float:FloatingActionButton 
-                x:Name="FAB"
-                ButtonColor="#0097F6"
-                BackgroundColor="White"
-                WidthRequest="65"
-                HeightRequest="65"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"  
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}"
-                Image="floatAdd_icon.png"/>
         </RelativeLayout>
 
     </ContentPage.Content>

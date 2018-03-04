@@ -5,12 +5,12 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="White">
-                <!--<Image Source="LoginHeader.png"></Image>-->
+                <Image Source="LoginHeader.png"></Image>
                 <StackLayout Padding="40,0,40,0" VerticalOptions="CenterAndExpand">
 
                     <Label 
-                        Text="ADMELI"
-                        FontSize="50"
+                        Text="LOGIN"
+                        FontSize="45"
                         HorizontalOptions="Center"/>
 
                     <Entry 

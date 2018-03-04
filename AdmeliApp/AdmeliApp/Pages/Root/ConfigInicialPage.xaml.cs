@@ -10,17 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace AdmeliApp.Pages.Root
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : ContentPage
+	public partial class ConfigInicialPage : ContentPage
 	{
-        List<Microcharts.Entry> entries = new List<Microcharts.Entry>
-        {
-            /*new Microcharts.Entry
-            {
-
-            };*/
-        };
-
-		public HomePage ()
+		public ConfigInicialPage ()
 		{
 			InitializeComponent ();
 		}

@@ -86,7 +86,7 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            CurrentMarca.Nuevo = true; /// Importante indicaque se agregara un nuevo registro
+            SetCurrentMarca(new MarcaItemViewModel() { Nuevo = true, DeleteIsEnabled =  false });
             App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
         } 
         #endregion

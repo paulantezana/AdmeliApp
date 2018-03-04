@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:Float="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
              x:Class="AdmeliApp.Pages.ProductoPages.MarcaPage">
     <ContentPage.Content>
         <RelativeLayout>
@@ -53,16 +52,18 @@
             </ContentView>
 
             <!-- Botton flotante para agregar un nuevo registro -->
-            <Float:FloatingActionButton 
-                x:Name="FAB"
-                ButtonColor="#0097F6"
-                BackgroundColor="White"
-                WidthRequest="65"
-                HeightRequest="65"
-                Command="{Binding NuevoCommand}"
+            <StackLayout                 
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"  
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}"
-                Image="floatAdd_icon.png"/>
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-100}">
+                <Image 
+                    WidthRequest="65"
+                    HeightRequest="65"
+                    Source="floatAdd_icon.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NuevoCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
         </RelativeLayout>
 
     </ContentPage.Content>

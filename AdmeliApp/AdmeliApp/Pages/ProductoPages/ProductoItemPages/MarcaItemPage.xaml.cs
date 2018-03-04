@@ -17,8 +17,8 @@ namespace AdmeliApp.Pages.ProductoPages.ProductoItemPages
 		{
 			InitializeComponent ();
 
-            BindingContext = new MarcaViewModel().CurrentMarca;
-            //BindingContext = marcaViewModel.CurrentMarca;
+            MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
+            BindingContext = marcaViewModel.CurrentMarca;
         }
 
         protected override void OnAppearing()

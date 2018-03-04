@@ -15,6 +15,14 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         internal WebService webService = new WebService();
         public bool Nuevo;
 
+        private bool _DeleteIsEnabled;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public bool DeleteIsEnabled
+        {
+            get { return _DeleteIsEnabled; }
+            set { SetValue(ref _DeleteIsEnabled, value); }
+        }
+
         #region ================================= COMMANDS =================================
         private ICommand _GuardarCommand;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
@@ -52,6 +60,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
             marcaViewModel.SetCurrentMarca(this);
             this.Nuevo = false; /// Importante indicaque se modificara el registro actual
+            this.DeleteIsEnabled = true;
             App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
         }
 
@@ -104,6 +113,13 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         {
             try
             {
+                /// validacion de los campos
+                if (string.IsNullOrEmpty(this.NombreMarca))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo obligatoria", "Aceptar");
+                    return;
+                }
+
                 // Estados
                 this.IsRunning = true;
                 this.IsEnabled = false;

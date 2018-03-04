@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:Float="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
              x:Class="AdmeliApp.Pages.ProductoPages.UnidadMedidaPage">
     <ContentPage.Content>
         <RelativeLayout>
@@ -37,17 +36,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </ContentView>
-
-            <!-- Botton flotante para agregar un nuevo registro -->
-            <Float:FloatingActionButton 
-                x:Name="FAB"
-                ButtonColor="#0097F6"
-                BackgroundColor="White"
-                WidthRequest="65"
-                HeightRequest="65"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"  
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}"
-                Image="floatAdd_icon.png"/>
         </RelativeLayout>
 
     </ContentPage.Content>

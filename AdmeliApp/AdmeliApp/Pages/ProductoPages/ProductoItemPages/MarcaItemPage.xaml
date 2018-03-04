@@ -62,7 +62,7 @@
                     <Button
                         Text="Eliminar" 
                         Command="{Binding EliminarCommand}"
-                        IsEnabled="{Binding IsEnabled}"
+                        IsEnabled="{Binding DeleteIsEnabled}"
                         Style="{StaticResource ButtonAlert}"
                         HorizontalOptions="FillAndExpand"/>
                 </StackLayout>

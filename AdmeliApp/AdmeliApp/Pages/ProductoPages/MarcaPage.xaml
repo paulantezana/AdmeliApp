@@ -31,8 +31,12 @@
                                         <MenuItem Text="Anular" Command="{Binding AnularCommand}"/>
                                         <MenuItem Text="Editar" Command="{Binding EditarCommand}"/>
                                     </ViewCell.ContextActions>
-                                    <StackLayout Padding="15,12" BackgroundColor="{Binding BackgroundItem}">
+                                    <StackLayout BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
                                         <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" BackgroundColor="Blue">
+                                            <Image Source="icon.png"/>
+                                            <Image Source="icon.png"/>
+                                        </StackLayout>
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding EditarCommand}"/>
                                         </StackLayout.GestureRecognizers>

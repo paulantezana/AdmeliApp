@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.Navigation.MenuPage"
-             BackgroundColor="#212025"
+             BackgroundColor="White"
              Title="Menu">
     <StackLayout>
         <ListView x:Name="MenuItemsListView"
@@ -75,8 +75,8 @@
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout  BackgroundColor="#252429" Padding="15,12">
-                            <Label Text="{Binding Heading}" TextColor="#7D777A"/>
+                        <StackLayout  BackgroundColor="White" Padding="15,12">
+                            <Label Text="{Binding Heading}" TextColor="#212025"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -89,7 +89,7 @@
                             <Image Source="{Binding Icon}" HeightRequest="30" WidthRequest="30" Margin="0,0,10,0"></Image>
                             <Label  VerticalOptions="FillAndExpand"
                                     VerticalTextAlignment="Center"
-                                    TextColor="#938D90"
+                                    TextColor="#212025"
                                     Text="{Binding Title}"/>
                         </StackLayout>
                     </ViewCell>

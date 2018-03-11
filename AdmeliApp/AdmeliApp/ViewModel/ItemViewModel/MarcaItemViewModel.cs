@@ -51,6 +51,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             // Estados
             this.IsRunning = false;
             this.IsEnabled = true;
+            this.Estado = 1;
         } 
         #endregion
 

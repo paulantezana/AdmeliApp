@@ -2,13 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.Root.HomePage"
-             xmlns:Float="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              BackgroundColor="White"
              Title="Home">
     <StackLayout>
-        <Label Text="Ventas del ultimo mes" HorizontalOptions="CenterAndExpand"></Label>
-        <Label Text="Estadisticas" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>
-        <microcharts:ChartView x:Name="Chart1" HeightRequest="250"/>
+
+        <!-- CHART VENTAS MENSUALES  -->
+        <StackLayout Padding="10,20,10,10">
+            <StackLayout Spacing="0">
+                <Label Text="VENTAS MENSUALES"></Label>
+                <Label Text="Estadística" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>
+            </StackLayout>
+            <microcharts:ChartView Chart="{Binding VentaMensualChart}" HeightRequest="250"/>
+            <StackLayout>
+                <Label Text="Cargando..." IsVisible="{Binding IsRunning}" HorizontalOptions="CenterAndExpand"></Label>
+            </StackLayout>
+        </StackLayout>
+
+        <!-- CHART INGRESOS POR MONEDA  -->
+        <StackLayout  Padding="10,20,10,10">
+            <StackLayout Spacing="0">
+                <Label Text="INGRESOS POR MONEDA"></Label>
+                <Label Text="Estadística" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>
+            </StackLayout>
+            <microcharts:ChartView Chart="{Binding IngresoMonedaChart}" HeightRequest="250"/>
+            <StackLayout>
+                <Label Text="Cargando..." IsVisible="{Binding IsRunning}" HorizontalOptions="CenterAndExpand"></Label>
+            </StackLayout>
+        </StackLayout>
+        <!-- END CHARTS -->
     </StackLayout>
 </ContentPage>

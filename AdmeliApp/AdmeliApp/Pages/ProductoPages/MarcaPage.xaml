@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ProductoPages.MarcaPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <RelativeLayout>
 
@@ -27,15 +30,14 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <ViewCell.ContextActions>
-                                        <MenuItem Text="Anular" Command="{Binding AnularCommand}"/>
-                                        <MenuItem Text="Editar" Command="{Binding EditarCommand}"/>
-                                    </ViewCell.ContextActions>
-                                    <StackLayout BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                        <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}"/>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" BackgroundColor="Blue">
-                                            <Image Source="icon.png"/>
-                                            <Image Source="icon.png"/>
+                                    <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
+                                        <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                            <Image Source="cancel_icon.png">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding AnularCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
                                         </StackLayout>
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding EditarCommand}"/>
@@ -47,18 +49,41 @@
 
                         <!-- "Cargando..." se visualiza, con visibilidad vinculada a IsRunning -->
                         <ListView.Footer>
-                            <Grid Padding="6" IsVisible="{Binding IsRunning}">
-                                <Label Text="Cargando..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
-                            </Grid>
+                            <StackLayout Padding="0,15,0,0">
+                                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                    <Image Source="first_icon.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FirstCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image Source="previous_icon.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding PreviousCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Entry Text="{Binding CurrentPage, Mode=TwoWay}"></Entry>
+                                    <Image Source="next_icon.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NextCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image Source="last_icon.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding LastCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                                <Label Text="125 Registros" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>  
+                            </StackLayout>
                         </ListView.Footer>
                     </ListView>
                 </StackLayout>
             </ContentView>
 
-            <!-- Botton flotante para agregar un nuevo registro -->
+            <!-- Botton flotante para agregar un nuevo registro 
             <StackLayout                 
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"  
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-100}">
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-200}">
                 <Image 
                     WidthRequest="65"
                     HeightRequest="65"
@@ -68,6 +93,7 @@
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
+            -->
         </RelativeLayout>
 
     </ContentPage.Content>

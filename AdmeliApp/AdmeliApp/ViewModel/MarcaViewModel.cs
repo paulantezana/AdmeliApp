@@ -51,6 +51,23 @@ namespace AdmeliApp.ViewModel
         private ICommand _NuevoCommand;
         public ICommand NuevoCommand =>
             _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
+
+
+        private ICommand _FirstCommand;
+        public ICommand FirstCommand =>
+            _FirstCommand ?? (_FirstCommand = new Command(() => ExecuteFirstPage()));
+
+        private ICommand _PreviousCommand;
+        public ICommand PreviousCommand =>
+            _PreviousCommand ?? (_PreviousCommand = new Command(() => ExecutePreviousPage()));
+
+        private ICommand _NextCommand;
+        public ICommand NextCommand =>
+            _NextCommand ?? (_NextCommand = new Command(() => ExecuteNextPage()));
+
+        private ICommand _LastCommand;
+        public ICommand LastCommand =>
+            _LastCommand ?? (_LastCommand = new Command(() => ExecutelastPage()));
         #endregion
 
         #region =========================== CONSTRUCTOR ===========================
@@ -88,7 +105,27 @@ namespace AdmeliApp.ViewModel
         {
             SetCurrentMarca(new MarcaItemViewModel() { Nuevo = true, DeleteIsEnabled =  false });
             App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
-        } 
+        }
+
+        private void ExecuteFirstPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecutePreviousPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteNextPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecutelastPage()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region ===================================== LOADS =====================================

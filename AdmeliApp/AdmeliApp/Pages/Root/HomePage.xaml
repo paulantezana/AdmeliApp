@@ -4,10 +4,11 @@
              x:Class="AdmeliApp.Pages.Root.HomePage"
              xmlns:Float="clr-namespace:SuaveControls.Views;assembly=SuaveControls.FloatingActionButton"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             BackgroundColor="White"
              Title="Home">
-
-    <microcharts:ChartView x:Name="Chart1" HeightRequest="200">
-        
-    </microcharts:ChartView>
-    
+    <StackLayout>
+        <Label Text="Ventas del ultimo mes" HorizontalOptions="CenterAndExpand"></Label>
+        <Label Text="Estadisticas" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>
+        <microcharts:ChartView x:Name="Chart1" HeightRequest="250"/>
+    </StackLayout>
 </ContentPage>

@@ -51,29 +51,31 @@
                         <ListView.Footer>
                             <StackLayout Padding="0,15,0,0">
                                 <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                                    <Image Source="first_icon.png">
+                                    <Image Source="first_icon.png" IsVisible="{Binding FirstIsVisible}">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding FirstCommand}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <Image Source="previous_icon.png">
+                                    <Image Source="previous_icon.png" IsVisible="{Binding PreviousIsVisible}">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding PreviousCommand}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <Entry Text="{Binding CurrentPage, Mode=TwoWay}"></Entry>
-                                    <Image Source="next_icon.png">
+                                    <Entry 
+                                        Text="{Binding CurrentPage, Mode=TwoWay}"
+                                        Keyboard="Numeric"></Entry>
+                                    <Image Source="next_icon.png" IsVisible="{Binding NextIsVisible}">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding NextCommand}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <Image Source="last_icon.png">
+                                    <Image Source="last_icon.png" IsVisible="{Binding LastIsVisible}">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding LastCommand}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </StackLayout>
-                                <Label Text="125 Registros" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>  
+                                <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource Grey}" Margin="0,-5,0,5"></Label>  
                             </StackLayout>
                         </ListView.Footer>
                     </ListView>

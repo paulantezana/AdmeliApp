@@ -16,6 +16,7 @@
                     <SearchBar
                         Text="{Binding SearchText, Mode=TwoWay}"
                         SearchCommand="{Binding SearchCommand}"
+                        Margin="0,5,0,5"
                         Placeholder="Buscar..."/>
 
                     <ListView 

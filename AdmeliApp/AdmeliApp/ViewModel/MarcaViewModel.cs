@@ -197,6 +197,8 @@ namespace AdmeliApp.ViewModel
             try
             {
                 this.IsRefreshing = true;
+                this.IsEnabled = false;
+
                 // www.lineatienda.com/services.php/marcas/estado/1/100
                 RootObject<Marca> rootData = await webService.GET<RootObject<Marca>>("marcas", String.Format("estado/{0}/{1}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina));
                 this.marcaList = rootData.datos;
@@ -219,6 +221,7 @@ namespace AdmeliApp.ViewModel
             finally
             {
                 this.IsRefreshing = false;
+                this.IsEnabled = true;
             }
         }
 

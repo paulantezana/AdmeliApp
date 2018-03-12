@@ -2,11 +2,86 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.VentaPages.DescuentoPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <RelativeLayout>
+
+            <!-- Listar registros en el listview -->
+            <ContentView
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+                <StackLayout>
+                    <SearchBar
+                        Text="{Binding SearchText, Mode=TwoWay}"
+                        SearchCommand="{Binding SearchCommand}"
+                        Margin="0,5,0,5"
+                        Placeholder="Buscar..."/>
+
+                    <ListView 
+                        ItemsSource="{Binding MarcaItems}"
+                        HasUnevenRows="True"
+                        IsPullToRefreshEnabled="True"
+                        CachingStrategy="RecycleElement"
+                        RefreshCommand="{Binding RefreshCommand}"
+                        IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
+
+                        <!-- Template de los items -->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
+                                        <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                            <Image Source="cancel_icon.png">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding AnularCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EditarCommand}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                        <!-- "Cargando..." se visualiza, con visibilidad vinculada a IsRunning -->
+                        <ListView.Footer>
+                            <StackLayout Padding="0,15,0,0">
+                                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                    <Image Source="first_icon.png" IsVisible="{Binding FirstIsVisible}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding FirstCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image Source="previous_icon.png" IsVisible="{Binding PreviousIsVisible}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding PreviousCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Entry 
+                                        Text="{Binding CurrentPage, Mode=TwoWay}"
+                                        Keyboard="Numeric"></Entry>
+                                    <Image Source="next_icon.png" IsVisible="{Binding NextIsVisible}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding NextCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image Source="last_icon.png" IsVisible="{Binding LastIsVisible}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding LastCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                                <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource Grey}" Margin="0,-5,0,5"></Label>
+                            </StackLayout>
+                        </ListView.Footer>
+                    </ListView>
+                </StackLayout>
+            </ContentView>
+        </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>

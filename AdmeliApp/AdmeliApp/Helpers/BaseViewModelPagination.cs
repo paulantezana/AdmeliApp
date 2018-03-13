@@ -10,6 +10,17 @@ namespace AdmeliApp.Helpers
     {
         internal Paginacion paginacion = new Paginacion(1, App.configuracionGeneral.itemPorPagina); // Configuracion inicial de la paginacion
 
+        private string _SearchText;
+        public string SearchText
+        {
+            get { return this._SearchText; }
+            set
+            {
+                SetValue(ref this._SearchText, value);
+                this.ExecuteSearch();
+            }
+        }
+
         private int _CurrentPage;
         public int CurrentPage
         {
@@ -20,11 +31,6 @@ namespace AdmeliApp.Helpers
                 this.paginacion.reloadPage((value == 0) ? 1 : value);
                 this.LoadRegisters();
             }
-        }
-
-        public virtual async void LoadRegisters()
-        {
-            await App.Current.MainPage.DisplayAlert("Load registers","Load resgisters" ,"Aceptar");
         }
 
         private string _NRegistros;
@@ -78,6 +84,14 @@ namespace AdmeliApp.Helpers
         public ICommand LastCommand =>
             _LastCommand ?? (_LastCommand = new Command(() => ExecutelastPage()));
 
+        private ICommand _RefreshCommand;
+        public ICommand RefreshCommand =>
+            _RefreshCommand ?? (_RefreshCommand = new Command(() => ExecuteRefresh()));
+
+        private ICommand _SearchCommand;
+        public ICommand SearchCommand =>
+            _SearchCommand ?? (_SearchCommand = new Command(() => ExecuteSearch()));
+
         private void ExecuteFirstPage()
         {
             if (this.CurrentPage != 1)
@@ -112,6 +126,21 @@ namespace AdmeliApp.Helpers
                 this.paginacion.lastPage();
                 this.LoadRegisters();
             }
+        }
+
+        public virtual async void LoadRegisters()
+        {
+            await App.Current.MainPage.DisplayAlert("Load registers", "Load resgisters", "Aceptar");
+        }
+
+        public virtual void ExecuteRefresh()
+        {
+            App.Current.MainPage.DisplayAlert("Search registers", "Search resgisters", "Aceptar");
+        }
+
+        public virtual void ExecuteSearch()
+        {
+            App.Current.MainPage.DisplayAlert("Search registers", "Search resgisters", "Aceptar");
         }
 
         protected void reloadPagination()

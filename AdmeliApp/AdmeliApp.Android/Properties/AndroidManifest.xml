@@ -3,5 +3,5 @@
 	<uses-sdk android:minSdkVersion="15" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-	<application android:label="AdmeliApp.Android"></application>
+	<application android:label="AdmeliApp.Android" android:icon="@drawable/icon"></application>
 </manifest>

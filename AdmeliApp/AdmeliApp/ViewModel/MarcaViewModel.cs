@@ -15,7 +15,8 @@ namespace AdmeliApp.ViewModel
     {
         internal WebService webService = new WebService();
 
-        #region =================================== COLLECTIONS ===================================
+        public MarcaItemViewModel CurrentMarca { get; set; }
+
         private List<Marca> marcaList { get; set; }
         private ObservableCollection<MarcaItemViewModel> _MarcaItems;
         public ObservableCollection<MarcaItemViewModel> MarcaItems
@@ -23,35 +24,10 @@ namespace AdmeliApp.ViewModel
             get { return this._MarcaItems; }
             set { SetValue(ref this._MarcaItems, value); }
         }
-        #endregion
-
-        #region =============================== PROPERTIES ===============================
-        public MarcaItemViewModel CurrentMarca { get; set; }
-        private string _SearchText;
-        public string SearchText
-        {
-            get { return this._SearchText; }
-            set
-            {
-                SetValue(ref this._SearchText, value);
-                this.ExecuteSearch();
-            }
-        } 
-        #endregion
-
-        #region ================================ COMMANDS ================================
-        private ICommand _RefreshCommand;
-        public ICommand RefreshCommand =>
-            _RefreshCommand ?? (_RefreshCommand = new Command(() => ExecuteRefresh()));
-
-        private ICommand _SearchCommand;
-        public ICommand SearchCommand =>
-            _SearchCommand ?? (_SearchCommand = new Command(() => ExecuteSearch()));
 
         private ICommand _NuevoCommand;
         public ICommand NuevoCommand =>
             _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
-        #endregion
 
         #region =========================== CONSTRUCTOR ===========================
         public MarcaViewModel()
@@ -63,13 +39,13 @@ namespace AdmeliApp.ViewModel
         #endregion
 
         #region =========================== COMMAND EXECUTE ===========================
-        internal void ExecuteRefresh()
+        public override void ExecuteRefresh()
         {
             this.MarcaItems.Clear();
             this.LoadRegisters();
         }
 
-        private void ExecuteSearch()
+        public override void ExecuteSearch()
         {
             if (string.IsNullOrEmpty(SearchText))
             {

@@ -15,6 +15,8 @@ namespace AdmeliApp.ViewModel
     {
         internal WebService webService = new WebService();
 
+        public UnidadMedidaItemViewModel CurrentUnidadMedida { get; set; }
+
         #region =================================== COLLECTIONS ===================================
         private List<UnidadMedida> unidadMedidaList { get; set; }
         private ObservableCollection<UnidadMedidaItemViewModel> _UnidadMedidaItems;
@@ -26,22 +28,48 @@ namespace AdmeliApp.ViewModel
         #endregion
 
         #region ===================================== COMANDS =====================================
-        private ICommand refreshUnidadMedidaCommand;
-        public ICommand RefreshUnidadMedidaCommand =>
-            refreshUnidadMedidaCommand ?? (refreshUnidadMedidaCommand = new Command(() => ExecuteRefreshUnidadMedidaAsync()));
+
+        private ICommand _NuevoCommand;
+        public ICommand NuevoCommand =>
+            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
         #endregion
 
-        private void ExecuteRefreshUnidadMedidaAsync()
+        #region =================================== EXECUTE COMANDS ===================================
+        public override void ExecuteRefresh()
         {
             UnidadMedidaItems.Clear();
             this.LoadRegisters();
         }
 
+        public override void ExecuteSearch()
+        {
+            if (string.IsNullOrEmpty(SearchText))
+            {
+                this.UnidadMedidaItems = new ObservableCollection<UnidadMedidaItemViewModel>(
+                    this.ToMarcaItemViewModel());
+            }
+            else
+            {
+                this.UnidadMedidaItems = new ObservableCollection<UnidadMedidaItemViewModel>(
+                    this.ToMarcaItemViewModel().Where(
+                        m => m.nombreUnidad.ToLower().Contains(this.SearchText.ToLower())));
+            }
+        }
+
+        private void ExecuteNuevo()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region ========================================= CONSTRUCTOR =========================================
         public UnidadMedidaViewModel()
         {
-            UnidadMedidaItems = new ObservableCollection<UnidadMedidaItemViewModel>();
+            UnidadMedidaViewModel.instance = this;
+            this.CurrentUnidadMedida = new UnidadMedidaItemViewModel();
             this.LoadRegisters();
         }
+        #endregion
 
         public override async void LoadRegisters()
         {

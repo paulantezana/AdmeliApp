@@ -20,7 +20,7 @@
                         Placeholder="Buscar..."/>
 
                     <ListView 
-                        ItemsSource="{Binding MarcaItems}"
+                        ItemsSource="{Binding PuntoVentaItems}"
                         HasUnevenRows="True"
                         IsPullToRefreshEnabled="True"
                         CachingStrategy="RecycleElement"

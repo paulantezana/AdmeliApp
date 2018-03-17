@@ -1,7 +1,9 @@
 ﻿using AdmeliApp.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace AdmeliApp.Model
 {
@@ -19,5 +21,11 @@ namespace AdmeliApp.Model
         public string formatoDocumento { get; set; }
         public bool redimensionarModelo { get; set; }
         public bool bordeDetalle { get; set; }
+
+        [JsonIgnore]
+        public Color BackgroundItem { get; set; }
+
+        [JsonIgnore]
+        public Color TextColorItem { get; set; }
     }
 }

@@ -209,7 +209,7 @@ namespace AdmeliApp.ViewModel
         private async void loadPuntoDeVenta()
         {
             // www.lineatienda.com/services.php/asignarpuntoventas/sucursal/1/personal/8
-            App.puntosDeVenta = await webService.GET<List<PuntoDeVenta>>("asignarpuntoventas", String.Format("sucursal/{0}/personal/{1}", App.sucursal.idSucursal, App.personal.idPersonal));
+            App.puntosDeVenta = await webService.GET<List<PuntoVenta>>("asignarpuntoventas", String.Format("sucursal/{0}/personal/{1}", App.sucursal.idSucursal, App.personal.idPersonal));
 
             this.nLoads++;
             //loadState("puntos de venta");

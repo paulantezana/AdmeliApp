@@ -7,10 +7,14 @@ using Xamarin.Forms;
 
 namespace AdmeliApp.Model
 {
-    public class TipoCambioMoneda : BaseModel
+    public class GrupoCliente : BaseModel
     {
-        public string moneda { get; set; }
-        public int cambio { get; set; }
+        public int idGrupoCliente { get; set; }
+        public string nombreGrupo { get; set; }
+        public string descripcion { get; set; }
+        public int minimoOrden { get; set; }
+        public int estado { get; set; }
+        public bool enUso { get; set; }
 
         [JsonIgnore]
         public Color BackgroundItem { get; set; }

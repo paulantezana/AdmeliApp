@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace AdmeliApp.Pages.ConfiguracionPages
 		public ListarDocumentosPage ()
 		{
 			InitializeComponent ();
+            this.BindingContext = new TipoDocumentoViewModel();
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.TipoDocumento = this;
+        }
+    }
 }

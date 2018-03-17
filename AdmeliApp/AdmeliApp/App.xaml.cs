@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages;
 using AdmeliApp.Pages.ProductoPages;
 using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
 using Xamarin.Forms;
@@ -17,7 +18,7 @@ namespace AdmeliApp
         internal static AsignacionPersonal asignacionPersonal;
         internal static bool cajaIniciada;
         internal static CajaSesion cajaSesion;
-        internal static List<PuntoDeVenta> puntosDeVenta;
+        internal static List<PuntoVenta> puntosDeVenta;
         internal static List<Almacen> alamacenes;
         internal static List<TipoDocumento> tipoDocumentos;
         internal static List<TipoCambioMoneda> tipoCambioMonedas;
@@ -26,6 +27,19 @@ namespace AdmeliApp
 
         public static MarcaPage MarcaPage { get; internal set; }
         public static MarcaItemPage MarcaItemPage { get; internal set; }
+        public static AlmacenPage AlmacenPage { get; internal set; }
+        public static AsignarCorrelativoPage AsignarCorrelativoPage { get; internal set; }
+        public static DatosEmpresaPage DatosEmpresaPage { get; internal set; }
+        public static DenominacionPage DenominacionPage { get; internal set; }
+        public static DocIdentificacionPage DocIdentificacionPage { get; internal set; }
+        public static GrupoClientePage GrupoClientePage { get; internal set; }
+        public static ImpuestoPage ImpuestoPage { get; internal set; }
+        public static ListarDocumentosPage TipoDocumento { get; internal set; }
+        public static MonedaPage MonedaPage { get; internal set; }
+        public static PersonalPage PersonalPage { get; internal set; }
+        public static PuntoVentaPage PuntoVentaPage { get; internal set; }
+        public static SucursalPage SucursalPage { get; internal set; }
+        public static TipoCambioPage TipoCambioPage { get; internal set; }
 
         public App ()
 		{

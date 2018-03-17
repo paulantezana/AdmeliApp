@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace AdmeliApp.Pages.ConfiguracionPages
 		public PersonalPage ()
 		{
 			InitializeComponent ();
+            this.BindingContext = new PersonalViewModel();
 		}
-	}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.PersonalPage = this;
+        }
+    }
 }

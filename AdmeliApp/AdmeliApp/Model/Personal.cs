@@ -4,6 +4,7 @@ using SQLite.Net.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace AdmeliApp.Model
 {
@@ -32,5 +33,13 @@ namespace AdmeliApp.Model
 
         [JsonIgnore]
         public bool IsRemembered { get; set; }
+
+        [Ignore]
+        [JsonIgnore]
+        public Color BackgroundItem { get; set; }
+
+        [Ignore]
+        [JsonIgnore]
+        public Color TextColorItem { get; set; }
     }
 }

@@ -7,16 +7,16 @@ using Xamarin.Forms;
 
 namespace AdmeliApp.Model
 {
-    public class Sucursal : BaseModel
+    public class Impuesto : BaseModel
     {
-        public int idSucursal { get; set; }
-        public string nombre { get; set; }
-        public bool principal { get; set; }
+        public int idImpuesto { get; set; }
+        public string nombreImpuesto { get; set; }
+        public string siglasImpuesto { get; set; }
+        public string valorImpuesto { get; set; }
+        public bool porcentual { get; set; }
+        public bool porDefecto { get; set; }
         public int estado { get; set; }
-        public string estados { get; set; }
-        public string direccion { get; set; }
-        public int idUbicacionGeografica { get; set; }
-        public string tieneRegistros { get; set; }
+        public bool enUso { get; set; }
 
         [JsonIgnore]
         public Color BackgroundItem { get; set; }

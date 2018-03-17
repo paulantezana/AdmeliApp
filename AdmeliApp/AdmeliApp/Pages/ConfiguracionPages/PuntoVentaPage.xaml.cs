@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace AdmeliApp.Pages.ConfiguracionPages
 		public PuntoVentaPage ()
 		{
 			InitializeComponent ();
+            this.BindingContext = new PuntoVentaViewModel();
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.PuntoVentaPage = this;
+        }
+    }
 }

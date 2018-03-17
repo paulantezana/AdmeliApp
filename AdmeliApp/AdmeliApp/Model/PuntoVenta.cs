@@ -1,11 +1,13 @@
 ﻿using AdmeliApp.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace AdmeliApp.Model
 {
-    public class PuntoDeVenta : BaseModel
+    public class PuntoVenta : BaseModel
     {
         public int idPuntoVenta { get; set; }
         public string nombre { get; set; }
@@ -15,5 +17,11 @@ namespace AdmeliApp.Model
         public string sucursal { get; set; }
 
         public int idAsignarPuntoVenta { get; set; }
+
+        [JsonIgnore]
+        public Color BackgroundItem { get; set; }
+
+        [JsonIgnore]
+        public Color TextColorItem { get; set; }
     }
 }

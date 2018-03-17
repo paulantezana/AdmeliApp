@@ -16,5 +16,11 @@ namespace AdmeliApp.Pages.ConfiguracionPages
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.AsignarCorrelativoPage = this;
+        }
+    }
 }

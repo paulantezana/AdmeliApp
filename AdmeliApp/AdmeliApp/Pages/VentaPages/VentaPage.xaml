@@ -18,6 +18,31 @@
                         SearchCommand="{Binding SearchCommand}"
                         Margin="0,5,0,5"
                         Placeholder="Buscar..."/>
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <Picker
+                            Title="Sucursal"
+                            VerticalOptions="Fill"
+                            SelectedItem="{Binding nombre}"
+                            SelectedIndex="{Binding idSucursal}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>
+                        <Picker
+                            VerticalOptions="Fill"
+                            ItemsSource="{Binding PuntoVentaItems}"/>
+                    </StackLayout>
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <Picker
+                            Title="Personal"
+                            SelectedItem="{Binding nombres}"
+                            SelectedIndex="{Binding idPersonal}"
+                            ItemDisplayBinding="{Binding nombres}"
+                            ItemsSource="{Binding PersonalItems, Mode=TwoWay}"/>
+
+                        <Picker
+                            ItemsSource="{Binding EstadoItem}"/>
+                    </StackLayout>
 
                     <ListView 
                         ItemsSource="{Binding VentaItems}"

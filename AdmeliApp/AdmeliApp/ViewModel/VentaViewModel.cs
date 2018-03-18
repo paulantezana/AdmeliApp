@@ -25,6 +25,20 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._VentaItems, value); }
         }
 
+        private ObservableCollection<Sucursal> _SucursalItems;
+        public ObservableCollection<Sucursal> SucursalItems
+        {
+            get { return this._SucursalItems; }
+            set { SetValue(ref this._SucursalItems, value); }
+        }
+
+        private ObservableCollection<Personal> _PersonalItems;
+        public ObservableCollection<Personal> PersonalItems
+        {
+            get { return this._PersonalItems; }
+            set { SetValue(ref this._PersonalItems, value); }
+        }
+
         private ICommand _NuevoCommand;
         public ICommand NuevoCommand =>
             _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
@@ -34,6 +48,9 @@ namespace AdmeliApp.ViewModel
             instance = this;
             this.CurrentVenta = new VentaItemViewModel();
             this.LoadRegisters();
+
+            this.LoadSucursales();
+            this.LoadPersonales();
         }
 
         public override void ExecuteRefresh()
@@ -93,6 +110,42 @@ namespace AdmeliApp.ViewModel
             {
                 this.IsRefreshing = false;
                 this.IsEnabled = true;
+            }
+        }
+
+        private async void LoadPersonales()
+        {
+            PersonalItems = new ObservableCollection<Personal>();
+            try
+            {
+                // www.lineatienda.com/services.php/listarpersonalalmacen/sucursal/0
+                List<Personal> list = await webService.GET<List<Personal>>("listarpersonalalmacen", String.Format("sucursal/{0}", App.sucursal.idSucursal));
+                list.ForEach(personal =>
+                {
+                    PersonalItems.Add(personal);
+                });
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+        }
+
+        private async void LoadSucursales()
+        {
+            SucursalItems = new ObservableCollection<Sucursal>();
+            try
+            {
+                // www.lineatienda.com/services.php/listarsucursalesactivos
+                List<Sucursal> list = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
+                list.ForEach(sucursal =>
+                {
+                    SucursalItems.Add(sucursal);
+                });
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
             }
         }
 

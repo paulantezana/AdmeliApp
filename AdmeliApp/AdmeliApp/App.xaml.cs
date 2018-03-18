@@ -6,6 +6,7 @@ using AdmeliApp.Model;
 using AdmeliApp.Pages.ConfiguracionPages;
 using AdmeliApp.Pages.ProductoPages;
 using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
+using AdmeliApp.Pages.VentaPages;
 using Xamarin.Forms;
 
 namespace AdmeliApp
@@ -40,6 +41,10 @@ namespace AdmeliApp
         public static PuntoVentaPage PuntoVentaPage { get; internal set; }
         public static SucursalPage SucursalPage { get; internal set; }
         public static TipoCambioPage TipoCambioPage { get; internal set; }
+        public static ClientePage ClientePage { get; internal set; }
+        public static VentaPage VentaPage { get; internal set; }
+        public static DescuentoPage DescuentoPage { get; internal set; }
+        public static CotizacionPage CotizacionPage { get; internal set; }
 
         public App ()
 		{

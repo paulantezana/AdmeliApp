@@ -20,11 +20,5 @@ namespace AdmeliApp.Model
         public string tieneRegistros { get; set; }
 
         public int idPersonalAlmacen { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

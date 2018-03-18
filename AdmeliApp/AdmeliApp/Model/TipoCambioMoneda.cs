@@ -11,11 +11,5 @@ namespace AdmeliApp.Model
     {
         public string moneda { get; set; }
         public int cambio { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

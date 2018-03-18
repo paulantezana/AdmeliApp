@@ -32,11 +32,5 @@ namespace AdmeliApp.Model
 
         [JsonProperty(PropertyName = "tieneRegistros")]
         public string TieneRegistros { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

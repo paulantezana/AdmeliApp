@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using SQLite.Net.Attributes;
+using Xamarin.Forms;
 
 namespace AdmeliApp.Helpers
 {
@@ -37,6 +38,14 @@ namespace AdmeliApp.Helpers
             get { return this._IsRefreshing; }
             set { SetValue(ref this._IsRefreshing, value); }
         }
+
+        [Ignore]
+        [JsonIgnore]
+        public Color BackgroundItem { get; set; }
+
+        [Ignore]
+        [JsonIgnore]
+        public Color TextColorItem { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

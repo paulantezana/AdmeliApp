@@ -14,11 +14,5 @@ namespace AdmeliApp.Model
         public int numeroDigitos { get; set; }
         public string tipoDocumento { get; set; }
         public int estado { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

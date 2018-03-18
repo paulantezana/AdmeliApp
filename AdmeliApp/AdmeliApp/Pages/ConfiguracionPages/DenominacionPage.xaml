@@ -32,7 +32,9 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                        <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding nombre}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding valor}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding moneda}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                             <Image Source="cancel_icon.png">
                                                 <Image.GestureRecognizers>

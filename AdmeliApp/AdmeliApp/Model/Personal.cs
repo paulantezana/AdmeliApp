@@ -33,13 +33,5 @@ namespace AdmeliApp.Model
 
         [JsonIgnore]
         public bool IsRemembered { get; set; }
-
-        [Ignore]
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [Ignore]
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

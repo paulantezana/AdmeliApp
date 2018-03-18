@@ -20,11 +20,5 @@ namespace AdmeliApp.Model
         public int idPuntoVenta { get; set; }
         public int idAlmacen { get; set; }
         public int idAsignarPuntoVenta { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

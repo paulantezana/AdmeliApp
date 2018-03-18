@@ -18,11 +18,5 @@ namespace AdmeliApp.Model
         public string totalIngreso { get; set; }
         public string totalEgreso { get; set; }
         public string nombre { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

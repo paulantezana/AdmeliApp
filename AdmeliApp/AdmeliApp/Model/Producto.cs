@@ -36,11 +36,5 @@ namespace AdmeliApp.Model
         public bool ventaVarianteSinStock { get; set; }
         public string nombre { get; set; }
         public string codigo { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

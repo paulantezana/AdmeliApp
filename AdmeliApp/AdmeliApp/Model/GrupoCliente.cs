@@ -15,11 +15,5 @@ namespace AdmeliApp.Model
         public int minimoOrden { get; set; }
         public int estado { get; set; }
         public bool enUso { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

@@ -21,11 +21,5 @@ namespace AdmeliApp.Model
         public string formatoDocumento { get; set; }
         public bool redimensionarModelo { get; set; }
         public bool bordeDetalle { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

@@ -17,11 +17,5 @@ namespace AdmeliApp.Model
         public string direccion { get; set; }
         public int idUbicacionGeografica { get; set; }
         public string tieneRegistros { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

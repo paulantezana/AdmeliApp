@@ -18,11 +18,5 @@ namespace AdmeliApp.Model
         public int idDatosGenerales { get; set; }
         public int estado { get; set; }
         public bool arquearMarcador { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

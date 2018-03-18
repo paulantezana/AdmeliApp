@@ -17,11 +17,5 @@ namespace AdmeliApp.Model
         public bool porDefecto { get; set; }
         public int estado { get; set; }
         public bool enUso { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

@@ -27,11 +27,5 @@ namespace AdmeliApp.Model
         public string tieneRegistros { get; set; }
         public bool relacionPrincipal { get; set; }
         public bool afecta { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

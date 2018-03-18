@@ -34,11 +34,5 @@ namespace AdmeliApp.Model
         public string observacion { get; set; }
 
         public double total { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

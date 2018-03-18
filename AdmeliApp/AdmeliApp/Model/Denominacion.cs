@@ -18,11 +18,5 @@ namespace AdmeliApp.Model
         public int idMoneda { get; set; }
         public string moneda { get; set; }
         public string anular { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

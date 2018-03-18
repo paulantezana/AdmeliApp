@@ -17,11 +17,5 @@ namespace AdmeliApp.Model
         public string sucursal { get; set; }
 
         public int idAsignarPuntoVenta { get; set; }
-
-        [JsonIgnore]
-        public Color BackgroundItem { get; set; }
-
-        [JsonIgnore]
-        public Color TextColorItem { get; set; }
     }
 }

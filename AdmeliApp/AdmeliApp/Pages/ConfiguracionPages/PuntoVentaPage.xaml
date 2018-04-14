@@ -23,15 +23,15 @@
                         <Picker
                             Title="Sucursal"
                             HorizontalOptions="FillAndExpand"
-                            SelectedItem="{Binding nombre}"
-                            SelectedIndex="{Binding idSucursal}"
+                            SelectedItem="{Binding SucursalSelectedItem}"
+                            SelectedIndex="{Binding SucursalSelectedIndex}"
                             ItemDisplayBinding="{Binding nombre}"
                             ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>
                         <Picker
                             Title="Estados"
                             HorizontalOptions="FillAndExpand"
-                            SelectedItem="{Binding nombre}"
-                            SelectedIndex="{Binding idEstado}"
+                            SelectedItem="{Binding EstadoSelectedItem}"
+                            SelectedIndex="{Binding EstadoSelectedIndex}"
                             ItemDisplayBinding="{Binding nombre}"
                             ItemsSource="{Binding EstadolItems, Mode=TwoWay}"/>
                     </StackLayout>

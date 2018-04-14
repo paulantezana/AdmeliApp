@@ -18,21 +18,19 @@ namespace AdmeliApp.ViewModel
 
         public PuntoVentaItemViewModel CurrentPuntoVenta { get; set; }
 
-        private Sucursal _nombre;
-        public Sucursal nombre
+        private Sucursal _SucursalSelectedItem;
+        public Sucursal SucursalSelectedItem
         {
-            get { return this._nombre; }
-            set { SetValue(ref this._nombre, value); }
+            get { return this._SucursalSelectedItem; }
+            set { SetValue(ref this._SucursalSelectedItem, value); }
         }
 
-        private int _idSucursal;
-        public int idSucursal
+        private int _SucursalSelectedIndex;
+        public int SucursalSelectedIndex
         {
-            get { return this._idSucursal; }
-            set { SetValue(ref this._idSucursal, value); }
+            get { return this._SucursalSelectedIndex; }
+            set { SetValue(ref this._SucursalSelectedIndex, value); }
         }
-
-
 
         private List<Sucursal> _SucursalItems;
         public List<Sucursal> SucursalItems
@@ -40,6 +38,7 @@ namespace AdmeliApp.ViewModel
             get { return this._SucursalItems; }
             set { SetValue(ref this._SucursalItems, value); }
         }
+
 
         private List<PuntoVenta> PuntoVentaList { get; set; }
         private ObservableCollection<PuntoVentaItemViewModel> _PuntoVentaItems;
@@ -64,7 +63,6 @@ namespace AdmeliApp.ViewModel
         #region =============================== COMMAND EXECUTE ===============================
         public override void ExecuteRefresh()
         {
-            Application.Current.MainPage.DisplayAlert("Alerta",string.Format("ID: {0} -- Nombre{1}", nombre.idSucursal.ToString(),idSucursal.ToString()), "Aceptar");
             this.PuntoVentaItems.Clear();
             this.LoadRegisters();
         }
@@ -99,9 +97,8 @@ namespace AdmeliApp.ViewModel
                 this.IsRefreshing = true;
                 this.IsEnabled = false;
 
-                //int sucursaId = (cbxSucursales.SelectedIndex == -1) ? ConfigModel.sucursal.idSucursal : Convert.ToInt32(cbxSucursales.SelectedValue);
+                int idSucursal = ( SucursalSelectedIndex == -1) ? App.sucursal.idSucursal : Convert.ToInt32( SucursalSelectedItem.idSucursal);
                 //string estado = (cbxEstados.SelectedIndex == -1) ? "todos" : cbxEstados.SelectedValue.ToString();
-                int idSucursal = 0;
                 string idEstado = "todos";
 
                 // www.lineatienda.com/services.php/puntoventas/sucursal/0/estado/todos/1/100
@@ -139,6 +136,7 @@ namespace AdmeliApp.ViewModel
 
                 // www.lineatienda.com/services.php/listarsucursalesactivos
                 SucursalItems = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
+                SucursalSelectedIndex = App.sucursal.idSucursal;
             }
             catch (Exception ex)
             {

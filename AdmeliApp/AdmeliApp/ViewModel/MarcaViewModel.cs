@@ -25,9 +25,11 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._MarcaItems, value); }
         }
 
+        #region ============================= COMANDS =============================
         private ICommand _NuevoCommand;
         public ICommand NuevoCommand =>
-            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
+            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo())); 
+        #endregion
 
         #region =========================== CONSTRUCTOR ===========================
         public MarcaViewModel()

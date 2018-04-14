@@ -23,8 +23,7 @@
                         <Picker
                             Title="Sucursal"
                             VerticalOptions="Fill"
-                            SelectedItem="{Binding nombre}"
-                            SelectedIndex="{Binding idSucursal}"
+
                             ItemDisplayBinding="{Binding nombre}"
                             ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>
                         <Picker

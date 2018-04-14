@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,22 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._SucursalItems, value); }
         }
 
+        #region ============================ COMMANDS ============================
         private ICommand _NuevoCommand;
         public ICommand NuevoCommand =>
-            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
+            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo())); 
+        #endregion
 
+        #region ========================== CONSTRUCTOR ==========================
         public SucursalViewModel()
         {
             instance = this;
             this.CurrentSucursal = new SucursalItemViewModel();
             this.LoadRegisters();
         }
+        #endregion
 
+        #region =========================== COMMAND EXECUTE ===========================
         public override void ExecuteRefresh()
         {
             this.SucursalItems.Clear();
@@ -59,8 +65,10 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
-        }
+            this.SetCurrentSucursal(new SucursalItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.SucursalPage.Navigation.PushAsync(new SucursalItemPage());
+        } 
+        #endregion
 
         #region ===================================== LOADS =====================================
         public override async void LoadRegisters()
@@ -96,7 +104,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(SucursalItemViewModel sucursalItemViewModel)
+        internal void SetCurrentSucursal(SucursalItemViewModel sucursalItemViewModel)
         {
             this.CurrentSucursal = sucursalItemViewModel;
         }

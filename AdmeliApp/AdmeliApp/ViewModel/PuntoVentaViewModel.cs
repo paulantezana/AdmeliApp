@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,29 @@ namespace AdmeliApp.ViewModel
         internal WebService webService = new WebService();
 
         public PuntoVentaItemViewModel CurrentPuntoVenta { get; set; }
+
+        private Sucursal _nombre;
+        public Sucursal nombre
+        {
+            get { return this._nombre; }
+            set { SetValue(ref this._nombre, value); }
+        }
+
+        private int _idSucursal;
+        public int idSucursal
+        {
+            get { return this._idSucursal; }
+            set { SetValue(ref this._idSucursal, value); }
+        }
+
+
+
+        private List<Sucursal> _SucursalItems;
+        public List<Sucursal> SucursalItems
+        {
+            get { return this._SucursalItems; }
+            set { SetValue(ref this._SucursalItems, value); }
+        }
 
         private List<PuntoVenta> PuntoVentaList { get; set; }
         private ObservableCollection<PuntoVentaItemViewModel> _PuntoVentaItems;
@@ -34,10 +58,13 @@ namespace AdmeliApp.ViewModel
             instance = this;
             this.CurrentPuntoVenta = new PuntoVentaItemViewModel();
             this.LoadRegisters();
+            this.cargarSucursales();
         }
 
+        #region =============================== COMMAND EXECUTE ===============================
         public override void ExecuteRefresh()
         {
+            Application.Current.MainPage.DisplayAlert("Alerta",string.Format("ID: {0} -- Nombre{1}", nombre.idSucursal.ToString(),idSucursal.ToString()), "Aceptar");
             this.PuntoVentaItems.Clear();
             this.LoadRegisters();
         }
@@ -59,8 +86,10 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
-        }
+            this.SetCurrentPuntoVenta(new PuntoVentaItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.PuntoVentaPage.Navigation.PushAsync(new PuntoVentaItemPage());
+        } 
+        #endregion
 
         #region ===================================== LOADS =====================================
         public override async void LoadRegisters()
@@ -70,8 +99,13 @@ namespace AdmeliApp.ViewModel
                 this.IsRefreshing = true;
                 this.IsEnabled = false;
 
-                // www.lineatienda.com/services.php/marcas/estado/1/100
-                RootObject<PuntoVenta> rootData = await webService.GET<RootObject<PuntoVenta>>("marcas", String.Format("estado/{0}/{1}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina));
+                //int sucursaId = (cbxSucursales.SelectedIndex == -1) ? ConfigModel.sucursal.idSucursal : Convert.ToInt32(cbxSucursales.SelectedValue);
+                //string estado = (cbxEstados.SelectedIndex == -1) ? "todos" : cbxEstados.SelectedValue.ToString();
+                int idSucursal = 0;
+                string idEstado = "todos";
+
+                // www.lineatienda.com/services.php/puntoventas/sucursal/0/estado/todos/1/100
+                RootObject<PuntoVenta> rootData = await webService.GET<RootObject<PuntoVenta>>("puntoventas", String.Format("sucursal/{0}/estado/{1}/{2}/{3}", idSucursal, idEstado, paginacion.currentPage, App.configuracionGeneral.itemPorPagina));
                 this.PuntoVentaList = rootData.datos;
 
                 // Set data paginacion
@@ -96,7 +130,28 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(PuntoVentaItemViewModel puntoVentaItemViewModel)
+        private async void cargarSucursales()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                // www.lineatienda.com/services.php/listarsucursalesactivos
+                SucursalItems = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+
+        internal void SetCurrentPuntoVenta(PuntoVentaItemViewModel puntoVentaItemViewModel)
         {
             this.CurrentPuntoVenta = puntoVentaItemViewModel;
         }

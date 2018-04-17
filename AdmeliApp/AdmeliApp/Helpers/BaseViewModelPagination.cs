@@ -21,6 +21,7 @@ namespace AdmeliApp.Helpers
             }
         }
 
+        //private int _OldCurrentPage;
         private int _CurrentPage;
         public int CurrentPage
         {
@@ -29,7 +30,11 @@ namespace AdmeliApp.Helpers
             {
                 SetValue(ref this._CurrentPage, value);
                 this.paginacion.reloadPage((value == 0) ? 1 : value);
-                this.LoadRegisters();
+                //if (_OldCurrentPage != _CurrentPage)
+                //{
+                //    _OldCurrentPage = value;
+                //    this.LoadRegisters();
+                //}
             }
         }
 

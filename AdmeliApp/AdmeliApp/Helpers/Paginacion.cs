@@ -15,7 +15,7 @@ namespace AdmeliApp.Helpers
 
         public Paginacion(int currentPage, int steep)
         {
-            this.currentPage = currentPage;
+            this.currentPage = (currentPage == 0 ) ? 1 : currentPage;
             this.speed = steep;
 
             this.itemsCount = 1;
@@ -25,6 +25,7 @@ namespace AdmeliApp.Helpers
         public void reload()
         {
             pageCount = Convert.ToInt32(Math.Ceiling(itemsCount / (decimal)speed));
+            if (pageCount == 0) currentPage = 1; 
         }
 
         public void nextPage()

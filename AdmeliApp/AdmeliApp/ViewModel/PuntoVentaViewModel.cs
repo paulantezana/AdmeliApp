@@ -18,6 +18,20 @@ namespace AdmeliApp.ViewModel
 
         public PuntoVentaItemViewModel CurrentPuntoVenta { get; set; }
 
+        private EstadoPuntoVenta _EstadoSelectedItem;
+        public EstadoPuntoVenta EstadoSelectedItem
+        {
+            get { return this._EstadoSelectedItem; }
+            set { SetValue(ref this._EstadoSelectedItem, value); }
+        }
+
+        private int _EstadoSelectedIndex;
+        public int EstadoSelectedIndex
+        {
+            get { return this._EstadoSelectedIndex; }
+            set { SetValue(ref this._EstadoSelectedIndex, value); }
+        }
+
         private Sucursal _SucursalSelectedItem;
         public Sucursal SucursalSelectedItem
         {
@@ -39,6 +53,13 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._SucursalItems, value); }
         }
 
+        private List<EstadoPuntoVenta> _EstadolItems;
+        public List<EstadoPuntoVenta> EstadolItems
+        {
+            get { return this._EstadolItems; }
+            set { SetValue(ref this._EstadolItems, value); }
+        }
+
 
         private List<PuntoVenta> PuntoVentaList { get; set; }
         private ObservableCollection<PuntoVentaItemViewModel> _PuntoVentaItems;
@@ -58,6 +79,7 @@ namespace AdmeliApp.ViewModel
             this.CurrentPuntoVenta = new PuntoVentaItemViewModel();
             this.LoadRegisters();
             this.cargarSucursales();
+            this.cargarEstados();
         }
 
         #region =============================== COMMAND EXECUTE ===============================
@@ -97,9 +119,8 @@ namespace AdmeliApp.ViewModel
                 this.IsRefreshing = true;
                 this.IsEnabled = false;
 
-                int idSucursal = ( SucursalSelectedIndex == -1) ? App.sucursal.idSucursal : Convert.ToInt32( SucursalSelectedItem.idSucursal);
-                //string estado = (cbxEstados.SelectedIndex == -1) ? "todos" : cbxEstados.SelectedValue.ToString();
-                string idEstado = "todos";
+                int idSucursal = (SucursalSelectedItem != null) ? Convert.ToInt32(SucursalSelectedItem.idSucursal) : App.sucursal.idSucursal;
+                string idEstado = (EstadoSelectedItem != null) ? EstadoSelectedItem.idEstado : "todos";
 
                 // www.lineatienda.com/services.php/puntoventas/sucursal/0/estado/todos/1/100
                 RootObject<PuntoVenta> rootData = await webService.GET<RootObject<PuntoVenta>>("puntoventas", String.Format("sucursal/{0}/estado/{1}/{2}/{3}", idSucursal, idEstado, paginacion.currentPage, App.configuracionGeneral.itemPorPagina));
@@ -136,8 +157,10 @@ namespace AdmeliApp.ViewModel
 
                 // www.lineatienda.com/services.php/listarsucursalesactivos
                 SucursalItems = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
-                SucursalSelectedIndex = App.sucursal.idSucursal;
+                SucursalSelectedIndex = App.sucursal.idSucursal;    //  Sucursal seleccionado por defecto
+                EstadoSelectedIndex = 1;        // Estado seleccionado por defecto
             }
+
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
@@ -147,6 +170,30 @@ namespace AdmeliApp.ViewModel
                 this.IsRefreshing = false;
                 this.IsEnabled = true;
             }
+        }
+
+        private void cargarEstados()
+        {
+            EstadolItems = new List<EstadoPuntoVenta>()
+            {
+                new EstadoPuntoVenta()
+                {
+                    idEstado = "1",
+                    nombre = "Activos"
+                },
+
+                new EstadoPuntoVenta()
+                {
+                    idEstado = "todos",
+                    nombre = "Todos los estados"
+                },
+
+                new EstadoPuntoVenta()
+                {
+                    idEstado = "0",
+                    nombre = "Anulados"
+                },
+            };
         }
 
         internal void SetCurrentPuntoVenta(PuntoVentaItemViewModel puntoVentaItemViewModel)
@@ -187,4 +234,11 @@ namespace AdmeliApp.ViewModel
         }
         #endregion
     }
+    public class EstadoPuntoVenta
+    {
+        public string idEstado { get; set; }
+        public string nombre { get; set; }
+    }
 }
+
+

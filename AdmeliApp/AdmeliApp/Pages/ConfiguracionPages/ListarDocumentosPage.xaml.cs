@@ -22,7 +22,7 @@ namespace AdmeliApp.Pages.ConfiguracionPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            App.TipoDocumento = this;
+            App.TipoDocumentoPage = this;
         }
     }
 }

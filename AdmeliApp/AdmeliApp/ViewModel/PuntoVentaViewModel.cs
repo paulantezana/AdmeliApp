@@ -94,12 +94,12 @@ namespace AdmeliApp.ViewModel
             if (string.IsNullOrEmpty(SearchText))
             {
                 this.PuntoVentaItems = new ObservableCollection<PuntoVentaItemViewModel>(
-                    this.ToPuntoVentaItemViewModel());
+                    this.TiPuntoVentaItemViewModel());
             }
             else
             {
                 this.PuntoVentaItems = new ObservableCollection<PuntoVentaItemViewModel>(
-                    this.ToPuntoVentaItemViewModel().Where(
+                    this.TiPuntoVentaItemViewModel().Where(
                         m => m.nombre.ToLower().Contains(this.SearchText.ToLower())));
             }
         }
@@ -135,7 +135,7 @@ namespace AdmeliApp.ViewModel
 
                 // create observablecollection
                 this.PuntoVentaItems = new ObservableCollection<PuntoVentaItemViewModel>(
-                    this.ToPuntoVentaItemViewModel());
+                    this.TiPuntoVentaItemViewModel());
             }
             catch (Exception ex)
             {
@@ -157,9 +157,10 @@ namespace AdmeliApp.ViewModel
 
                 // www.lineatienda.com/services.php/listarsucursalesactivos
                 SucursalItems = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
-                SucursalSelectedIndex = App.sucursal.idSucursal;    //  Sucursal seleccionado por defecto
+                SucursalSelectedItem = SucursalItems.Find(s => s.idSucursal == App.sucursal.idSucursal);
                 EstadoSelectedIndex = 1;        // Estado seleccionado por defecto
             }
+
 
             catch (Exception ex)
             {
@@ -203,7 +204,7 @@ namespace AdmeliApp.ViewModel
         #endregion
 
         #region ============================= CREATE OBJECT LIST =============================
-        private IEnumerable<PuntoVentaItemViewModel> ToPuntoVentaItemViewModel()
+        private IEnumerable<PuntoVentaItemViewModel> TiPuntoVentaItemViewModel()
         {
             return PuntoVentaList.Select(m => new PuntoVentaItemViewModel
             {

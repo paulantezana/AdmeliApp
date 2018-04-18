@@ -35,7 +35,6 @@ namespace AdmeliApp
         public static DocIdentificacionPage DocIdentificacionPage { get; internal set; }
         public static GrupoClientePage GrupoClientePage { get; internal set; }
         public static ImpuestoPage ImpuestoPage { get; internal set; }
-        public static ListarDocumentosPage TipoDocumento { get; internal set; }
         public static MonedaPage MonedaPage { get; internal set; }
         public static PersonalPage PersonalPage { get; internal set; }
         public static PuntoVentaPage PuntoVentaPage { get; internal set; }
@@ -45,6 +44,8 @@ namespace AdmeliApp
         public static VentaPage VentaPage { get; internal set; }
         public static DescuentoPage DescuentoPage { get; internal set; }
         public static CotizacionPage CotizacionPage { get; internal set; }
+        public static ListarDocumentosPage TipoDocumentoPage { get; internal set; }
+        public static CajaInicializadaPage CajaInicializadaPage { get; internal set; }
 
         public App ()
 		{

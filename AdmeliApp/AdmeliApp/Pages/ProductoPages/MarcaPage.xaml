@@ -76,7 +76,7 @@
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </StackLayout>
-                                <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource Grey}" Margin="0,-5,0,5"></Label>  
+                                <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource grey}" Margin="0,-5,0,5"></Label>  
                             </StackLayout>
                         </ListView.Footer>
                     </ListView>

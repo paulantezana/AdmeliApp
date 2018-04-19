@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.Root.HomePage"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             BackgroundColor="White"
              Title="Home">
     <StackLayout>
 
@@ -11,7 +10,7 @@
         <StackLayout Padding="10,20,10,10">
             <StackLayout Spacing="0">
                 <Label Text="VENTAS MENSUALES"></Label>
-                <Label Text="Estadística" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>
+                <Label Text="Estadística" FontSize="Small" TextColor="{StaticResource grey-lighter}"></Label>
             </StackLayout>
             <microcharts:ChartView Chart="{Binding VentaMensualChart}" HeightRequest="250"/>
             <StackLayout>
@@ -23,7 +22,7 @@
         <StackLayout  Padding="10,20,10,10">
             <StackLayout Spacing="0">
                 <Label Text="INGRESOS POR MONEDA"></Label>
-                <Label Text="Estadística" FontSize="Small" TextColor="{StaticResource GreyLight}"></Label>
+                <Label Text="Estadística" FontSize="Small" TextColor="{StaticResource grey-lighter}"></Label>
             </StackLayout>
             <microcharts:ChartView Chart="{Binding IngresoMonedaChart}" HeightRequest="250"/>
             <StackLayout>

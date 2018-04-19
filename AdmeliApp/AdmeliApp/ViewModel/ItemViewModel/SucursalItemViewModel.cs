@@ -19,5 +19,9 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             get { return _DeleteIsEnabled; }
             set { SetValue(ref _DeleteIsEnabled, value); }
         }
+
+        #region ============================ LOAD DATA ============================
+
+        #endregion
     }
 }

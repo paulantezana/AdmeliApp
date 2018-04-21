@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AdmeliApp.Model;
 using AdmeliApp.Pages.ConfiguracionPages;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.Pages.ProductoPages;
 using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
 using AdmeliApp.Pages.VentaPages;
@@ -46,6 +47,7 @@ namespace AdmeliApp
         public static CotizacionPage CotizacionPage { get; internal set; }
         public static ListarDocumentosPage TipoDocumentoPage { get; internal set; }
         public static CajaInicializadaPage CajaInicializadaPage { get; internal set; }
+        public static SucursalItemPage SucursalItemPage { get; internal set; }
 
         public App ()
 		{

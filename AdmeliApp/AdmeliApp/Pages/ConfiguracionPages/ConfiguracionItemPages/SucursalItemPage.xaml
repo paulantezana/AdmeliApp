@@ -25,9 +25,10 @@
                 </StackLayout>
                 
                 <StackLayout>
-                    <Label Text="Nivel 1" TextColor="{StaticResource grey}"></Label>
+                    <Label Text="{Binding  Nivel1Title, Mode=TwoWay}}" IsVisible="{Binding Nivel1IsVisible}" TextColor="{StaticResource grey}"></Label>
                     <Picker
-                            Title="Nivel 1"
+                            Title="{Binding  Nivel1Title, Mode=TwoWay}"
+                            IsVisible="{Binding Nivel1IsVisible}"
                             IsEnabled="{Binding IsEnabled}"
                             SelectedItem="{Binding Nivel1SelectedItem}"
                             ItemDisplayBinding="{Binding nombre}"
@@ -35,9 +36,10 @@
                 </StackLayout>
                 
                 <StackLayout>
-                    <Label Text="Nivel 2" TextColor="{StaticResource grey}"></Label>
+                    <Label Text="{Binding  Nivel2Title}" IsVisible="{Binding Nivel2IsVisible}" TextColor="{StaticResource grey}"></Label>
                     <Picker
-                            Title="Nivel 2"
+                            Title="{Binding  Nivel2Title}"
+                            IsVisible="{Binding Nivel2IsVisible}"
                             IsEnabled="{Binding IsEnabled}"
                             SelectedItem="{Binding Nivel2SelectedItem}"
                             ItemDisplayBinding="{Binding nombre}"
@@ -45,9 +47,10 @@
                 </StackLayout>
                 
                 <StackLayout>
-                    <Label Text="Nivel 3" TextColor="{StaticResource grey}"></Label>
+                    <Label Text="{Binding  Nivel3Title}" IsVisible="{Binding Nivel3IsVisible}" TextColor="{StaticResource grey}"></Label>
                     <Picker
-                            Title="Nivel 3"
+                            Title="{Binding  Nivel3Title}"
+                            IsVisible="{Binding Nivel3IsVisible}"
                             IsEnabled="{Binding IsEnabled}"
                             SelectedItem="{Binding Nivel3SelectedItem}"
                             ItemDisplayBinding="{Binding nombre}"

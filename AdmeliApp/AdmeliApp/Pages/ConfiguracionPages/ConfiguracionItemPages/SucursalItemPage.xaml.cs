@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,14 @@ namespace AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages
 		public SucursalItemPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            SucursalViewModel sucursalViewModel = SucursalViewModel.GetInstance();
+            BindingContext = sucursalViewModel.CurrentSucursal;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.SucursalItemPage = this;
+        }
+    }
 }

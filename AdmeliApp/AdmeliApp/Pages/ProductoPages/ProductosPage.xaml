@@ -31,12 +31,19 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <ViewCell.ContextActions>
-                                        <MenuItem Text="Anular" Command="{Binding AnularCommand}"/>
-                                        <MenuItem Text="Eliminar" Command="{Binding EliminarCommand}"/>
-                                    </ViewCell.ContextActions>
-                                    <StackLayout  BackgroundColor="White" Padding="15,12">
-                                        <Label Text="{Binding nombreProducto}"/>
+                                    <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
+                                        <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding direccion}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                            <Image Source="cancel_icon.png">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding AnularCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EditarCommand}"/>
+                                        </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
@@ -73,6 +80,7 @@
                                 <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource grey}" Margin="0,-5,0,5"></Label>
                             </StackLayout>
                         </ListView.Footer>
+                        
                     </ListView>
                 </StackLayout>
             </ContentView>

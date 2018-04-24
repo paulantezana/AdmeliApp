@@ -18,5 +18,11 @@ namespace AdmeliApp.Pages.ProductoPages
 			InitializeComponent ();
             BindingContext = new ProductoViewModel();
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.ProductosPage = this;
+        }
+    }
 }

@@ -48,6 +48,8 @@ namespace AdmeliApp
         public static ListarDocumentosPage TipoDocumentoPage { get; internal set; }
         public static CajaInicializadaPage CajaInicializadaPage { get; internal set; }
         public static SucursalItemPage SucursalItemPage { get; internal set; }
+        public static ProductosPage ProductosPage { get; internal set; }
+        public static ProductoItemPage ProductoItemPage { get; internal set; }
 
         public App ()
 		{

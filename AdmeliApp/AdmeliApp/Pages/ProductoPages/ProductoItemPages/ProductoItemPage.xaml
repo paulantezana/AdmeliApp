@@ -2,8 +2,35 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductoItemPages.ProductoItemPage">
-  <!--Pages can be added as references or inline-->
-  <ContentPage Title="Tab 1" />
-  <ContentPage Title="Tab 2" />
-  <ContentPage Title="Tab 3" />
+    <!--Pages can be added as references or inline-->
+    <ContentPage Icon="producto_white.png">
+        <StackLayout>
+            <Label Text="Hola producto"></Label>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Icon="stock_white.png">
+        <StackLayout>
+            <Label Text="Hola stock"></Label>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Icon="adicional_white.png">
+        <StackLayout>
+            <Label Text="Hola adicional"></Label>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Icon="impuesto_white.png">
+        <StackLayout>
+            <Label Text="Hola impuesto"></Label>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Icon="oferta_white.png">
+        <StackLayout>
+            <Label Text="Hola offerta"></Label>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage Icon="tienda_white.png">
+        <StackLayout>
+            <Label Text="Hola tienda"></Label>
+        </StackLayout>
+    </ContentPage>
 </TabbedPage>

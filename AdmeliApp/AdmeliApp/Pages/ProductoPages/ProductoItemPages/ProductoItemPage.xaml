@@ -1,36 +1,141 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Producto"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductoItemPages.ProductoItemPage">
-    <!--Pages can be added as references or inline-->
+    
+    
+    
+    <!-- 
+    =======================================================================================
+    DATOS
+    GENERALES
+    DEL PRODUCTO
+    =======================================================================================
+    -->
     <ContentPage Icon="producto_white.png">
-        <StackLayout>
-            <Label Text="Hola producto"></Label>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="20,40,20,40" Spacing="30">
+                
+                <StackLayout>
+                    <Label Text="Código del producto*" TextColor="{StaticResource grey}"/>
+                    <Entry
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding nombre, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Nombre del producto*" TextColor="{StaticResource grey}"/>
+                    <Entry
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding nombre, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Precio compra" TextColor="{StaticResource grey}" />
+                    <Entry
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding nombre, Mode=TwoWay}" Keyboard="Numeric"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label  HorizontalOptions="StartAndExpand" Text="Activo" TextColor="{StaticResource grey}"></Label>
+                    <Switch 
+                        IsToggled="{Binding Estado, Mode=TwoWay}"
+                        IsEnabled="{Binding IsEnabled}"
+                        HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Descripcion corta" TextColor="{StaticResource grey}"/>
+                    <Entry
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding nombre, Mode=TwoWay}"/>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage>
+    
+    
+    
+    
+    <!--
+    =======================================================================================
+    MANEJO DEL 
+    STOCK 
+    DEL 
+    PRODUCTO
+    =======================================================================================
+    -->
     <ContentPage Icon="stock_white.png">
         <StackLayout>
             <Label Text="Hola stock"></Label>
         </StackLayout>
     </ContentPage>
+    
+    
+    
+    <!--
+    =======================================================================================
+    DATOS
+    ADICIONALES
+    DEL
+    PRODUCTO
+    =======================================================================================
+    -->
     <ContentPage Icon="adicional_white.png">
         <StackLayout>
             <Label Text="Hola adicional"></Label>
         </StackLayout>
     </ContentPage>
+    
+    
+    
+    <!--
+    =======================================================================================
+    MANEJO
+    DE LOS
+    IMPUESTOS
+    DEL PRODUCTO
+    =======================================================================================
+    -->
     <ContentPage Icon="impuesto_white.png">
         <StackLayout>
             <Label Text="Hola impuesto"></Label>
         </StackLayout>
     </ContentPage>
+    
+    
+    
+    <!--
+    =======================================================================================
+    MANEJO
+    DE lA
+    OFERTA
+    =======================================================================================
+    -->
     <ContentPage Icon="oferta_white.png">
         <StackLayout>
             <Label Text="Hola offerta"></Label>
         </StackLayout>
     </ContentPage>
+    
+    
+    
+    
+    <!--
+    =======================================================================================
+    DATOS DE
+    UN PRODUCTO
+    A LA HORA DE MOSTRARSE
+    EN LA TIENDA ONLINE
+    =======================================================================================
+    -->
     <ContentPage Icon="tienda_white.png">
         <StackLayout>
             <Label Text="Hola tienda"></Label>
         </StackLayout>
     </ContentPage>
+    <!--END TAP APGES -->
 </TabbedPage>

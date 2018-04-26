@@ -52,6 +52,8 @@ namespace AdmeliApp
         public static ProductosPage ProductosPage { get; internal set; }
         public static ProductoItemPage ProductoItemPage { get; internal set; }
         public static ProveedorPage ProveedorPage { get; internal set; }
+        public static CompraPage CompraPage { get; internal set; }
+        public static OrdenCompraPage OrdenCompraPage { get; internal set; }
 
         public App ()
 		{

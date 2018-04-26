@@ -19,6 +19,21 @@
                         Margin="0,5,0,5"
                         Placeholder="Buscar..."/>
 
+                    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                        <Picker
+                            Title="Sucursal"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding SucursalSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>
+                        <Picker
+                            Title="Personal"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding PersonalSelectedItem}"
+                            ItemDisplayBinding="{Binding nombres}"
+                            ItemsSource="{Binding PersonalItems, Mode=TwoWay}"/>
+                    </StackLayout>
+
                     <ListView 
                         ItemsSource="{Binding CotizacionItems}"
                         HasUnevenRows="True"

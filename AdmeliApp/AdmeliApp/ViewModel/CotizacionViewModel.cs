@@ -17,6 +17,34 @@ namespace AdmeliApp.ViewModel
 
         public CotizacionItemViewModel CurrentCotizacion { get; set; }
 
+        private Personal _PersonalSelectedItem;
+        public Personal PersonalSelectedItem
+        {
+            get { return this._PersonalSelectedItem; }
+            set { SetValue(ref this._PersonalSelectedItem, value); }
+        }
+
+        private Sucursal _SucursalSelectedItem;
+        public Sucursal SucursalSelectedItem
+        {
+            get { return this._SucursalSelectedItem; }
+            set { SetValue(ref this._SucursalSelectedItem, value); }
+        }
+
+        private List<Sucursal> _SucursalItems;
+        public List<Sucursal> SucursalItems
+        {
+            get { return this._SucursalItems; }
+            set { SetValue(ref this._SucursalItems, value); }
+        }
+
+        private List<Personal> _PersonalItems;
+        public List<Personal> PersonalItems
+        {
+            get { return this._PersonalItems; }
+            set { SetValue(ref this._PersonalItems, value); }
+        }
+
         private List<Cotizacion> CotizacionList { get; set; }
         private ObservableCollection<CotizacionItemViewModel> _CotizacionItems;
         public ObservableCollection<CotizacionItemViewModel> CotizacionItems
@@ -33,7 +61,7 @@ namespace AdmeliApp.ViewModel
         {
             instance = this;
             this.CurrentCotizacion = new CotizacionItemViewModel();
-            this.LoadRegisters();
+            this.loadRoot(); // Load registers
         }
 
         public override void ExecuteRefresh()
@@ -63,6 +91,57 @@ namespace AdmeliApp.ViewModel
         }
 
         #region ===================================== LOADS =====================================
+        private void loadRoot()
+        {
+            cargarSucursales();
+            cargarPersonales();
+            LoadRegisters();
+        }
+
+        private async void cargarSucursales()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                // www.lineatienda.com/services.php/listarsucursalesactivos
+                SucursalItems = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
+                SucursalSelectedItem = SucursalItems.Find(s => s.idSucursal == 0);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+
+        private async void cargarPersonales()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                // www.lineatienda.com/services.php/listarpersonalalmacen/sucursal/0
+                PersonalItems = await webService.GET<List<Personal>>("listarpersonalalmacen", String.Format("sucursal/{0}", App.sucursal.idSucursal));
+                PersonalSelectedItem = PersonalItems.Find(p => p.idPersonal == 0);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+
         public override async void LoadRegisters()
         {
             try
@@ -70,8 +149,12 @@ namespace AdmeliApp.ViewModel
                 this.IsRefreshing = true;
                 this.IsEnabled = false;
 
-                // www.lineatienda.com/services.php/almacenes/estado/1/100
-                RootObject<Cotizacion> rootData = await webService.GET<RootObject<Cotizacion>>("almacenes", String.Format("estado/{0}/{1}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina));
+                int personalId = (PersonalSelectedItem == null) ? App.personal.idPersonal : PersonalSelectedItem.idPersonal;
+                int sucursalId = (SucursalSelectedItem == null) ? App.sucursal.idSucursal : SucursalSelectedItem.idSucursal;
+
+                // www.lineatienda.com/services.php/cotizaciones/suc/0/per/0/1/100
+                RootObject<Cotizacion> rootData = await webService.GET<RootObject<Cotizacion>>("cotizaciones", String.Format("suc/{0}/per/{1}/{2}/{3}", sucursalId, personalId, paginacion.currentPage, App.configuracionGeneral.itemPorPagina));
+
                 this.CotizacionList = rootData.datos;
 
                 // Set data paginacion
@@ -96,7 +179,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(CotizacionItemViewModel cotizacionItemViewModel)
+        internal void SetCurrentCotizacion(CotizacionItemViewModel cotizacionItemViewModel)
         {
             this.CurrentCotizacion = cotizacionItemViewModel;
         }

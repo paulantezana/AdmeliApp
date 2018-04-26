@@ -19,28 +19,35 @@
                         Margin="0,5,0,5"
                         Placeholder="Buscar..."/>
                     
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
                         <Picker
                             Title="Sucursal"
-                            VerticalOptions="Fill"
-
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding SucursalSelectedItem}"
                             ItemDisplayBinding="{Binding nombre}"
                             ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>
                         <Picker
-                            VerticalOptions="Fill"
-                            ItemsSource="{Binding PuntoVentaItems}"/>
+                            Title="Punto de Venta"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding PuntoVentaSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding PuntoVentaItems, Mode=TwoWay}"/>
                     </StackLayout>
-                    
-                    <StackLayout Orientation="Horizontal">
+
+                    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
                         <Picker
                             Title="Personal"
-                            SelectedItem="{Binding nombres}"
-                            SelectedIndex="{Binding idPersonal}"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding PersonalSelectedItem}"
                             ItemDisplayBinding="{Binding nombres}"
                             ItemsSource="{Binding PersonalItems, Mode=TwoWay}"/>
-
                         <Picker
-                            ItemsSource="{Binding EstadoItem}"/>
+                            Title="Estados"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding EstadoSelectedItem}"
+                            SelectedIndex="{Binding EstadoSelectedIndex}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding EstadolItems, Mode=TwoWay}"/>
                     </StackLayout>
 
                     <ListView 

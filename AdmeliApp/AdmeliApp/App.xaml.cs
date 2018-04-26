@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.CompraPages;
 using AdmeliApp.Pages.ConfiguracionPages;
 using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.Pages.ProductoPages;
@@ -50,6 +51,7 @@ namespace AdmeliApp
         public static SucursalItemPage SucursalItemPage { get; internal set; }
         public static ProductosPage ProductosPage { get; internal set; }
         public static ProductoItemPage ProductoItemPage { get; internal set; }
+        public static ProveedorPage ProveedorPage { get; internal set; }
 
         public App ()
 		{

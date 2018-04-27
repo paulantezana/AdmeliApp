@@ -33,7 +33,7 @@
                                 <ViewCell>
                                     <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
                                         <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                        <Label Text="{Binding direccion}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding precioCompra}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                             <Image Source="cancel_icon.png">
                                                 <Image.GestureRecognizers>

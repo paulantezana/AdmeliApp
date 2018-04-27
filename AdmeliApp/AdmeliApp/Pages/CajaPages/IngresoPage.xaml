@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Ingresos"
              x:Class="AdmeliApp.Pages.CajaPages.IngresoPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
@@ -20,7 +21,7 @@
                         Placeholder="Buscar..."/>
 
                     <ListView 
-                        ItemsSource="{Binding MarcaItems}"
+                        ItemsSource="{Binding ProveedorItems}"
                         HasUnevenRows="True"
                         IsPullToRefreshEnabled="True"
                         CachingStrategy="RecycleElement"
@@ -32,7 +33,7 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                        <Label Text="{Binding NombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                        <Label Text="{Binding razonSocial}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                             <Image Source="cancel_icon.png">
                                                 <Image.GestureRecognizers>

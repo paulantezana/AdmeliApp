@@ -17,7 +17,7 @@ namespace AdmeliApp.Helpers
             set
             {
                 SetValue(ref this._SearchText, value);
-                this.ExecuteSearch();
+                this.ExecuteSearchRealTime();
             }
         }
 
@@ -146,6 +146,11 @@ namespace AdmeliApp.Helpers
         public virtual void ExecuteSearch()
         {
             App.Current.MainPage.DisplayAlert("Search registers", "Search resgisters", "Aceptar");
+        }
+
+        public virtual void ExecuteSearchRealTime()
+        {
+            App.Current.MainPage.DisplayAlert("Search registers real time", "Search resgisters", "Aceptar");
         }
 
         protected void reloadPagination()

@@ -78,14 +78,14 @@ namespace AdmeliApp.ViewModel
             this.IsEnabled = false;
 
             /// Verificar conecion a internet
-            Response connection = await this.webService.CheckConnection();
-            if (!connection.IsSuccess)
-            {
-                this.IsRunning = false;
-                this.IsEnabled = true;
-                await Application.Current.MainPage.DisplayAlert("Alerta", connection.Message, "Aceptar");
-                return;
-            }
+            //Response connection = await this.webService.CheckConnection();
+            //if (!connection.IsSuccess)
+            //{
+            //    this.IsRunning = false;
+            //    this.IsEnabled = true;
+            //    await Application.Current.MainPage.DisplayAlert("Alerta", connection.Message, "Aceptar");
+            //    return;
+            //}
 
             try
             {

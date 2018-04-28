@@ -18,6 +18,44 @@ namespace AdmeliApp.ViewModel
 
         public ProductoItemViewModel CurrentProducto { get; set; }
 
+        // PERSONAL
+        private Almacen _AlmacenSelectedItem;
+        public Almacen AlmacenSelectedItem
+        {
+            get { return this._AlmacenSelectedItem; }
+            set { SetValue(ref this._AlmacenSelectedItem, value); }
+        }
+
+        private List<Almacen> _AlmacenItems;
+        public List<Almacen> AlmacenItems
+        {
+            get { return this._AlmacenItems; }
+            set { SetValue(ref this._AlmacenItems, value); }
+        }
+
+        // SUCURSAL
+        private Sucursal _SucursalSelectedItem;
+        public Sucursal SucursalSelectedItem
+        {
+            get { return this._SucursalSelectedItem; }
+            set { SetValue(ref this._SucursalSelectedItem, value); }
+        }
+
+        private List<Sucursal> _SucursalItems;
+        public List<Sucursal> SucursalItems
+        {
+            get { return this._SucursalItems; }
+            set { SetValue(ref this._SucursalItems, value); }
+        }
+
+        // --------------------------------------
+        private bool _IsEnabledStock;
+        public bool IsEnabledStock
+        {
+            get { return this._IsEnabledStock; }
+            set { SetValue(ref this._IsEnabledStock, value); }
+        }
+
         private List<Producto> ProductoList { get; set; }
         private ObservableCollection<ProductoItemViewModel> _ProductoItems;
         public ObservableCollection<ProductoItemViewModel> ProductoItems
@@ -26,43 +64,132 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._ProductoItems, value); }
         }
 
-        private ICommand _NuevoCommand;
-        public ICommand NuevoCommand =>
-            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
-
         #region ============================== CONSTRUCTOR ==============================
         public ProductoViewModel()
         {
             instance = this;
             this.CurrentProducto = new ProductoItemViewModel();
-            this.LoadRegisters();
+            this.loadRoot();
         } 
         #endregion
 
         #region =============================== EXECUTES ===============================
         public override void ExecuteSearch()
         {
-            if (string.IsNullOrEmpty(SearchText))
-            {
-                this.ProductoItems = new ObservableCollection<ProductoItemViewModel>(
-                    this.ToProductoItemViewModel());
-            }
-            else
-            {
-                this.ProductoItems = new ObservableCollection<ProductoItemViewModel>(
-                    this.ToProductoItemViewModel().Where(
-                        m => m.nombre.ToLower().Contains(this.SearchText.ToLower())));
-            }
+            LoadSerach();
         }
 
-        private void ExecuteNuevo()
+        public override void ExecuteSearchRealTime()
         {
-            this.SetCurrentProducto(new ProductoItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
-            App.ProductosPage.Navigation.PushAsync(new ProductoItemPage());
+            if (SearchText == string.Empty) this.loadRoot();
         }
         #endregion
 
         #region ================================ LOADS ================================
+        private void loadRoot()
+        {
+            cargarSucursal();
+            cargarAlmacen();
+
+            LoadRegisters();
+        }
+
+        private async void cargarAlmacen()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                // www.lineatienda.com/services.php/almacenes/id/nombre/estado/1
+                int estado = 1;
+                AlmacenItems = await webService.GET<List<Almacen>>("almacenes", String.Format("id/nombre/estado/{0}", estado));
+                AlmacenSelectedItem = AlmacenItems.Find(a => a.idAlmacen == 0);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+
+        private async void cargarSucursal()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                // www.lineatienda.com/services.php/listarsucursalesactivos
+                SucursalItems = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
+                SucursalSelectedItem = SucursalItems.Find(s => s.idSucursal == 0);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+
+        public async void LoadSerach()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                Dictionary<string, int> list = new Dictionary<string, int>();
+                list.Add("id0", 0);
+
+                Dictionary<string, int>[] dataSend = { list };
+
+                RootObject<Producto> rootData;
+                if (IsEnabledStock)
+                {
+                    // www.lineatienda.com/services.php/productos/categoria/stock/1/100/1/1
+                    int almacenId = (AlmacenSelectedItem == null) ? 1 : AlmacenSelectedItem.idAlmacen;
+                    int sucursalId = (SucursalSelectedItem == null) ? App.sucursal.idSucursal : SucursalSelectedItem.idSucursal;
+
+                    rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/stock/{0}/{1}/{2}/{3}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina, almacenId, sucursalId), dataSend);
+                }
+                else
+                {
+                    // www.lineatienda.com/services.php/productos/categoria/1/100
+                    rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/{0}/{1}/{2}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina, SearchText), dataSend);
+                }
+
+                this.ProductoList = rootData.datos;
+
+                // Set data paginacion
+                this.paginacion.itemsCount = rootData.nro_registros;
+                this.paginacion.reload();
+
+                // Reload pagination
+                this.reloadPagination();
+
+                // create observablecollection
+                this.ProductoItems = new ObservableCollection<ProductoItemViewModel>(
+                    this.ToProductoItemViewModel());
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+
         public override async void LoadRegisters()
         {
             try

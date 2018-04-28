@@ -2,9 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductosPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <RelativeLayout>
 
@@ -18,10 +15,45 @@
                         SearchCommand="{Binding SearchCommand}"
                         Margin="0,5,0,5"
                         Placeholder="Buscar..."/>
+
+                    <StackLayout>
+                        
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Padding="15,0,15,0"
+                            VerticalOptions="CenterAndExpand">
+                            <Label
+                                HorizontalOptions="StartAndExpand"
+                                Text="Activo"
+                                VerticalOptions="Center">
+                            </Label>
+                            <Switch
+                                IsToggled="{Binding IsEnabledStock, Mode=TwoWay}"
+                                HorizontalOptions="End">
+                            </Switch>
+                        </StackLayout>
+                        
+                        <StackLayout Padding="10,0,10,0">
+                            <Picker
+                                Title="Sucursal"
+                                HorizontalOptions="FillAndExpand"
+                                SelectedItem="{Binding SucursalSelectedItem}"
+                                ItemDisplayBinding="{Binding nombre}"
+                                IsEnabled="{Binding IsEnabledStock}"
+                                ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>
+                            <Picker
+                                Title="Almacen"
+                                HorizontalOptions="FillAndExpand"
+                                SelectedItem="{Binding AlmacenSelectedItem}"
+                                ItemDisplayBinding="{Binding nombre}"
+                                IsEnabled="{Binding IsEnabledStock}"
+                                ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
+                        </StackLayout>
+                        
+                    </StackLayout>
                     
                     <ListView 
                         ItemsSource="{Binding ProductoItems}"
-                        HasUnevenRows="True"
                         IsPullToRefreshEnabled="True"
                         CachingStrategy="RecycleElement"
                         RefreshCommand="{Binding RefreshCommand}"
@@ -32,9 +64,16 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                        <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                        <Label Text="{Binding precioCompra}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <StackLayout>
+                                                <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
+                                                <Label Text="Stock: --" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                            <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                                                <Label Text="{Binding precioCompra}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontSize="Medium"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
                                             <Image Source="cancel_icon.png">
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Command="{Binding AnularCommand}"/>
@@ -42,7 +81,7 @@
                                             </Image>
                                         </StackLayout>
                                         <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding EditarCommand}"/>
+                                            <TapGestureRecognizer Command="{Binding ViewCommand}"/>
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </ViewCell>

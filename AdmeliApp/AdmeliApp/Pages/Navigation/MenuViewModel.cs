@@ -95,16 +95,19 @@ namespace AdmeliApp.Pages.Navigation
                 //    new MenuTienda() { Id = 604, Icon = "codigoBarra_icon.png", Title = "Generar código de barras" }
                 //},
                 
-                new MenuGrouping("Reportes")
-                {
-                    new MenuTienda() { Id = 1, Icon = "reporteProducto_icon.png", Title = "Existencia producto",  TargetType = typeof(ReportePages.ExistenciaProductoPage) },
-                    new MenuTienda() { Id = 1, Icon = "reporteIngreso_icon.png", Title = "Ingresos ventas",  TargetType = typeof(ReportePages.IngresoPage) },
-                    new MenuTienda() { Id = 1, Icon = "reporteImpuesto_icon.png", Title = "Impuestos",  TargetType = typeof(ReportePages.ImpuestoPage) }
-                },
 
-                new MenuGrouping("Configuración")
-                {
-                    new MenuTienda() { Id = 1, Icon = "empresa_icon.png", Title = "Datos Empresa",  TargetType = typeof(ConfiguracionPages.DatosEmpresaPage)  },
+            };
+
+            MenuGrouping menuConfig = new MenuGrouping("Reportes")
+            {
+                new MenuTienda() { Id = 1, Icon = "reporteProducto_icon.png", Title = "Existencia producto",  TargetType = typeof(ReportePages.ExistenciaProductoPage) },
+                new MenuTienda() { Id = 1, Icon = "reporteIngreso_icon.png", Title = "Ingresos ventas",  TargetType = typeof(ReportePages.IngresoPage) },
+                new MenuTienda() { Id = 1, Icon = "reporteImpuesto_icon.png", Title = "Impuestos",  TargetType = typeof(ReportePages.ImpuestoPage) }
+            };
+
+            MenuGrouping menuAdmin = new MenuGrouping("Configuración")
+            {
+                            new MenuTienda() { Id = 1, Icon = "empresa_icon.png", Title = "Datos Empresa",  TargetType = typeof(ConfiguracionPages.DatosEmpresaPage)  },
                     new MenuTienda() { Id = 1, Icon = "sucursal_icon.png", Title = "Sucursales",  TargetType = typeof(ConfiguracionPages.SucursalPage)  },
                     new MenuTienda() { Id = 1, Icon = "puntoVenta_icon.png", Title = "Punto de venta",  TargetType = typeof(ConfiguracionPages.PuntoVentaPage)  },
                     new MenuTienda() { Id = 1, Icon = "almacen_icon.png", Title = "Almacenes",  TargetType = typeof(ConfiguracionPages.AlmacenPage)  },
@@ -121,8 +124,15 @@ namespace AdmeliApp.Pages.Navigation
                     new MenuTienda() { Id = 1, Icon = "caja_icon.png", Title = "Cajas inicializadas",  TargetType = typeof(ConfiguracionPages.CajaInicializadaPage)  },
                     //new MenuTienda() { Id = 1, Icon = "docImpuesto_icon.png", Title = "Impuestos documento"},
                     //new MenuTienda() { Id = 1, Icon = "codigoBarra_icon.png", Title = "Diseño de código de barras"},
-                }
             };
+
+
+            // Agregando los menus a la lista del menu tienda segun los permisos de login ususario
+            MenuTiendaItems.Add(menuConfig);
+            if (App.asignacionPersonal.idAsignarPuntoAdministracion > 0)
+            {
+                MenuTiendaItems.Add(menuAdmin);
+            }
         }
 
         private void ExecuteLogoutAsync()

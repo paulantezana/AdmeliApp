@@ -81,16 +81,8 @@
                                         <Label Text="{Binding stock}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="StockFinanciero: " TextColor="{Binding TextColorItem}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                        <Label Text="{Binding stockFinanciero}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
                                         <Label Text="Precio compra: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
                                         <Label Text="{Binding precioCompra}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Precio venta: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
-                                        <Label Text="{Binding precioVenta}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
                                     </StackLayout>
                                 </StackLayout>
                                 <!--<StackLayout Orientation="Horizontal" HorizontalOptions="End">

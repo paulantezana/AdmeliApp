@@ -166,6 +166,7 @@ namespace AdmeliApp.ViewModel
                 RootObject<Producto> rootData;
                 if (IsEnabledStock)
                 {
+                    
                     // www.lineatienda.com/services.php/productos/categoria/stock/1/100/1/1
                     int almacenId = (AlmacenSelectedItem == null) ? 1 : AlmacenSelectedItem.idAlmacen;
                     int sucursalId = (SucursalSelectedItem == null) ? App.sucursal.idSucursal : SucursalSelectedItem.idSucursal;

@@ -79,6 +79,18 @@ namespace AdmeliApp.ViewModel
             LoadSerach();
         }
 
+        public override void ExecuteRefresh()
+        {
+            if (SearchText != string.Empty)
+            {
+                LoadSerach();
+            }
+            else
+            {
+                LoadRegisters();
+            }
+        }
+
         public override void ExecuteSearchRealTime()
         {
             if (SearchText == string.Empty) this.loadRoot();
@@ -204,6 +216,9 @@ namespace AdmeliApp.ViewModel
                 Dictionary<string, int>[] dataSend = { list };
 
                 RootObject<Producto> rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/{0}/{1}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina), dataSend);
+
+
+
                 this.ProductoList = rootData.datos;
 
                 // Set data paginacion

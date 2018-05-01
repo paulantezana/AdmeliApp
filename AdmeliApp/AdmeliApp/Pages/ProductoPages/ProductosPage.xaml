@@ -3,28 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductosPage">
     <ContentPage.Content>
-        <RelativeLayout>
-
-            <!-- Listar registros en el listview -->
-            <ContentView
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
-                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
-                <StackLayout>
-                    <SearchBar
-                        Text="{Binding SearchText, Mode=TwoWay}"
-                        SearchCommand="{Binding SearchCommand}"
-                        Margin="0,5,0,5"
-                        Placeholder="Buscar..."/>
-
-                    <StackLayout>
-                        
+        <StackLayout BackgroundColor="{StaticResource Color1}">
+            <StackLayout
+                BackgroundColor="{StaticResource Color1}"
+                Padding="0,1,0,1">
+                <SearchBar
+                    Text="{Binding SearchText, Mode=TwoWay}"
+                    SearchCommand="{Binding SearchCommand}"
+                    TextColor="White"
+                    Placeholder="Buscar..."/>
+            </StackLayout>
+            <ListView 
+                ItemsSource="{Binding ProductoItems}"
+                IsPullToRefreshEnabled="True"
+                CachingStrategy="RecycleElement"
+                BackgroundColor="White"
+                RefreshCommand="{Binding RefreshCommand}"
+                RowHeight="100"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
+                <ListView.Header>
+                    <StackLayout 
+                        Padding="0,20,0,20"
+                        BackgroundColor="{StaticResource Color1}">
                         <StackLayout
                             Orientation="Horizontal"
                             Padding="15,0,15,0"
                             VerticalOptions="CenterAndExpand">
                             <Label
                                 HorizontalOptions="StartAndExpand"
-                                Text="Activo"
+                                Text="Ver Stock"
+                                FontAttributes="Bold"
+                                TextColor="White"
                                 VerticalOptions="Center">
                             </Label>
                             <Switch
@@ -32,7 +41,7 @@
                                 HorizontalOptions="End">
                             </Switch>
                         </StackLayout>
-                        
+
                         <StackLayout Padding="10,0,10,0">
                             <Picker
                                 Title="Sucursal"
@@ -49,83 +58,90 @@
                                 IsEnabled="{Binding IsEnabledStock}"
                                 ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
                         </StackLayout>
-                        
+
                     </StackLayout>
-                    
-                    <ListView 
-                        ItemsSource="{Binding ProductoItems}"
-                        IsPullToRefreshEnabled="True"
-                        CachingStrategy="RecycleElement"
-                        RefreshCommand="{Binding RefreshCommand}"
-                        IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
+                </ListView.Header>
 
-                        <!-- Template de los items -->
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                            <StackLayout>
-                                                <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
-                                                <Label Text="Stock: --" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                            </StackLayout>
-                                            <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
-                                                <Label Text="{Binding precioCompra}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontSize="Medium"/>
-                                            </StackLayout>
-                                        </StackLayout>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                                            <Image Source="cancel_icon.png">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding AnularCommand}"/>
-                                                </Image.GestureRecognizers>
-                                            </Image>
-                                        </StackLayout>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding ViewCommand}"/>
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-
-                        <!-- "Cargando..." se visualiza, con visibilidad vinculada a IsRunning -->
-                        <ListView.Footer>
-                            <StackLayout Padding="0,15,0,0">
-                                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                                    <Image Source="first_icon.png" IsVisible="{Binding FirstIsVisible}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding FirstCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <Image Source="previous_icon.png" IsVisible="{Binding PreviousIsVisible}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding PreviousCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <Entry 
-                                        Text="{Binding CurrentPage, Mode=TwoWay}"
-                                        Keyboard="Numeric"></Entry>
-                                    <Image Source="next_icon.png" IsVisible="{Binding NextIsVisible}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding NextCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <Image Source="last_icon.png" IsVisible="{Binding LastIsVisible}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding LastCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
+                <!-- Template de los items -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="0,15,0,15" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
+                                <StackLayout VerticalOptions="StartAndExpand">
+                                    <Image Source="producto_icon.png" Margin="0,-10,0,0"/>
                                 </StackLayout>
-                                <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource grey}" Margin="0,-5,0,5"></Label>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold" Margin="0,-5,0,-5"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Marca: " VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                        <Label Text="{Binding nombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Stock : " TextColor="{Binding TextColorItem}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                        <Label Text="{Binding stock}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="StockFinanciero: " TextColor="{Binding TextColorItem}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                        <Label Text="{Binding stockFinanciero}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Precio compra: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
+                                        <Label Text="{Binding precioCompra}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Precio venta: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
+                                        <Label Text="{Binding precioVenta}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <!--<StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                    <Image Source="cancel_icon.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding AnularCommand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>-->
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ViewCommand}"/>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
-                        </ListView.Footer>
-                        
-                    </ListView>
-                </StackLayout>
-            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-            <!-- Botton flotante para agregar un nuevo registro -->
-        </RelativeLayout>
+                <!-- "Cargando..." se visualiza, con visibilidad vinculada a IsRunning -->
+                <ListView.Footer>
+                    <StackLayout Padding="0,15,0,0">
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Image Source="first_icon.png" IsVisible="{Binding FirstIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding FirstCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image Source="previous_icon.png" IsVisible="{Binding PreviousIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PreviousCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Entry 
+                                Text="{Binding CurrentPage, Mode=TwoWay}"
+                                Keyboard="Numeric"></Entry>
+                            <Image Source="next_icon.png" IsVisible="{Binding NextIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image Source="last_icon.png" IsVisible="{Binding LastIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding LastCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                        <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource grey}" Margin="0,-5,0,5"></Label>
+                    </StackLayout>
+                </ListView.Footer>
+
+            </ListView>
+        </StackLayout>
 
     </ContentPage.Content>
 </ContentPage>

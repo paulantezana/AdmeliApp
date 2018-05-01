@@ -36,5 +36,9 @@ namespace AdmeliApp.Model
         public bool ventaVarianteSinStock { get; set; }
         public string nombre { get; set; }
         public string codigo { get; set; }
+
+        public string precioVenta { get; set; }
+        public string stock { get; set; }
+        public string stockFinanciero { get; set; }
     }
 }

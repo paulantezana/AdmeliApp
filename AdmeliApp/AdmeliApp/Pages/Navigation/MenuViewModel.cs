@@ -45,60 +45,49 @@ namespace AdmeliApp.Pages.Navigation
             this.UserName = App.personal.usuario;
             this.UserDocument = App.personal.numeroDocumento;
 
-            MenuTiendaItems = new ObservableCollection<MenuGrouping>()
+            MenuTiendaItems = new ObservableCollection<MenuGrouping>();
+
+            MenuGrouping menuVentas = new MenuGrouping("Ventas")
             {
-                new MenuGrouping("Ventas")
-                {
-                    new MenuTienda() { Id = 100, Icon = "guia_icon.png", Title = "Contizaciones de cliente", TargetType = typeof(VentaPages.CotizacionPage)  },
-                    new MenuTienda() { Id = 101, Icon = "venta_icon.png", Title = "Ventas", TargetType = typeof(VentaPages.VentaPage)  },
-                    new MenuTienda() { Id = 102, Icon = "cliente_icon.png", Title = "Clientes", TargetType = typeof(VentaPages.ClientePage)  },
-                    new MenuTienda() { Id = 103, Icon = "oferta_icon.png", Title = "Descuento y oferta", TargetType = typeof(VentaPages.DescuentoPage)  }
-                },
-
-                new MenuGrouping("Compras")
-                {
-                    new MenuTienda() { Id = 201, Icon = "ordenCompra_icon.png", Title = "Órden compra proveedor", TargetType = typeof(CompraPages.OrdenCompraPage)  },
-                    new MenuTienda() { Id = 202, Icon = "compra_icon.png", Title = "Compras", TargetType = typeof(CompraPages.CompraPage)  },
-                    new MenuTienda() { Id = 203, Icon = "proveedor_icon.png", Title = "Proveedores", TargetType = typeof(CompraPages.ProveedorPage)  }
-                },
-
-                new MenuGrouping("Productos")
-                {
-                    new MenuTienda() { Id = 301, Icon = "producto_icon.png", Title = "Listado de productos", TargetType = typeof(ProductoPages.ProductosPage) },
-                    new MenuTienda() { Id = 302, Icon = "marca_icon.png", Title = "Marcas", TargetType = typeof(ProductoPages.MarcaPage) },
-                    new MenuTienda() { Id = 303, Icon = "unidadMedida_icon.png", Title = "Unidades de medida", TargetType = typeof(ProductoPages.UnidadMedidaPage) },
-                    new MenuTienda() { Id = 304, Icon = "categoria_icon.png", Title = "Categorias", TargetType = typeof(ProductoPages.CategoriaPage) }
-                },
-
-                new MenuGrouping("Almacen")
-                {
-                    new MenuTienda() { Id = 401, Icon = "view_icon.png", Title = "Nota de entrada", TargetType = typeof(AlmacenPages.NotaEntradaPage) },
-                    new MenuTienda() { Id = 402, Icon = "notaSalida_icon.png", Title = "Nota de salida", TargetType = typeof(AlmacenPages.NotaSalidaPage)  },
-                    new MenuTienda() { Id = 403, Icon = "gruiaRemision_icon.png", Title = "Guía de remisión", TargetType = typeof(AlmacenPages.GuiaRemisionPage)  }
-                },
-
-                new MenuGrouping("Caja")
-                {
-                    new MenuTienda() { Id = 501, Icon = "egreso_icon.png", Title = "Egresos",  TargetType = typeof(CajaPages.EgresoPage)},
-                    new MenuTienda() { Id = 502, Icon = "ingreso_icon.png", Title = "Ingresos",  TargetType = typeof(CajaPages.IngresoPage) },
-                    //new MenuTienda() { Id = 503, Icon = "cobrar_icon.png", Title = "Cuentas por cobrar"},
-                    //new MenuTienda() { Id = 504, Icon = "pagar_icon.png", Title = "Cuentas por pagar"},
-                    //new MenuTienda() { Id = 505, Icon = "iniciarCaja_icon.png", Title = "Iniciar caja"},
-                    //new MenuTienda() { Id = 506, Icon = "cierreCaja_icon.png", Title = "Cierre de caja"}
-                },
-
-                //new MenuGrouping("Herramientas")
-                //{
-                //    new MenuTienda() { Id = 601, Icon = "stock_icon.png", Title = "Stock precio" },
-                //    new MenuTienda() { Id = 602, Icon = "categoria_icon.png", Title = "Asignar categorías" },
-                //    new MenuTienda() { Id = 603, Icon = "impuesto_icon.png", Title = "Asignar impuestos" },
-                //    new MenuTienda() { Id = 604, Icon = "codigoBarra_icon.png", Title = "Generar código de barras" }
-                //},
-                
-
+                new MenuTienda() { Id = 100, Icon = "guia_icon.png", Title = "Contizaciones de cliente", TargetType = typeof(VentaPages.CotizacionPage)  },
+                new MenuTienda() { Id = 101, Icon = "venta_icon.png", Title = "Ventas", TargetType = typeof(VentaPages.VentaPage)  },
+                new MenuTienda() { Id = 102, Icon = "cliente_icon.png", Title = "Clientes", TargetType = typeof(VentaPages.ClientePage)  },
+                new MenuTienda() { Id = 103, Icon = "oferta_icon.png", Title = "Descuento y oferta", TargetType = typeof(VentaPages.DescuentoPage)  }
             };
 
-            MenuGrouping menuConfig = new MenuGrouping("Reportes")
+            MenuGrouping menuCompras = new MenuGrouping("Compras")
+            {
+                new MenuTienda() { Id = 201, Icon = "ordenCompra_icon.png", Title = "Órden compra proveedor", TargetType = typeof(CompraPages.OrdenCompraPage)  },
+                new MenuTienda() { Id = 202, Icon = "compra_icon.png", Title = "Compras", TargetType = typeof(CompraPages.CompraPage)  },
+                new MenuTienda() { Id = 203, Icon = "proveedor_icon.png", Title = "Proveedores", TargetType = typeof(CompraPages.ProveedorPage)  }
+            };
+
+            MenuGrouping menuProductos = new MenuGrouping("Productos")
+            {
+                new MenuTienda() { Id = 301, Icon = "producto_icon.png", Title = "Listado de productos", TargetType = typeof(ProductoPages.ProductosPage) },
+                new MenuTienda() { Id = 302, Icon = "marca_icon.png", Title = "Marcas", TargetType = typeof(ProductoPages.MarcaPage) },
+                new MenuTienda() { Id = 303, Icon = "unidadMedida_icon.png", Title = "Unidades de medida", TargetType = typeof(ProductoPages.UnidadMedidaPage) },
+                new MenuTienda() { Id = 304, Icon = "categoria_icon.png", Title = "Categorias", TargetType = typeof(ProductoPages.CategoriaPage) }
+            };
+
+            MenuGrouping menuAlmacen = new MenuGrouping("Almacen")
+            {
+                new MenuTienda() { Id = 401, Icon = "view_icon.png", Title = "Nota de entrada", TargetType = typeof(AlmacenPages.NotaEntradaPage) },
+                new MenuTienda() { Id = 402, Icon = "notaSalida_icon.png", Title = "Nota de salida", TargetType = typeof(AlmacenPages.NotaSalidaPage)  },
+                new MenuTienda() { Id = 403, Icon = "gruiaRemision_icon.png", Title = "Guía de remisión", TargetType = typeof(AlmacenPages.GuiaRemisionPage)  }
+            };
+
+            MenuGrouping menuCaja = new MenuGrouping("Caja")
+            {
+                new MenuTienda() { Id = 501, Icon = "egreso_icon.png", Title = "Egresos",  TargetType = typeof(CajaPages.EgresoPage)},
+                new MenuTienda() { Id = 502, Icon = "ingreso_icon.png", Title = "Ingresos",  TargetType = typeof(CajaPages.IngresoPage) },
+                //new MenuTienda() { Id = 503, Icon = "cobrar_icon.png", Title = "Cuentas por cobrar"},
+                //new MenuTienda() { Id = 504, Icon = "pagar_icon.png", Title = "Cuentas por pagar"},
+                //new MenuTienda() { Id = 505, Icon = "iniciarCaja_icon.png", Title = "Iniciar caja"},
+                //new MenuTienda() { Id = 506, Icon = "cierreCaja_icon.png", Title = "Cierre de caja"}
+            };
+
+            MenuGrouping menuReportes = new MenuGrouping("Reportes")
             {
                 new MenuTienda() { Id = 1, Icon = "reporteProducto_icon.png", Title = "Existencia producto",  TargetType = typeof(ReportePages.ExistenciaProductoPage) },
                 new MenuTienda() { Id = 1, Icon = "reporteIngreso_icon.png", Title = "Ingresos ventas",  TargetType = typeof(ReportePages.IngresoPage) },
@@ -126,8 +115,13 @@ namespace AdmeliApp.Pages.Navigation
                 //new MenuTienda() { Id = 1, Icon = "codigoBarra_icon.png", Title = "Diseño de código de barras"},
             };
 
-            // Agregando los menus a la lista del menu tienda segun los permisos de login ususario
-            MenuTiendaItems.Add(menuConfig);
+            //// Agregando los menus a la lista del menu tienda segun los permisos de login ususario
+            MenuTiendaItems.Add(menuVentas);
+            MenuTiendaItems.Add(menuCompras);
+            MenuTiendaItems.Add(menuProductos);
+            MenuTiendaItems.Add(menuAlmacen);
+            MenuTiendaItems.Add(menuCaja);
+            MenuTiendaItems.Add(menuReportes);
             if (App.asignacionPersonal.idAsignarPuntoAdministracion > 0)
             {
                 MenuTiendaItems.Add(menuAdmin);

@@ -17,7 +17,8 @@ namespace AdmeliApp
 	{
         internal static ConfiguracionGeneral configuracionGeneral;
         internal static List<DatosGenerales> datosGeneralesList;
-        internal static Sucursal sucursal;
+        internal static int currentIdAlmacen;
+        internal static int currentIdPuntoVenta;
         internal static AsignacionPersonal asignacionPersonal;
         internal static bool cajaIniciada;
         internal static CajaSesion cajaSesion;
@@ -54,6 +55,8 @@ namespace AdmeliApp
         public static ProveedorPage ProveedorPage { get; internal set; }
         public static CompraPage CompraPage { get; internal set; }
         public static OrdenCompraPage OrdenCompraPage { get; internal set; }
+        public static List<Sucursal> sucursales { get; internal set; }
+        public static Sucursal sucursal { get; internal set; }
 
         public App ()
 		{

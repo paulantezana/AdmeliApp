@@ -127,7 +127,20 @@ namespace AdmeliApp.ViewModel
                     }
                 });
 
-                App.Current.MainPage = new AdmeliApp.Pages.Root.RootPage();
+                // Compronbando la asignacion
+                if (App.alamacenes.Count > 1 || App.puntosDeVenta.Count > 1)
+                {
+                    App.Current.MainPage = new AdmeliApp.Pages.Root.ConfigInitialPage();
+                }
+                else
+                {
+                    // asignando los id principales de almacen y id punto de venta
+                    App.currentIdAlmacen = App.alamacenes[0].idAlmacen;
+                    App.currentIdPuntoVenta = App.puntosDeVenta[0].idAsignarPuntoVenta;
+
+                    // Mostrando la pagina principal
+                    App.Current.MainPage = new AdmeliApp.Pages.Root.RootPage();
+                }
             }
             catch (Exception ex)
             {
@@ -145,9 +158,9 @@ namespace AdmeliApp.ViewModel
             loadDatosGenerales();
 
             // www.lineatienda.com/services.php/sucursalespersonal/8
-            List<Sucursal> sList = await webService.GET<List<Sucursal>>("sucursalespersonal", App.personal.idPersonal.ToString());
-            if (sList.Count == 0) throw new Exception("Usted no pertenece a una sucursal no podrá ingresar al sistema.");
-            App.sucursal = sList[0];
+            App.sucursales = await webService.GET<List<Sucursal>>("sucursalespersonal", App.personal.idPersonal.ToString());
+            if (App.sucursales.Count == 0) throw new Exception("Usted no pertenece a una sucursal no podrá ingresar al sistema."); // Validacion si el usuario eiene asignado una sucursal
+            App.sucursal = App.sucursales[0];
             this.nLoads++;
 
             // www.lineatienda.com/services.php/personales/asignacionpersonal/per/8/suc/1

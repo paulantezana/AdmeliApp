@@ -23,11 +23,11 @@
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
                 <ListView.Header>
                     <StackLayout 
-                        Padding="0,20,0,20"
+                        Padding="0,5,0,20"
                         BackgroundColor="{StaticResource Color1}">
                         <StackLayout
+                            Padding="20,0,15,0"
                             Orientation="Horizontal"
-                            Padding="15,0,15,0"
                             VerticalOptions="CenterAndExpand">
                             <Label
                                 HorizontalOptions="StartAndExpand"
@@ -42,7 +42,7 @@
                             </Switch>
                         </StackLayout>
 
-                        <StackLayout Padding="10,0,10,0">
+                        <StackLayout Padding="20,0,15,0">
                             <Picker
                                 Title="Sucursal"
                                 HorizontalOptions="FillAndExpand"
@@ -80,9 +80,13 @@
                                         <Label Text="Stock : " TextColor="{Binding TextColorItem}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
                                         <Label Text="{Binding stock}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
                                     </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
+                                    <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVisiblePrecioCompra, Mode=TwoWay}">
                                         <Label Text="Precio compra: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
                                         <Label Text="{Binding precioCompra}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Precio venta: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
+                                        <Label Text="{Binding precioVenta}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
                                     </StackLayout>
                                 </StackLayout>
                                 <!--<StackLayout Orientation="Horizontal" HorizontalOptions="End">

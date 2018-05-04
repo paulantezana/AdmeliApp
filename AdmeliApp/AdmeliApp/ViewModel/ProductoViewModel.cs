@@ -48,12 +48,20 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._SucursalItems, value); }
         }
 
-        // --------------------------------------
+        // --------------------------------------------------------------------------
+        // --------------------------------------------------------------------------
         private bool _IsEnabledStock;
         public bool IsEnabledStock
         {
             get { return this._IsEnabledStock; }
             set { SetValue(ref this._IsEnabledStock, value); }
+        }
+
+        private bool _IsVisiblePrecioCompra;
+        public bool IsVisiblePrecioCompra
+        {
+            get { return this._IsVisiblePrecioCompra; }
+            set { SetValue(ref this._IsVisiblePrecioCompra, value); }
         }
 
         private List<Producto> ProductoList { get; set; }
@@ -68,6 +76,10 @@ namespace AdmeliApp.ViewModel
         public ProductoViewModel()
         {
             instance = this;
+            IsEnabledStock = true;
+
+            IsVisiblePrecioCompra = (App.asignacionPersonal.idAsignarPuntoCompra > 0) ? true : false;
+
             this.CurrentProducto = new ProductoItemViewModel();
             this.loadRoot();
         } 

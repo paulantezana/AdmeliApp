@@ -55,23 +55,28 @@ namespace AdmeliApp.ViewModel
         public ICommand ContinuarCommand =>
             _ContinuarCommand ?? (_ContinuarCommand = new Command(() => ExecuteContinuar()));
 
-        private void ExecuteContinuar()
+        private async void ExecuteContinuar()
         {
             this.IsEnabled = false;
             this.IsRunning = true;
-            if(PuntoVentaSelectedItem != null || AlmacenSelectedItem != null)
-            {
-                // Estableciendo los IDAlmacen y IDPunto Venta por defecto
-                App.currentIdAlmacen = AlmacenSelectedItem.idAlmacen;
-                App.currentIdPuntoVenta = PuntoVentaSelectedItem.idAsignarPuntoVenta;
 
-                // Mostrando la pagina principal
-                App.Current.MainPage = new AdmeliApp.Pages.Root.RootPage();
-            }
-            else
+            if (PuntoVentaSelectedItem == null || AlmacenSelectedItem == null)
             {
-                Application.Current.MainPage.DisplayAlert("Error","No soleciono ninguno", "Aceptar");
+                if (await App.Current.MainPage.DisplayAlert("Alerta", "No selecciono un almacén o punto de venta\n ¿desea continuar de todas formas?", "SI", "NO") == false)
+                {
+                    this.IsEnabled = true;
+                    this.IsRunning = false;
+                    return;
+                }
             }
+
+            // Estableciendo los IDAlmacen y IDPunto Venta por defecto
+            if (AlmacenSelectedItem != null) App.currentIdAlmacen = AlmacenSelectedItem.idAlmacen;
+            if(PuntoVentaSelectedItem != null) App.currentIdPuntoVenta = PuntoVentaSelectedItem.idAsignarPuntoVenta;
+
+            // Mostrando el panel principal de la APP
+            App.Current.MainPage = new AdmeliApp.Pages.Root.RootPage();
+
             this.IsEnabled = true;
             this.IsRunning = false;
         }

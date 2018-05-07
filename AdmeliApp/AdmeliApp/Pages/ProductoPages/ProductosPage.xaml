@@ -13,13 +13,13 @@
                     TextColor="White"
                     Placeholder="Buscar..."/>
             </StackLayout>
-            <ListView 
+            <ListView
                 ItemsSource="{Binding ProductoItems}"
                 IsPullToRefreshEnabled="True"
                 CachingStrategy="RecycleElement"
                 BackgroundColor="White"
+                HasUnevenRows="True"
                 RefreshCommand="{Binding RefreshCommand}"
-                RowHeight="100"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
                 <ListView.Header>
                     <StackLayout 
@@ -66,40 +66,77 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="0,15,0,15" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                <StackLayout VerticalOptions="StartAndExpand">
-                                    <Image Source="producto_icon.png" Margin="0,-10,0,0"/>
-                                </StackLayout>
-                                <StackLayout HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold" Margin="0,-5,0,-5"/>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Marca: " VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                        <Label Text="{Binding nombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Stock : " TextColor="{Binding TextColorItem}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                        <Label Text="{Binding stock}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVisiblePrecioCompra, Mode=TwoWay}">
-                                        <Label Text="Precio compra: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
-                                        <Label Text="{Binding precioCompra}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Precio venta: " VerticalOptions="Center" Margin="0,-5,0,-5" TextColor="{StaticResource Color3}"/>
-                                        <Label Text="{Binding precioVenta}" TextColor="{StaticResource Color3}" VerticalOptions="Center" Margin="0,-5,0,-5"/>
-                                    </StackLayout>
-                                </StackLayout>
-                                <!--<StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                                    <Image Source="cancel_icon.png">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding AnularCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                </StackLayout>-->
-                                <StackLayout.GestureRecognizers>
+                            <Grid>
+
+                                <!-- Events -->
+                                <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ViewCommand}"/>
-                                </StackLayout.GestureRecognizers>
-                            </StackLayout>
+                                </Grid.GestureRecognizers>
+
+                                <!-- Layout -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="5" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Start Content -->
+                                <Image Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                                    Source="product_image.png"/>
+
+                                <StackLayout Grid.Column="2" Grid.Row="1" >
+                                    <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Codigo: " VerticalOptions="Center"/>
+                                        <Label Text="{Binding codigoProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3">
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Marca : " VerticalOptions="Center"/>
+                                                <Label Text="{Binding nombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Unidad: " VerticalOptions="Center"/>
+                                                <Label Text="{Binding nombreUnidad}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <StackLayout HorizontalOptions="EndAndExpand" Padding="5">
+                                            <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                            <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                        </StackLayout>
+
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}">
+                                            <Label Text="Precio venta: " VerticalOptions="Center" TextColor="{StaticResource Color3}"/>
+                                            <Label Text="{Binding precioVenta}" TextColor="{StaticResource Color3}" VerticalOptions="Center"/>
+                                        </StackLayout>
+                                        <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Padding="5" HorizontalOptions="EndAndExpand">
+                                            <Label Text="Precio compra" VerticalOptions="Center" TextColor="{StaticResource Color3}" HorizontalTextAlignment="End"/>
+                                            <Label Text="{Binding precioCompra}" TextColor="{StaticResource Color3}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                </StackLayout>
+
+                                <!-- End Content -->
+                            </Grid>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

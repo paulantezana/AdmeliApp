@@ -18,6 +18,26 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         public ICommand ViewCommand =>
             _ViewCommand ?? (_ViewCommand = new Command(() => ExecuteView()));
 
+        private bool _IsVisiblePrecioCompra;
+        public bool IsVisiblePrecioCompra
+        {
+            get { return this._IsVisiblePrecioCompra; }
+            set { SetValue(ref this._IsVisiblePrecioCompra, value); }
+        }
+
+        private bool _IsVisiblePrecioVenta;
+        public bool IsVisiblePrecioVenta
+        {
+            get { return this._IsVisiblePrecioVenta; }
+            set { SetValue(ref this._IsVisiblePrecioVenta, value); }
+        }
+
+        public ProductoItemViewModel()
+        {
+            IsVisiblePrecioVenta = (App.asignacionPersonal.idAsignarPuntoVenta > 0) ? true : false;
+            IsVisiblePrecioCompra = (App.asignacionPersonal.idAsignarPuntoCompra > 0) ? true : false;
+        }
+
         private void ExecuteView()
         {
             ProductoViewModel productoViewModel = ProductoViewModel.GetInstance();

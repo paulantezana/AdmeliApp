@@ -20,13 +20,13 @@ namespace AdmeliApp.Helpers
         public WebService()
         {
             //this.domainName = "http://www.lineatienda.com";
-            this.domainName = "http://192.168.20.1:8080";
-            //this.domainName = "http://190.117.145.7:8080";
-            //this.domainName = "http://192.168.1.45:8080";
-
             //this.directory = "services.php";
-            //this.directory = "service_fact_prueba/xcore/services.php";
-            this.directory = "admeli/xcore/services.php";
+
+            this.domainName = "http://190.117.145.7:8080";
+            this.directory = "service_fact_prueba/xcore/services.php";
+
+            //this.domainName = "http://192.168.20.1:8080";
+            //this.directory = "admeli/xcore/services.php";
 
             this.urlBase = String.Format("{0}/{1}", domainName, directory);
         }

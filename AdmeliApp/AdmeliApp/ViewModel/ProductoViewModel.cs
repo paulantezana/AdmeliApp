@@ -18,19 +18,24 @@ namespace AdmeliApp.ViewModel
 
         public ProductoItemViewModel CurrentProducto { get; set; }
 
-        // PERSONAL
+        // ALMACEN
         private Almacen _AlmacenSelectedItem;
         public Almacen AlmacenSelectedItem
         {
             get { return this._AlmacenSelectedItem; }
-            set { SetValue(ref this._AlmacenSelectedItem, value); }
+            set {
+                SetValue(ref this._AlmacenSelectedItem, value);
+                this.LoadRegisters();
+            }
         }
 
         private List<Almacen> _AlmacenItems;
         public List<Almacen> AlmacenItems
         {
             get { return this._AlmacenItems; }
-            set { SetValue(ref this._AlmacenItems, value); }
+            set {
+                SetValue(ref this._AlmacenItems, value);
+            }
         }
 
         // SUCURSAL
@@ -38,7 +43,10 @@ namespace AdmeliApp.ViewModel
         public Sucursal SucursalSelectedItem
         {
             get { return this._SucursalSelectedItem; }
-            set { SetValue(ref this._SucursalSelectedItem, value); }
+            set {
+                SetValue(ref this._SucursalSelectedItem, value);
+                this.LoadRegisters();
+            }
         }
 
         private List<Sucursal> _SucursalItems;
@@ -54,14 +62,10 @@ namespace AdmeliApp.ViewModel
         public bool IsEnabledStock
         {
             get { return this._IsEnabledStock; }
-            set { SetValue(ref this._IsEnabledStock, value); }
-        }
-
-        private bool _IsVisiblePrecioCompra;
-        public bool IsVisiblePrecioCompra
-        {
-            get { return this._IsVisiblePrecioCompra; }
-            set { SetValue(ref this._IsVisiblePrecioCompra, value); }
+            set {
+                SetValue(ref this._IsEnabledStock, value);
+                this.LoadRegisters();
+            }
         }
 
         private List<Producto> ProductoList { get; set; }
@@ -77,8 +81,6 @@ namespace AdmeliApp.ViewModel
         {
             instance = this;
             IsEnabledStock = true;
-
-            IsVisiblePrecioCompra = (App.asignacionPersonal.idAsignarPuntoCompra > 0) ? true : false;
 
             this.CurrentProducto = new ProductoItemViewModel();
             this.loadRoot();
@@ -150,7 +152,7 @@ namespace AdmeliApp.ViewModel
 
                 // www.lineatienda.com/services.php/listarsucursalesactivos
                 SucursalItems = await webService.GET<List<Sucursal>>("listarsucursalesactivos");
-                SucursalSelectedItem = SucursalItems.Find(s => s.idSucursal == 0);
+                SucursalSelectedItem = SucursalItems.Find(s => s.idSucursal == App.sucursal.idSucursal);
             }
             catch (Exception ex)
             {
@@ -163,56 +165,9 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        public async void LoadSerach()
+        public void LoadSerach()
         {
-            try
-            {
-                this.IsRefreshing = true;
-                this.IsEnabled = false;
-
-                Dictionary<string, int> list = new Dictionary<string, int>();
-                list.Add("id0", 0);
-
-                Dictionary<string, int>[] dataSend = { list };
-
-                RootObject<Producto> rootData;
-                if (IsEnabledStock)
-                {
-                    
-                    // www.lineatienda.com/services.php/productos/categoria/stock/1/100/1/1
-                    int almacenId = (AlmacenSelectedItem == null) ? 1 : AlmacenSelectedItem.idAlmacen;
-                    int sucursalId = (SucursalSelectedItem == null) ? App.sucursal.idSucursal : SucursalSelectedItem.idSucursal;
-
-                    rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/stock/{0}/{1}/{2}/{3}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina, almacenId, sucursalId), dataSend);
-                }
-                else
-                {
-                    // www.lineatienda.com/services.php/productos/categoria/1/100
-                    rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/{0}/{1}/{2}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina, SearchText), dataSend);
-                }
-
-                this.ProductoList = rootData.datos;
-
-                // Set data paginacion
-                this.paginacion.itemsCount = rootData.nro_registros;
-                this.paginacion.reload();
-
-                // Reload pagination
-                this.reloadPagination();
-
-                // create observablecollection
-                this.ProductoItems = new ObservableCollection<ProductoItemViewModel>(
-                    this.ToProductoItemViewModel());
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
-            }
-            finally
-            {
-                this.IsRefreshing = false;
-                this.IsEnabled = true;
-            }
+            LoadRegisters();
         }
 
         public override async void LoadRegisters()
@@ -222,15 +177,44 @@ namespace AdmeliApp.ViewModel
                 this.IsRefreshing = true;
                 this.IsEnabled = false;
 
-                // www.lineatienda.com/services.php/productos/categoria/1/100
                 Dictionary<string, int> list = new Dictionary<string, int>();
                 list.Add("id0", 0);
 
+                // Preparando datos
                 Dictionary<string, int>[] dataSend = { list };
+                int almacenId = (AlmacenSelectedItem == null) ? 1 : AlmacenSelectedItem.idAlmacen;
+                int sucursalId = (SucursalSelectedItem == null) ? App.sucursal.idSucursal : SucursalSelectedItem.idSucursal;
 
-                RootObject<Producto> rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/{0}/{1}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina), dataSend);
+                RootObject<Producto> rootData;  // Variable donde se almacenara la respuesta de la API
+                if (SearchText == null) SearchText = string.Empty;
 
+                if (SearchText != string.Empty) // Cuando el cuadro de busueda esta bacia
+                {
+                    if (IsEnabledStock) // Cuando el stock sta havilitado
+                    {
+                        // localhost:8080/admeli/xcore/services.php/productos/categoria/stock/1/10/monitor/1/1
+                        rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/stock/{0}/{1}/{2}/{3}/{4}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina, SearchText, almacenId, sucursalId), dataSend);
+                    }
+                    else
+                    {
+                        // localhost:8080/admeli/xcore/services.php/productos/categoria/1/10/monitor
+                        rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/{0}/{1}/{2}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina, SearchText), dataSend);
+                    }
+                }
 
+                else
+                {
+                    if (IsEnabledStock) // Cuando el stock sta havilitado
+                    {
+                        // localhost:8080/admeli/xcore/services.php/productos/categoria/stock/1/10/1/1
+                        rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/stock/{0}/{1}/{2}/{3}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina, almacenId, sucursalId), dataSend);
+                    }
+                    else
+                    {
+                        // localhost:8080/admeli/xcore/services.php/productos/categoria/1/10
+                        rootData = await webService.POST<Dictionary<string, int>[], RootObject<Producto>>("productos", String.Format("categoria/{0}/{1}", paginacion.currentPage, App.configuracionGeneral.itemPorPagina), dataSend);
+                    }
+                }
 
                 this.ProductoList = rootData.datos;
 
@@ -267,7 +251,6 @@ namespace AdmeliApp.ViewModel
         {
             return ProductoList.Select(p => new ProductoItemViewModel
             {
-
                 idProducto = p.idProducto,
                 cantidadFraccion = p.cantidadFraccion,
                 codigoBarras = p.codigoBarras,
@@ -295,9 +278,13 @@ namespace AdmeliApp.ViewModel
                 ventaVarianteSinStock = p.ventaVarianteSinStock,
                 nombre = p.nombre,
                 codigo = p.codigo,
+                precioVenta = p.precioVenta,
+                stock = p.stock,
+                stockFinanciero = p.stockFinanciero,
+                idPresentacionAfectada = p.idPresentacionAfectada,
 
-                //BackgroundItem = (p.estado == 0) ? (Color)App.Current.Resources["AlertLight"] : Color.Transparent,
-                //TextColorItem = (p.estado == 0) ? (Color)App.Current.Resources["Alert"] : (Color)App.Current.Resources["GreyDark"],
+                BackgroundItem = (!p.estado) ? (Color)App.Current.Resources["AlertLight"] : Color.Transparent,
+                TextColorItem = (!p.estado) ? (Color)App.Current.Resources["Alert"] : (Color)App.Current.Resources["grey"],
             });
         }
         #endregion

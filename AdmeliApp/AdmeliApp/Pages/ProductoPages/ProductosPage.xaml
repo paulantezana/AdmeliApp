@@ -43,13 +43,13 @@
                         </StackLayout>
 
                         <StackLayout Padding="20,0,15,0">
-                            <Picker
+                            <!--<Picker
                                 Title="Sucursal"
                                 HorizontalOptions="FillAndExpand"
                                 SelectedItem="{Binding SucursalSelectedItem}"
                                 ItemDisplayBinding="{Binding nombre}"
                                 IsEnabled="{Binding IsEnabledStock}"
-                                ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>
+                                ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>-->
                             <Picker
                                 Title="Almacen"
                                 HorizontalOptions="FillAndExpand"
@@ -76,58 +76,39 @@
 
                                 <!-- Layout -->
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="5" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="5" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="5" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="5"/>
                                 </Grid.RowDefinitions>
 
                                 <!-- Start Content -->
-                                <Image Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
-                                    Source="product_image.png"/>
+                                <Image Grid.Row="1" Grid.Column="1" Grid.RowSpan="1"
+                                    Source="product_image.png" WidthRequest="30" HeightRequest="30"/>
 
                                 <StackLayout Grid.Column="2" Grid.Row="1" >
-                                    <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
-                                    <!--<StackLayout Orientation="Horizontal">
-                                        <Label Text="Codigo: " VerticalOptions="Center"/>
-                                        <Label Text="{Binding codigoProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                    </StackLayout>-->
+                                    <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                        <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                    </StackLayout>
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3">
-
-                                    <StackLayout Orientation="Horizontal">
-                                        <StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Marca : " VerticalOptions="Center"/>
-                                                <Label Text="{Binding nombreMarca}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                            </StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="Unidad: " VerticalOptions="Center"/>
-                                                <Label Text="{Binding nombreUnidad}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                            </StackLayout>
-                                        </StackLayout>
-
-                                        <StackLayout HorizontalOptions="EndAndExpand" Padding="5">
-                                            <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                            <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                        </StackLayout>
-
-                                    </StackLayout>
-
+                                    
                                     <StackLayout Orientation="Horizontal">
                                         <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}">
                                             <Label Text="Precio venta: " VerticalOptions="Center" TextColor="{StaticResource Color3}"/>
                                             <Label Text="{Binding precioVenta}" TextColor="{StaticResource Color3}" VerticalOptions="Center"/>
                                         </StackLayout>
-                                        <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Padding="5" HorizontalOptions="EndAndExpand">
+                                        <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Padding="0,0,5,0" HorizontalOptions="EndAndExpand">
                                             <Label Text="Precio compra" VerticalOptions="Center" TextColor="{StaticResource Color3}" HorizontalTextAlignment="End"/>
                                             <Label Text="{Binding precioCompra}" TextColor="{StaticResource Color3}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
                                         </StackLayout>

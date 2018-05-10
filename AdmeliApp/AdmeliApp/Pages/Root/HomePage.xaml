@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.Root.HomePage"
+             BackgroundColor="White"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              Title="Home">
     <StackLayout>
 
@@ -16,6 +18,42 @@
             <StackLayout>
                 <Label Text="Cargando..." IsVisible="{Binding IsRunning}" HorizontalOptions="CenterAndExpand"></Label>
             </StackLayout>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            
+            <StackLayout Padding="5">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ProductoCommand}"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="producto_icon.png"></Image>
+                <Label Text="Productos"/>
+            </StackLayout>
+
+            <StackLayout Padding="5">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CompraCommand}"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="compra_icon.png"></Image>
+                <Label Text="Compra"/>
+            </StackLayout>
+
+            <StackLayout Padding="5">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding VentaCommand}"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="venta_icon.png"></Image>
+                <Label Text="Ventas"/>
+            </StackLayout>
+
+            <StackLayout Padding="5">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ProveedorCommand}"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="proveedor_icon.png"></Image>
+                <Label Text="Proveedores"/>
+            </StackLayout>
+            
         </StackLayout>
 
         <!-- CHART INGRESOS POR MONEDA  -->

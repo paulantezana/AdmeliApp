@@ -5,49 +5,48 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="White">
-                <Image Source="LoginHeader.png"></Image>
-                <StackLayout Padding="40,0,40,0" VerticalOptions="CenterAndExpand">
+                
+                <StackLayout Padding="50,0,50,0" VerticalOptions="CenterAndExpand">
 
-                    <Label 
-                        Text="LOGIN"
-                        FontSize="45"
-                        HorizontalOptions="Center"/>
+                    <Image Source="LoginHeader.png"></Image>
 
-                    <Entry 
-                        Placeholder="Nombre de usuario"
-                        Keyboard="Email"
-                        Text="{Binding UserName, Mode=TwoWay}" 
-                        IsEnabled="{Binding IsEnabled}"/>
+                    <StackLayout Margin="0,30,0,30">
+                        
+                        <Entry 
+                            Placeholder="Nombre de usuario"
+                            Keyboard="Email"
+                            Text="{Binding UserName, Mode=TwoWay}" 
+                            IsEnabled="{Binding IsEnabled}"/>
 
-                    <Entry 
-                        Placeholder="Contraseña"
-                        IsPassword="True"
-                        Text="{Binding Password, Mode=TwoWay}"
-                        IsEnabled="{Binding IsEnabled}"/>
+                        <Entry 
+                            Placeholder="Contraseña"
+                            IsPassword="True"
+                            Text="{Binding Password, Mode=TwoWay}"
+                            IsEnabled="{Binding IsEnabled}"/>
 
-                    <StackLayout
-                        Margin="10,0"
-                        Orientation="Horizontal"
-                        VerticalOptions="CenterAndExpand">
-                        <Label
-                            HorizontalOptions="StartAndExpand"
-                            Text="Recordar"
-                            VerticalOptions="Center">
-                        </Label>
-                        <Switch
-                            IsToggled="{Binding IsRemembered, Mode=TwoWay}"
-                            IsEnabled="{Binding IsEnabled}"
-                            HorizontalOptions="End">
-                        </Switch>
+                        <StackLayout
+                            Margin="4,10,4,0"
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
+                            <Label
+                                HorizontalOptions="StartAndExpand"
+                                Text="Recuérdame"
+                                VerticalOptions="Center"/>
+                            <Switch
+                                IsToggled="{Binding IsRemembered, Mode=TwoWay}"
+                                IsEnabled="{Binding IsEnabled}"
+                                HorizontalOptions="End"/>
+                        </StackLayout>
                     </StackLayout>
 
+
+
                     <Button 
-                        Style="{StaticResource ButtonSuccess}"
+                        Style="{StaticResource ButtonInfo}"
                         Command="{Binding LoginCommand}"
                         IsEnabled="{Binding IsEnabled}"
                         HorizontalOptions="FillAndExpand"
                         Text="Ingresar"/>
-
                     <ActivityIndicator 
                         IsRunning="{Binding IsRunning}">
                         <ActivityIndicator.Color>

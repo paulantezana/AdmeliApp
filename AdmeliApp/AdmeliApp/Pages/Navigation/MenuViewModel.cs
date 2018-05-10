@@ -5,6 +5,7 @@ using AdmeliApp.Pages.CompraPages;
 using AdmeliApp.Pages.ConfiguracionPages;
 using AdmeliApp.Pages.ProductoPages;
 using AdmeliApp.Pages.ReportePages;
+using AdmeliApp.Pages.Root;
 using AdmeliApp.Pages.VentaPages;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,10 @@ namespace AdmeliApp.Pages.Navigation
             get { return this._UserDocument; }
             set { SetValue(ref this._UserDocument, value); }
         }
+
+        private ICommand _HomePageCommand;
+        public ICommand HomePageCommand =>
+            _HomePageCommand ?? (_HomePageCommand = new Command(() => ExecuteHomePage()));
 
         private ICommand _LogoutCommand;
         public ICommand LogoutCommand =>
@@ -132,6 +137,14 @@ namespace AdmeliApp.Pages.Navigation
         {
             dataService.DeletePersonal(App.personal);
             App.Current.MainPage = new AdmeliApp.Pages.Root.LoginPage();
+        }
+
+        private void ExecuteHomePage()
+        {
+            Page page = new HomePage(); // Creando una instancia
+            page.Title = "Home"; // Titulo de la página
+            App.RootPage.Detail = new NavigationPage(page); // Detalle de la página
+            App.RootPage.IsPresented = false; // Oculta el menu de navegacion
         }
 
         #region INotifyPropertyChanged Implementation

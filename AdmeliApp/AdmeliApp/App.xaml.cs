@@ -8,6 +8,7 @@ using AdmeliApp.Pages.ConfiguracionPages;
 using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.Pages.ProductoPages;
 using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
+using AdmeliApp.Pages.Root;
 using AdmeliApp.Pages.VentaPages;
 using Xamarin.Forms;
 
@@ -57,6 +58,7 @@ namespace AdmeliApp
         public static OrdenCompraPage OrdenCompraPage { get; internal set; }
         public static List<Sucursal> sucursales { get; internal set; }
         public static Sucursal sucursal { get; internal set; }
+        public static RootPage RootPage { get; internal set; }
 
         public App ()
 		{

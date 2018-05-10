@@ -41,7 +41,11 @@
                     
                     <!-- Perfil de usuario -->
                     <StackLayout Grid.Column="1" Grid.Row="1">
-                        <Image Source="profile.png" HeightRequest="70" WidthRequest="70"></Image>
+                        <Image Source="profile.png" HeightRequest="70" WidthRequest="70">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomePageCommand}"></TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </StackLayout>
                     
                     <!-- Icono  -->

@@ -19,6 +19,12 @@ namespace AdmeliApp.Pages.Root
             MenuPage.ListView.ItemSelected += ListView_ItemSelected;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.RootPage = this;
+        }
+
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as MenuTienda;

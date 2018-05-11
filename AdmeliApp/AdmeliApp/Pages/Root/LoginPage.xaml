@@ -37,6 +37,7 @@
                                 IsEnabled="{Binding IsEnabled}"
                                 HorizontalOptions="End"/>
                         </StackLayout>
+                        
                     </StackLayout>
 
                     <Button 
@@ -45,6 +46,7 @@
                         IsEnabled="{Binding IsEnabled}"
                         HorizontalOptions="FillAndExpand"
                         Text="Ingresar"/>
+                    
                     <ActivityIndicator 
                         IsRunning="{Binding IsRunning}">
                         <ActivityIndicator.Color>

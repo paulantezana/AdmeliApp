@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace AdmeliApp.Pages.ProductoPages.Util
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SelectCategoriaPage : ContentPage
+	public partial class SelectableCategoriaPage : ContentPage
 	{
-		public SelectCategoriaPage ()
+		public SelectableCategoriaPage ()
 		{
 			InitializeComponent ();
-		}
+            this.BindingContext = new SelectableCategoriaViewModel();
+        }
 	}
 }

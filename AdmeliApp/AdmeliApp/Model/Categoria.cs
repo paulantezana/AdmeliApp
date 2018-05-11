@@ -27,13 +27,10 @@ namespace AdmeliApp.Model
         public string tieneRegistros { get; set; }
         public bool relacionPrincipal { get; set; }
         public bool afecta { get; set; }
-
-        public bool Seleccionado { get; set; }
     }
 
-    public class SelectableCategoria<T>
+    public class SelectableCategoria : Categoria
     {
         public bool IsSelected { get; set; }
-        public T Item { get; set; }
     }
 }

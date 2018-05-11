@@ -12,6 +12,7 @@
                 <StackLayout>
                     <Label Text="Seleccionar Almacén" TextColor="White"/>
                     <Picker
+                        Title="Almacen"
                         HorizontalOptions="FillAndExpand"
                         SelectedItem="{Binding AlmacenSelectedItem}"
                         ItemDisplayBinding="{Binding nombre}"
@@ -22,6 +23,7 @@
                 <StackLayout>
                     <Label Text="Seleccionar punto de venta" TextColor="White"/>
                     <Picker
+                        Title="Punto de venta"
                         HorizontalOptions="FillAndExpand"
                         SelectedItem="{Binding PuntoVentaSelectedItem}"
                         ItemDisplayBinding="{Binding nombre}"
@@ -31,7 +33,9 @@
 
                 <Button 
                     Text="Continuar"
+                    HorizontalOptions="FillAndExpand"
                     Style="{StaticResource ButtonInfo}"
+                    Margin="0,15,0,0"
                     Command="{Binding ContinuarCommand}"
                     IsEnabled="{Binding IsEnabled}"/>
 

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AdmeliApp.Pages.ProductoPages.Util.SelectableCategoriaPage">
+    <ContentPage.Content>
+        <ListView 
+            ItemsSource="{Binding SelectCategoriaItems}"
+            IsPullToRefreshEnabled="True"
+            CachingStrategy="RecycleElement"
+            BackgroundColor="White"
+            HasUnevenRows="True"
+            RefreshCommand="{Binding RefreshCommand}"
+            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <SwitchCell Text="{Binding nombreCategoria}" On="{Binding IsSelected}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

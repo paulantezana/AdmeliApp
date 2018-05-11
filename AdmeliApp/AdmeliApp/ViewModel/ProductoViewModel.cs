@@ -1,6 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
-using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
+using AdmeliApp.Pages.ProductoPages.Util;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -76,6 +76,11 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._ProductoItems, value); }
         }
 
+        // COMANDS
+        private ICommand _FilterCommand;
+        public ICommand FilterCommand =>
+            _FilterCommand ?? (_FilterCommand = new Command(() => ExecuteFilterAsync()));
+
         #region ============================== CONSTRUCTOR ==============================
         public ProductoViewModel()
         {
@@ -108,6 +113,12 @@ namespace AdmeliApp.ViewModel
         public override void ExecuteSearchRealTime()
         {
             if (SearchText == string.Empty) this.loadRoot();
+        }
+
+        private void ExecuteFilterAsync()
+        {
+            // this.SetCurrentMarca(new MarcaItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.ProductosPage.Navigation.PushAsync(new SelectableCategoriaPage()); // Navegacion
         }
         #endregion
 
@@ -182,6 +193,7 @@ namespace AdmeliApp.ViewModel
 
                 // Preparando datos
                 Dictionary<string, int>[] dataSend = { list };
+
                 int almacenId = (AlmacenSelectedItem == null) ? 1 : AlmacenSelectedItem.idAlmacen;
                 int sucursalId = (SucursalSelectedItem == null) ? App.sucursal.idSucursal : SucursalSelectedItem.idSucursal;
 

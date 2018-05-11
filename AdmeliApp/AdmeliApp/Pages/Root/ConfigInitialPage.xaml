@@ -4,8 +4,10 @@
              Title="Configuracion Inicial"
              x:Class="AdmeliApp.Pages.Root.ConfigInitialPage">
     <ContentPage.Content>
-        <ScrollView BackgroundColor="{StaticResource Color1}">
+        <ScrollView BackgroundColor="White">
             <StackLayout Padding="40,0,40,0" VerticalOptions="CenterAndExpand" Spacing="10">
+                
+                <Image Source="LoginHeader.png"></Image>
                 
                 <StackLayout>
                     <Label Text="Seleccionar Almacén" TextColor="White"/>
@@ -29,10 +31,9 @@
 
                 <Button 
                     Text="Continuar"
-                    TextColor="{StaticResource Color1}"
+                    Style="{StaticResource ButtonInfo}"
                     Command="{Binding ContinuarCommand}"
-                    IsEnabled="{Binding IsEnabled}"
-                    BackgroundColor="White"/>
+                    IsEnabled="{Binding IsEnabled}"/>
 
             </StackLayout>
         </ScrollView>

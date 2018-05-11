@@ -11,7 +11,7 @@
                     <Image Source="LoginHeader.png"></Image>
 
                     <StackLayout Margin="0,30,0,30">
-                        
+
                         <Entry 
                             Placeholder="Nombre de usuario"
                             Keyboard="Email"
@@ -38,8 +38,6 @@
                                 HorizontalOptions="End"/>
                         </StackLayout>
                     </StackLayout>
-
-
 
                     <Button 
                         Style="{StaticResource ButtonInfo}"

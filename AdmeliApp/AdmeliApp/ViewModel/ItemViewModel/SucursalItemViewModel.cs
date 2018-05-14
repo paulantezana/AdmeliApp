@@ -26,7 +26,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         public SucursalItemViewModel()
         {
             this.rootLoad();
-        } 
+        }
         #endregion
 
         #region ========================== ROOT LOAD ==========================
@@ -47,7 +47,8 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         public Pais PaisSelectedItem
         {
             get { return this._PaisSelectedItem; }
-            set {
+            set
+            {
                 SetValue(ref this._PaisSelectedItem, value);
                 if (_PaisSelectedItem != null) crearNivelesPais();
             }
@@ -61,13 +62,16 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             set { SetValue(ref this._PaisItems, value); }
         }
 
-        // Nivel 1
+        // ----------------------------------------------------------------------------------------------------
+        // Nivel 1 ============================================================================================
+        // ----------------------------------------------------------------------------------------------------
         private Nivel1 _Nivel1SelectedItem;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public Nivel1 Nivel1SelectedItem
         {
             get { return this._Nivel1SelectedItem; }
-            set {
+            set
+            {
                 SetValue(ref this._Nivel1SelectedItem, value);
                 if (_Nivel1SelectedItem != null) cargarNivel2();
             }
@@ -97,13 +101,16 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             set { SetValue(ref this._Nivel1IsVisible, value); }
         }
 
-        // Nivel 2
+        // ----------------------------------------------------------------------------------------------------
+        // Nivel 2 ============================================================================================
+        // ----------------------------------------------------------------------------------------------------
         private Nivel2 _Nivel2SelectedItem;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public Nivel2 Nivel2SelectedItem
         {
             get { return this._Nivel2SelectedItem; }
-            set {
+            set
+            {
                 SetValue(ref this._Nivel2SelectedItem, value);
                 if (_Nivel2SelectedItem != null) cargarNivel3();
             }
@@ -133,8 +140,9 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             set { SetValue(ref this._Nivel2IsVisible, value); }
         }
 
-
-        // Nivel 3
+        // ----------------------------------------------------------------------------------------------------
+        // Nivel 3 ============================================================================================
+        // ----------------------------------------------------------------------------------------------------
         private Nivel3 _Nivel3SelectedItem;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public Nivel3 Nivel3SelectedItem
@@ -181,7 +189,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
 
                 // CARGANDO LA UBICACION GEOGRAFICA si es nuevo cargara la ubicacion geografica del sucursal actual activo en el sistema de lo contrario del sucursal actual
                 // www.lineatienda.com/services.php/ubigeoAtrib/2
-                
+
                 if (Nuevo)
                 {
                     List<UbicacionGeografica> data = await webService.GET<List<UbicacionGeografica>>("ubigeoAtrib", String.Format("{0}", App.sucursal.idUbicacionGeografica));
@@ -273,7 +281,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsEnabled = true;
             }
         }
-        
+
         private async void cargarNivel2()
         {
             try

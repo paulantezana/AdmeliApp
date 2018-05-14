@@ -19,6 +19,7 @@ namespace AdmeliApp.ViewModel
         public SucursalItemViewModel CurrentSucursal { get; set; }
 
         private List<Sucursal> SucursalList { get; set; }
+
         private ObservableCollection<SucursalItemViewModel> _SucursalItems;
         public ObservableCollection<SucursalItemViewModel> SucursalItems
         {

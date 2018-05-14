@@ -2,8 +2,105 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ConfiguracionPages.DatosEmpresaPage">
-  <!--Pages can be added as references or inline-->
-  <ContentPage Title="Tab 1" />
-  <ContentPage Title="Tab 2" />
-  <ContentPage Title="Tab 3" />
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="Empresa">
+        <ScrollView>
+            <StackLayout Padding="10">
+
+                <StackLayout Spacing="40" BindingContext="{Binding DatosGeneralesData}">
+
+                    <StackLayout>
+                        <Label Text="Nombre Empresa: "></Label>
+                        <Editor 
+                        Text="{Binding razonSocial, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Número Identificación: "></Label>
+                        <Editor 
+                        Text="{Binding ruc, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Email: "></Label>
+                        <Editor 
+                        Text="{Binding email, Mode=TwoWay}"/>
+                        <Label Text="A esté correo se le enviara todas las notificaciones del sistema." TextColor="{StaticResource grey-light}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Formas de pago"></Label>
+                        <Editor 
+                        Text="{Binding cuentaBancaria, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="0,20,0,50">
+                    <Button 
+                        Text="Guardar"
+                        Command="{Binding GuardarCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{StaticResource ButtonSuccess}"
+                        HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                
+            </StackLayout>
+            
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Configuraciones">
+        <ScrollView>
+            <StackLayout Padding="10">
+
+                <StackLayout Spacing="40" BindingContext="{Binding ConfiguracionGeneralData}">
+                    <StackLayout>
+                        <Label Text="Número Dígitos"></Label>
+                        <Editor 
+                            Text="{Binding numeroDecimales, Mode=TwoWay}"/>
+                        <Label Text="Número de dígitos que tendrá los números decimales (máximo 4)" TextColor="{StaticResource grey-light}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Item por Página"></Label>
+                        <Editor 
+                            Text="{Binding itemPorPagina, Mode=TwoWay}"/>
+                        <Label Text="Número de dígitos que tendrá los números decimales (máximo 4)" TextColor="{StaticResource grey-light}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Porcentaje de Utilidad(%)"></Label>
+                        <Editor 
+                            Text="{Binding porcentajeUtilidad, Mode=TwoWay}"/>
+                        <Label Text="Porcentaje de utilidad de las ventas." TextColor="{StaticResource grey-light}"/>
+                    </StackLayout>
+
+                    <StackLayout
+                        Margin="4,10,4,0"
+                        Orientation="Horizontal"
+                        VerticalOptions="CenterAndExpand">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Arquear con marcador Ejm. surtidores"
+                            VerticalOptions="Center"/>
+                        <Switch
+                            IsToggled="{Binding arquearMarcador, Mode=TwoWay}"
+                            HorizontalOptions="End"/>
+                    </StackLayout>
+                    
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="0,20,0,50">
+                    <Button 
+                        Text="Guardar" 
+                        Command="{Binding GuardarCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{StaticResource ButtonSuccess}"
+                        HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage>
 </TabbedPage>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AdmeliApp.Model
 {
-    class DatosGenerales : BaseModel
+    public class DatosGenerales : BaseModel
     {
         public int idDatosGenerales { get; set; }
         public string razonSocial { get; set; }

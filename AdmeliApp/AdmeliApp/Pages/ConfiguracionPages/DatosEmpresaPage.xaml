@@ -11,27 +11,23 @@
 
                     <StackLayout>
                         <Label Text="Nombre Empresa: "></Label>
-                        <Editor 
-                        Text="{Binding razonSocial, Mode=TwoWay}"/>
+                        <Editor Text="{Binding razonSocial, Mode=TwoWay}"/>
                     </StackLayout>
 
                     <StackLayout>
                         <Label Text="Número Identificación: "></Label>
-                        <Editor 
-                        Text="{Binding ruc, Mode=TwoWay}"/>
+                        <Editor Text="{Binding ruc, Mode=TwoWay}"/>
                     </StackLayout>
 
                     <StackLayout>
                         <Label Text="Email: "></Label>
-                        <Editor 
-                        Text="{Binding email, Mode=TwoWay}"/>
+                        <Editor Text="{Binding email, Mode=TwoWay}" Keyboard="Email"/>
                         <Label Text="A esté correo se le enviara todas las notificaciones del sistema." TextColor="{StaticResource grey-light}"/>
                     </StackLayout>
 
                     <StackLayout>
                         <Label Text="Formas de pago"></Label>
-                        <Editor 
-                        Text="{Binding cuentaBancaria, Mode=TwoWay}"/>
+                        <Editor Text="{Binding cuentaBancaria, Mode=TwoWay}"/>
                     </StackLayout>
 
                 </StackLayout>

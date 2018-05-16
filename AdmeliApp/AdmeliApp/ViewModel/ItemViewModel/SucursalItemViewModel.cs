@@ -1,10 +1,12 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
 using AdmeliApp.Model.Location;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel.ItemViewModel
@@ -21,6 +23,24 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             get { return _DeleteIsEnabled; }
             set { SetValue(ref _DeleteIsEnabled, value); }
         }
+
+        #region ================================= COMMANDS =================================
+        private ICommand _GuardarCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand GuardarCommand =>
+            _GuardarCommand ?? (_GuardarCommand = new Command(() => ExecuteGuardarAsync()));
+
+        private ICommand _EditarCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand EditarCommand =>
+            _EditarCommand ?? (_EditarCommand = new Command(() => ExecuteEditar()));
+
+        private ICommand _EliminarCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand EliminarCommand =>
+            _EliminarCommand ?? (_EliminarCommand = new Command(() => ExecuteEliminar()));
+        #endregion
+
 
         #region ============================ CONSTRUCTOR ============================
         public SucursalItemViewModel()
@@ -322,6 +342,109 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             finally
             {
                 this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+        #endregion
+
+
+        #region =============================== COMMAND EXECUTE ===============================
+        private void ExecuteEditar()
+        {
+            SucursalViewModel sucursalViewModel = SucursalViewModel.GetInstance();
+            sucursalViewModel.SetCurrentSucursal(this);
+            this.Nuevo = false; /// Importante indicaque se modificara el registro actual
+            this.DeleteIsEnabled = true;
+            App.SucursalPage.Navigation.PushAsync(new SucursalItemPage()); // Navegacion
+        }
+
+        private async void ExecuteGuardarAsync()
+        {
+            try
+            {
+                /// validacion de los campos
+                //if (string.IsNullOrEmpty(this.NombreMarca))
+                //{
+                //    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo obligatoria", "Aceptar");
+                //    return;
+                //}
+
+                // Estados
+                this.IsRunning = true;
+                this.IsEnabled = false;
+
+                // Preparando el objeto para enviar
+                //if (this.Nuevo)
+                //{
+                //    this.CaptionImagen = "";
+                //    this.UbicacionLogo = "";
+                //    this.TieneRegistros = "";
+                //}
+
+                gUbication.idPais = (PaisSelectedItem == null) ? gUbication.idPais : PaisSelectedItem.idPais;
+                gUbication.idNivel1 = (Nivel1SelectedItem == null) ? gUbication.idNivel1 : Nivel1SelectedItem.idNivel1;
+                gUbication.idNivel2 = (Nivel2SelectedItem == null) ? gUbication.idNivel2 : Nivel2SelectedItem.idNivel2;
+                gUbication.idNivel3 = (Nivel3SelectedItem == null) ? gUbication.idNivel3 : Nivel3SelectedItem.idNivel3;
+
+                // www.admeli.com/demo2/services.php/ubigeo
+                Response res = await webService.POST<UbicacionGeografica, Response>("ubigeo", gUbication);
+                this.idUbicacionGeografica = res.Id;
+
+                // Procediendo con el guardado
+                if (this.Nuevo)
+                {
+                    // localhost/admeli/xcore2/xcore/services.php/sucursal/guardar
+                    Response response = await webService.POST<Sucursal, Response>("sucursal", "guardar", (Sucursal)this);
+                    await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
+                }
+                else
+                {
+                    // localhost/admeli/xcore2/xcore/services.php/sucursal/modificar
+                    Response response = await webService.POST<Sucursal, Response>("sucursal", "modificar", (Sucursal)this);
+                    await App.Current.MainPage.DisplayAlert("Modificar", response.Message, "Aceptar");
+                }
+
+                // Refrescar y regresar a la pagina anterior
+                SucursalViewModel.GetInstance().ExecuteRefresh();
+                await App.SucursalItemPage.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                // Error message
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                // Estados
+                this.IsRunning = false;
+                this.IsEnabled = true;
+            }
+        }
+
+        private async void ExecuteEliminar()
+        {
+            try
+            {
+                // Estados
+                this.IsRunning = true;
+                this.IsEnabled = false;
+
+                // localhost/admeli/xcore2/xcore/services.php/sucursal/eliminar
+                Response response = await webService.POST<Sucursal, Response>("sucursal", "eliminar", (Sucursal)this);
+                await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
+
+                // Refrescar la lista
+                MarcaViewModel.GetInstance().ExecuteRefresh();
+            }
+            catch (Exception ex)
+            {
+                // Error message
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                // Estados
+                this.IsRunning = false;
                 this.IsEnabled = true;
             }
         }

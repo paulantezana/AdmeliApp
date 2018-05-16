@@ -36,10 +36,62 @@
 
                 </StackLayout>
 
+                <!-- LOCALIZACION -->
+                <StackLayout>
+                    <Label Text="Pais*" TextColor="{StaticResource grey}"></Label>
+                    <Picker
+                            Title="Pais"
+                            IsEnabled="{Binding IsEnabled}"
+                            SelectedItem="{Binding PaisSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding PaisItems, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="{Binding  Nivel1Title, Mode=TwoWay}}" IsVisible="{Binding Nivel1IsVisible}" TextColor="{StaticResource grey}"></Label>
+                    <Picker
+                            Title="{Binding  Nivel1Title, Mode=TwoWay}"
+                            IsVisible="{Binding Nivel1IsVisible}"
+                            IsEnabled="{Binding IsEnabled}"
+                            SelectedItem="{Binding Nivel1SelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding Nivel1Items, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="{Binding  Nivel2Title}" IsVisible="{Binding Nivel2IsVisible}" TextColor="{StaticResource grey}"></Label>
+                    <Picker
+                            Title="{Binding  Nivel2Title}"
+                            IsVisible="{Binding Nivel2IsVisible}"
+                            IsEnabled="{Binding IsEnabled}"
+                            SelectedItem="{Binding Nivel2SelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding Nivel2Items, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="{Binding  Nivel3Title}" IsVisible="{Binding Nivel3IsVisible}" TextColor="{StaticResource grey}"></Label>
+                    <Picker
+                            Title="{Binding  Nivel3Title}"
+                            IsVisible="{Binding Nivel3IsVisible}"
+                            IsEnabled="{Binding IsEnabled}"
+                            SelectedItem="{Binding Nivel3SelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            ItemsSource="{Binding Nivel3Items, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Direcion*" TextColor="{StaticResource grey}"></Label>
+                    <Entry 
+                            IsEnabled="{Binding IsEnabled}"
+                            Text="{Binding direccion, Mode=TwoWay}"/>
+                </StackLayout>
+                <!-- END LOCALIZACIOn -->
+                
                 <StackLayout Orientation="Horizontal" Padding="0,20,0,50">
                     <Button 
                         Text="Guardar"
-                        Command="{Binding GuardarCommand}"
+                        Command="{Binding GuardarDatosGeneralesCommand}"
                         IsEnabled="{Binding IsEnabled}"
                         Style="{StaticResource ButtonSuccess}"
                         HorizontalOptions="FillAndExpand"/>
@@ -57,21 +109,21 @@
                     <StackLayout>
                         <Label Text="Número Dígitos"></Label>
                         <Editor 
-                            Text="{Binding numeroDecimales, Mode=TwoWay}"/>
+                            Text="{Binding numeroDecimales, Mode=TwoWay}" Keyboard="Numeric"/>
                         <Label Text="Número de dígitos que tendrá los números decimales (máximo 4)" TextColor="{StaticResource grey-light}"/>
                     </StackLayout>
 
                     <StackLayout>
                         <Label Text="Item por Página"></Label>
                         <Editor 
-                            Text="{Binding itemPorPagina, Mode=TwoWay}"/>
+                            Text="{Binding itemPorPagina, Mode=TwoWay}" Keyboard="Numeric"/>
                         <Label Text="Número de dígitos que tendrá los números decimales (máximo 4)" TextColor="{StaticResource grey-light}"/>
                     </StackLayout>
 
                     <StackLayout>
                         <Label Text="Porcentaje de Utilidad(%)"></Label>
                         <Editor 
-                            Text="{Binding porcentajeUtilidad, Mode=TwoWay}"/>
+                            Text="{Binding porcentajeUtilidad, Mode=TwoWay}" Keyboard="Numeric"/>
                         <Label Text="Porcentaje de utilidad de las ventas." TextColor="{StaticResource grey-light}"/>
                     </StackLayout>
 
@@ -93,7 +145,7 @@
                 <StackLayout Orientation="Horizontal" Padding="0,20,0,50">
                     <Button 
                         Text="Guardar" 
-                        Command="{Binding GuardarCommand}"
+                        Command="{Binding GuardarConfiguracionGeneralCommand}"
                         IsEnabled="{Binding IsEnabled}"
                         Style="{StaticResource ButtonSuccess}"
                         HorizontalOptions="FillAndExpand"/>

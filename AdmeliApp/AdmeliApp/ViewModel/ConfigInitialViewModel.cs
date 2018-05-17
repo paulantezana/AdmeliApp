@@ -27,7 +27,7 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._AlmacenItems, value); }
         }
 
-        // PUNETO VENTA
+        // UNTO DE VENTA
         private PuntoVenta _PuntoVentaSelectedItem;
         public PuntoVenta PuntoVentaSelectedItem
         {
@@ -46,8 +46,12 @@ namespace AdmeliApp.ViewModel
         public ConfigInitialViewModel()
         {
             this.IsEnabled = true;
+
             PuntoVentaItems = App.puntosDeVenta;
             AlmacenItems = App.alamacenes;
+
+            PuntoVentaSelectedItem = PuntoVentaItems[0];
+            AlmacenSelectedItem = AlmacenItems[0];
         }
 
         // COMMANDS

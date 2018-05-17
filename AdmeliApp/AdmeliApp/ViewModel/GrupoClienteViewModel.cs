@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,8 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
+            this.SetCurrentGrupoCliente(new GrupoClienteItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.GrupoClientePage.Navigation.PushAsync(new GrupoClienteItemPage());
         }
 
         #region ===================================== LOADS =====================================
@@ -96,7 +98,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(GrupoClienteItemViewModel grupoClienteItemViewModel)
+        internal void SetCurrentGrupoCliente(GrupoClienteItemViewModel grupoClienteItemViewModel)
         {
             this.CurrentGrupoCliente = grupoClienteItemViewModel;
         }

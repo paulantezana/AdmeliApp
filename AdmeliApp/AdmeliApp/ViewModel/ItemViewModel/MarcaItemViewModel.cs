@@ -171,6 +171,9 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = true;
                 this.IsEnabled = false;
 
+                /// pregunta al usuario (Confirmacion)
+                if (await App.Current.MainPage.DisplayAlert("Eliminar", "¿esta seguro de eliminar este registro? \n" + this.NombreMarca, "Aceptar", "Cancelar") == false) return;
+
                 // localhost:8080/admeli/xcore2/xcore/services.php/marca/eliminar
                 Response response = await webService.POST<Marca, Response>("marca", "eliminar", (Marca)this);
                 await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");

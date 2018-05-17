@@ -130,7 +130,8 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
+            //this.SetCurrentVenta(new VentaItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            //App.VentaPage.Navigation.PushAsync(new VentaItemPage());
         }
 
         #region ===================================== LOADS =====================================

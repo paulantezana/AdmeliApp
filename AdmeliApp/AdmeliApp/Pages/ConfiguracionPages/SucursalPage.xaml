@@ -37,7 +37,7 @@
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                             <Image Source="cancel_icon.png">
                                                 <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding AnularCommand}"/>
+                                                    <TapGestureRecognizer Command="{Binding EliminarCommand}"/>
                                                 </Image.GestureRecognizers>
                                             </Image>
                                         </StackLayout>

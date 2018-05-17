@@ -112,7 +112,8 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
+            //this.SetCurrentCompra(new CompraItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            //App.CompraPage.Navigation.PushAsync(new CompraItemPage());
         }
 
         #region ===================================== LOADS =====================================

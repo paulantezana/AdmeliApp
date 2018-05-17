@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.VentaPages.VentaItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,8 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
+            this.SetCurrentCliente(new ClienteItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.ClientePage.Navigation.PushAsync(new ClienteItemPage());
         }
 
         #region ===================================== LOADS =====================================
@@ -96,7 +98,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(ClienteItemViewModel clienteItemViewModel)
+        internal void SetCurrentCliente(ClienteItemViewModel clienteItemViewModel)
         {
             this.CurrentCliente = clienteItemViewModel;
         }

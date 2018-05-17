@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,8 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
+            this.SetCurrentTipoCambio(new TipoCambioItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.TipoCambioPage.Navigation.PushAsync(new TipoCambioItemPage());
         }
 
         #region ===================================== LOADS =====================================
@@ -96,7 +98,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(TipoCambioItemViewModel tipoCambioItemViewModel)
+        internal void SetCurrentTipoCambio(TipoCambioItemViewModel tipoCambioItemViewModel)
         {
             this.CurrentTipoCambio = tipoCambioItemViewModel;
         }

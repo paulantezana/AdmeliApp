@@ -41,7 +41,6 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             _EliminarCommand ?? (_EliminarCommand = new Command(() => ExecuteEliminar()));
         #endregion
 
-
         #region ============================ CONSTRUCTOR ============================
         public SucursalItemViewModel()
         {
@@ -52,12 +51,12 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         #region ========================== ROOT LOAD ==========================
         private void rootLoad()
         {
+            if (Nuevo) this.estado = 1; /// Valor por defecto
             this.cargarPaises();
         }
         #endregion
 
         #region ========================== LOCALIZACION ==========================
-
         // Variables
         private UbicacionGeografica gUbication;
 
@@ -194,7 +193,6 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             get { return this._Nivel3IsVisible; }
             set { SetValue(ref this._Nivel3IsVisible, value); }
         }
-
 
         private async void cargarPaises()
         {
@@ -347,7 +345,6 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         }
         #endregion
 
-
         #region =============================== COMMAND EXECUTE ===============================
         private void ExecuteEditar()
         {
@@ -429,12 +426,15 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = true;
                 this.IsEnabled = false;
 
+                /// pregunta al usuario (Confirmacion)
+                if (await App.Current.MainPage.DisplayAlert("Anular", "¿esta seguro de Enular este registro? \n" + this.nombre, "Aceptar", "Cancelar") == false) return;
+
                 // localhost/admeli/xcore2/xcore/services.php/sucursal/eliminar
                 Response response = await webService.POST<Sucursal, Response>("sucursal", "eliminar", (Sucursal)this);
                 await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
 
                 // Refrescar la lista
-                MarcaViewModel.GetInstance().ExecuteRefresh();
+                SucursalViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {

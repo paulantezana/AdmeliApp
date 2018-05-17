@@ -67,7 +67,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Label  HorizontalOptions="StartAndExpand" Text="Principal" TextColor="{StaticResource grey}"></Label>
                     <Switch 
-                        IsToggled="{Binding Estado, Mode=TwoWay}"
+                        IsToggled="{Binding principal, Mode=TwoWay}"
                         IsEnabled="{Binding IsEnabled}"
                         HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
@@ -75,7 +75,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Label HorizontalOptions="StartAndExpand" Text="Activo" TextColor="{StaticResource grey}"></Label>
                     <Switch 
-                        IsToggled="{Binding Estado, Mode=TwoWay}"
+                        IsToggled="{Binding estado, Mode=TwoWay}"
                         IsEnabled="{Binding IsEnabled}"
                         HorizontalOptions="EndAndExpand"/>
                 </StackLayout>

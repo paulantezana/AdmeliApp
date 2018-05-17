@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,8 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
+            this.SetCurrentImpuesto(new ImpuestoItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.ImpuestoPage.Navigation.PushAsync(new ImpuestoItemPage());
         }
 
         #region ===================================== LOADS =====================================
@@ -96,7 +98,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(ImpuestoItemViewModel impuestoItemViewModel)
+        internal void SetCurrentImpuesto(ImpuestoItemViewModel impuestoItemViewModel)
         {
             this.CurrentImpuesto = impuestoItemViewModel;
         }

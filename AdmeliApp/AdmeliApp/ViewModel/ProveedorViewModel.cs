@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.CompraPages.CompraItemPages;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,8 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            throw new NotImplementedException();
+            this.SetCurrentProveedor(new ProveedorItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.ProveedorPage.Navigation.PushAsync(new ProveedorItemPage());
         }
 
         public override async void LoadRegisters()

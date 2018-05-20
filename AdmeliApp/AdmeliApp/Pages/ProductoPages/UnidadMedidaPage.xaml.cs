@@ -16,8 +16,13 @@ namespace AdmeliApp.Pages.ProductoPages
 		public UnidadMedidaPage ()
 		{
 			InitializeComponent ();
-
             BindingContext = new UnidadMedidaViewModel();
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.UnidadMedidaPage = this;
+        }
+    }
 }

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -26,16 +25,20 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._GrupoClienteItems, value); }
         }
 
+        #region ============================= COMANDS =============================
         private ICommand _NuevoCommand;
         public ICommand NuevoCommand =>
             _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
+        #endregion
 
+        #region =========================== CONSTRUCTOR ===========================
         public GrupoClienteViewModel()
         {
-            instance = this;
+            GrupoClienteViewModel.instance = this;
             this.CurrentGrupoCliente = new GrupoClienteItemViewModel();
             this.LoadRegisters();
-        }
+        } 
+        #endregion
 
         public override void ExecuteRefresh()
         {

@@ -18,5 +18,11 @@ namespace AdmeliApp.Pages.ProductoPages
 			InitializeComponent ();
             BindingContext = new CategoriaViewModel();
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.CategoriaPage = this;
+        }
+    }
 }

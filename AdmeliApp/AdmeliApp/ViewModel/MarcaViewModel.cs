@@ -47,6 +47,11 @@ namespace AdmeliApp.ViewModel
             this.LoadRegisters();
         }
 
+        public override void ExecuteSearchRealTime()
+        {
+            if (SearchText == string.Empty) this.LoadRegisters();
+        }
+
         public override void ExecuteSearch()
         {
             if (string.IsNullOrEmpty(SearchText))

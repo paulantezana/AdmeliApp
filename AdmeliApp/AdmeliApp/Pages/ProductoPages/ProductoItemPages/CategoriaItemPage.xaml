@@ -1,12 +1,171 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Categoria"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductoItemPages.CategoriaItemPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="20,40,20,40" Spacing="30">
+                
+                <StackLayout>
+                    <Label Text="Nombre Categoría"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding nombreCategoria, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Categoría Padre"></Label>
+                    <Picker
+                        Title="Categoría Padre"
+                        HorizontalOptions="FillAndExpand"
+                        SelectedItem="{Binding AlmacenSelectedItem}"
+                        ItemDisplayBinding="{Binding padre}"
+                        IsEnabled="{Binding IsEnabledStock}"
+                        ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        VerticalOptions="CenterAndExpand">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Activo"
+                            VerticalOptions="Center"/>
+                        <Switch
+                            IsToggled="{Binding estado, Mode=TwoWay}"
+                            IsEnabled="{Binding IsEnabled}"
+                            HorizontalOptions="End"/>
+                    </StackLayout>
+                    <Label Text="Si está desmarcado, no se podrá hacer operaciones con esta categoría."/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Número Columnas"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding numeroColumnas, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Título Categoría Seo"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding tituloCategoriaSeo, Mode=TwoWay}"/>
+                    <Label Text="Título de la página de la Categoría"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Url Categoría Seo"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding urlCategoriaSeo, Mode=TwoWay}"/>
+                    <Label Text="Url de la Categoría"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Meta Tags Seo"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding metaTagsSeo, Mode=TwoWay}"/>
+                    <Label Text="Texto que contiene los keywords y otras descripciones(Opcional)."/>
+                </StackLayout>
+
+
+
+
+
+
+
+
+                <StackLayout>
+                    <Label Text="Cabecera Página"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding cabeceraPagina, Mode=TwoWay}"/>
+                    <Label Text="Texto que aparecerá en la cabecera de la página"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Pie Página"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding piePagina, Mode=TwoWay}"/>
+                    <Label Text="Texto que aparecerá en el final de la página"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Orden"></Label>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding orden, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        VerticalOptions="CenterAndExpand">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Mostrar Web"
+                            VerticalOptions="Center">
+                        </Label>
+                        <Switch
+                            IsToggled="{Binding estado, Mode=TwoWay}"
+                            IsEnabled="{Binding IsEnabled}"
+                            HorizontalOptions="End">
+                        </Switch>
+                    </StackLayout>
+                    <Label Text="Si está desmarcado, esta categoría no se mostrara en la web."/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Orden Visualización Productos"></Label>
+                    <Picker
+                        Title="Almacen"
+                        HorizontalOptions="FillAndExpand"
+                        SelectedItem="{Binding AlmacenSelectedItem}"
+                        ItemDisplayBinding="{Binding nombre}"
+                        IsEnabled="{Binding IsEnabledStock}"
+                        ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Mostrar Productos En"></Label>
+                    <Picker
+                        Title="Almacen"
+                        HorizontalOptions="FillAndExpand"
+                        SelectedItem="{Binding AlmacenSelectedItem}"
+                        ItemDisplayBinding="{Binding nombre}"
+                        IsEnabled="{Binding IsEnabledStock}"
+                        ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
+                </StackLayout>
+
+
+                <ActivityIndicator 
+                        IsRunning="{Binding IsRunning}">
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button 
+                        Text="Guardar" 
+                        Command="{Binding GuardarCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{StaticResource ButtonSuccess}"
+                        HorizontalOptions="FillAndExpand"/>
+                    <Button
+                        Text="Eliminar" 
+                        Command="{Binding EliminarCommand}"
+                        IsEnabled="{Binding DeleteIsEnabled}"
+                        Style="{StaticResource ButtonAlert}"
+                        HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

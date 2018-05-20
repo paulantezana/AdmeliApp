@@ -14,5 +14,6 @@ namespace AdmeliApp.Model
         public string simbolo { get; set; }
         public int estado { get; set; }
         public string tieneRegistros { get; set; }
+
     }
 }

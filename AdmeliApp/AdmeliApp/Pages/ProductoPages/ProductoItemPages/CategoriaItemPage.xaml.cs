@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,15 @@ namespace AdmeliApp.Pages.ProductoPages.ProductoItemPages
 		public CategoriaItemPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+
+            CategoriaViewModel categoriaViewModel = CategoriaViewModel.GetInstance();
+            BindingContext = categoriaViewModel.CurrentCategoria;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.CategoriaItemPage = this;
+        }
+    }
 }

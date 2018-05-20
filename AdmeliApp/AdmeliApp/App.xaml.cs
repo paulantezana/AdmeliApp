@@ -59,6 +59,10 @@ namespace AdmeliApp
         public static List<Sucursal> sucursales { get; internal set; }
         public static Sucursal sucursal { get; internal set; }
         public static RootPage RootPage { get; internal set; }
+        public static UnidadMedidaPage UnidadMedidaPage { get; internal set; }
+        public static UnidadMedidaItemPage UnidadMedidaItemPage { get; internal set; }
+        public static CategoriaPage CategoriaPage { get; internal set; }
+        public static CategoriaItemPage CategoriaItemPage { get; internal set; }
 
         public App ()
 		{

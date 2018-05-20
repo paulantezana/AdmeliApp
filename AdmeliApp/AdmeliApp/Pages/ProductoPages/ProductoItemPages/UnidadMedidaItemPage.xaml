@@ -1,12 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Unidad de medida"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductoItemPages.UnidadMedidaItemPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="20,40,20,40" Spacing="30">
+
+                <StackLayout>
+                    <Label Text="Nombre unidad"/>
+                    <Entry 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding nombreUnidad, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Símbolo"/>
+                    <Entry
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="{Binding simbolo, Mode=TwoWay}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        VerticalOptions="CenterAndExpand">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Activo"
+                            VerticalOptions="Center"/>
+                        <Switch
+                            IsToggled="{Binding estado, Mode=TwoWay}"
+                            IsEnabled="{Binding IsEnabled}"
+                            HorizontalOptions="End"/>
+                    </StackLayout>
+                    <Label Text="Si está desmarcado, no se podrá hacer operaciones con esta Unidad de Medida."/>
+                </StackLayout>
+
+                <ActivityIndicator 
+                        IsRunning="{Binding IsRunning}">
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button 
+                        Text="Guardar" 
+                        Command="{Binding GuardarCommand}"
+                        IsEnabled="{Binding IsEnabled}"
+                        Style="{StaticResource ButtonSuccess}"
+                        HorizontalOptions="FillAndExpand"/>
+                    <Button
+                        Text="Eliminar" 
+                        Command="{Binding EliminarCommand}"
+                        IsEnabled="{Binding DeleteIsEnabled}"
+                        Style="{StaticResource ButtonAlert}"
+                        HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

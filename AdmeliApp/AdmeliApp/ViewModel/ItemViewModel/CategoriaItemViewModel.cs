@@ -55,6 +55,78 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         }
         #endregion
 
+        // =======================================================================================
+        // Listar categoria padre ----------------------------------------------------------------
+        // =======================================================================================
+        private Categoria _CategoriaPadreSelectedItem;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public Categoria CategoriaPadreSelectedItem
+        {
+            get { return this._CategoriaPadreSelectedItem; }
+            set
+            {
+                SetValue(ref this._CategoriaPadreSelectedItem, value);
+            }
+        }
+
+        private List<Categoria> _CategoriaPadreItems;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public List<Categoria> CategoriaPadreItems
+        {
+            get { return this._CategoriaPadreItems; }
+            set { SetValue(ref this._CategoriaPadreItems, value); }
+        }
+
+        // =======================================================================================
+        // Listar Mostrar en ----------------------------------------------------------------
+        // =======================================================================================
+        private Categoria _MostrarEnSelectedItem;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public Categoria MostrarEnSelectedItem
+        {
+            get { return this._MostrarEnSelectedItem; }
+            set
+            {
+                SetValue(ref this._MostrarEnSelectedItem, value);
+            }
+        }
+
+        private List<Categoria> _MostrarEnPadreItems;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public List<Categoria> MostrarEnPadreItems
+        {
+            get { return this._MostrarEnPadreItems; }
+            set { SetValue(ref this._MostrarEnPadreItems, value); }
+        }
+
+        // =======================================================================================
+        // Listar Orden Visual ----------------------------------------------------------------
+        // =======================================================================================
+        private Categoria _OrdenVisualSelectedItem;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public Categoria OrdenVisualSelectedItem
+        {
+            get { return this._OrdenVisualSelectedItem; }
+            set
+            {
+                SetValue(ref this._OrdenVisualSelectedItem, value);
+            }
+        }
+
+        private List<Categoria> _OrdenVisualPadreItems;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public List<Categoria> OrdenVisualPadreItems
+        {
+            get { return this._OrdenVisualPadreItems; }
+            set { SetValue(ref this._OrdenVisualPadreItems, value); }
+        }
+
+
+        #region =============================== LOADS ===============================
+
+        #endregion
+
+
         #region =============================== COMMAND EXECUTE ===============================
         private void ExecuteEditar()
         {

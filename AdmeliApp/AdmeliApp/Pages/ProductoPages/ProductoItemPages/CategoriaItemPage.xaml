@@ -19,10 +19,10 @@
                     <Picker
                         Title="Categoría Padre"
                         HorizontalOptions="FillAndExpand"
-                        SelectedItem="{Binding AlmacenSelectedItem}"
-                        ItemDisplayBinding="{Binding padre}"
+                        SelectedItem="{Binding CategoriaPadreSelectedItem}"
+                        ItemDisplayBinding="{Binding nombreCategoria}"
                         IsEnabled="{Binding IsEnabledStock}"
-                        ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
+                        ItemsSource="{Binding CategoriaPadreItems, Mode=TwoWay}"/>
                 </StackLayout>
 
                 <StackLayout>
@@ -38,7 +38,7 @@
                             IsEnabled="{Binding IsEnabled}"
                             HorizontalOptions="End"/>
                     </StackLayout>
-                    <Label Text="Si está desmarcado, no se podrá hacer operaciones con esta categoría."/>
+                    <Label Text="Si está desmarcado, no se podrá hacer operaciones con esta categoría." TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
                 <StackLayout>
@@ -53,7 +53,7 @@
                     <Entry 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding tituloCategoriaSeo, Mode=TwoWay}"/>
-                    <Label Text="Título de la página de la Categoría"/>
+                    <Label Text="Título de la página de la Categoría" TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
                 <StackLayout>
@@ -61,7 +61,7 @@
                     <Entry 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding urlCategoriaSeo, Mode=TwoWay}"/>
-                    <Label Text="Url de la Categoría"/>
+                    <Label Text="Url de la Categoría" TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
                 <StackLayout>
@@ -69,7 +69,7 @@
                     <Entry 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding metaTagsSeo, Mode=TwoWay}"/>
-                    <Label Text="Texto que contiene los keywords y otras descripciones(Opcional)."/>
+                    <Label Text="Texto que contiene los keywords y otras descripciones(Opcional)." TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
 
@@ -84,7 +84,7 @@
                     <Entry 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding cabeceraPagina, Mode=TwoWay}"/>
-                    <Label Text="Texto que aparecerá en la cabecera de la página"/>
+                    <Label Text="Texto que aparecerá en la cabecera de la página" TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
                 <StackLayout>
@@ -92,7 +92,7 @@
                     <Entry 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding piePagina, Mode=TwoWay}"/>
-                    <Label Text="Texto que aparecerá en el final de la página"/>
+                    <Label Text="Texto que aparecerá en el final de la página" TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
                 <StackLayout>
@@ -117,7 +117,7 @@
                             HorizontalOptions="End">
                         </Switch>
                     </StackLayout>
-                    <Label Text="Si está desmarcado, esta categoría no se mostrara en la web."/>
+                    <Label Text="Si está desmarcado, esta categoría no se mostrara en la web." TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
                 <StackLayout>

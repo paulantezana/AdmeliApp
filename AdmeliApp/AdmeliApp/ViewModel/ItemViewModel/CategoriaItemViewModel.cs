@@ -52,6 +52,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             this.IsRunning = false;
             this.IsEnabled = true;
             this.estado = 1;
+            this.RootLoad();
         }
         #endregion
 
@@ -80,9 +81,9 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         // =======================================================================================
         // Listar Mostrar en ----------------------------------------------------------------
         // =======================================================================================
-        private Categoria _MostrarEnSelectedItem;
+        private MostrarEn _MostrarEnSelectedItem;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
-        public Categoria MostrarEnSelectedItem
+        public MostrarEn MostrarEnSelectedItem
         {
             get { return this._MostrarEnSelectedItem; }
             set
@@ -91,20 +92,20 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             }
         }
 
-        private List<Categoria> _MostrarEnPadreItems;
+        private List<MostrarEn> _MostrarEnItems;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
-        public List<Categoria> MostrarEnPadreItems
+        public List<MostrarEn> MostrarEnItems
         {
-            get { return this._MostrarEnPadreItems; }
-            set { SetValue(ref this._MostrarEnPadreItems, value); }
+            get { return this._MostrarEnItems; }
+            set { SetValue(ref this._MostrarEnItems, value); }
         }
 
         // =======================================================================================
         // Listar Orden Visual ----------------------------------------------------------------
         // =======================================================================================
-        private Categoria _OrdenVisualSelectedItem;
+        private OrdenVisual _OrdenVisualSelectedItem;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
-        public Categoria OrdenVisualSelectedItem
+        public OrdenVisual OrdenVisualSelectedItem
         {
             get { return this._OrdenVisualSelectedItem; }
             set
@@ -113,19 +114,100 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             }
         }
 
-        private List<Categoria> _OrdenVisualPadreItems;
+        private List<OrdenVisual> _OrdenVisualPadreItems;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
-        public List<Categoria> OrdenVisualPadreItems
+        public List<OrdenVisual> OrdenVisualPadreItems
         {
             get { return this._OrdenVisualPadreItems; }
             set { SetValue(ref this._OrdenVisualPadreItems, value); }
         }
 
-
         #region =============================== LOADS ===============================
+        public void RootLoad()
+        {
+            this.LoadCategorias();
+            this.LoadMostrarEn();
+            this.LoadOrdenVisual();
+        }
 
+        private async void LoadCategorias()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                // www.lineatienda.com/services.php/categorias21/-1
+                int CategoriaID = (idCategoria > 0) ? idCategoria : -1;
+                List<Categoria> datos = await webService.GET<List<Categoria>>("categorias21", String.Format("{0}", CategoriaID));
+                CategoriaPadreItems = datos;
+                CategoriaPadreSelectedItem = datos.Find(c => c.idCategoria == this.idCategoria); // selecciona la categoria por defecto o la categoria seleccionada
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
+        }
+
+        private void LoadMostrarEn()
+        {
+            MostrarEnItems = new List<MostrarEn>()
+            {
+                new MostrarEn()
+                {
+                    idMostrarEn = "1",
+                    nombre = "En Cuadriculas"
+                },
+                new MostrarEn()
+                {
+                    idMostrarEn = "2",
+                    nombre = "En Listas"
+                },
+            };
+        }
+
+        private void LoadOrdenVisual()
+        {
+            OrdenVisualPadreItems = new List<OrdenVisual>()
+            {
+                new OrdenVisual()
+                {
+                    idOrdenVisual = "1",
+                    nombre = "Precio: Menos a Mas"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = "2",
+                    nombre = "Precio: Mas a Menos"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = "3",
+                    nombre = "Segun Nombre"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = "4",
+                    nombre = "Fecha: Modificacion"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = "5",
+                    nombre = "Promedio de Puntuacion"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = "6",
+                    nombre = "Numero de Comentarios"
+                },
+            };
+        }
         #endregion
-
 
         #region =============================== COMMAND EXECUTE ===============================
         private void ExecuteEditar()
@@ -189,7 +271,13 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 /// validacion de los campos
                 if (string.IsNullOrEmpty(this.nombreCategoria))
                 {
-                    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo obligatoria", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Nombre de la categoria \n Campo obligatoria", "Aceptar");
+                    return;
+                }
+
+                if (CategoriaPadreSelectedItem == null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Seleccione un categoria padre \n Campo obligatoria", "Aceptar");
                     return;
                 }
 
@@ -198,11 +286,19 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsEnabled = false;
 
                 // Preparando el objeto para enviar
+                this.idPadreCategoria = CategoriaPadreSelectedItem.idCategoria; // CATEGORIA PADRE
+                this.padre = CategoriaPadreSelectedItem.nombreCategoria; // CATEGORIA PADRE
+
+                this.ordenVisualizacionProductos = Convert.ToInt32(OrdenVisualSelectedItem.idOrdenVisual);
+                this.mostrarProductosEn = Convert.ToInt32(MostrarEnSelectedItem.idMostrarEn);
+
+                this.numeroColumnas = (this.numeroColumnas == 0) ? 1 : this.numeroColumnas; // Numero de datos si es cero valor por defecto 1
+                this.orden = (this.orden == 0) ? 0 : this.orden; // Numero de orden si es 0 es 0
+
                 if (this.Nuevo)
                 {
-                    //this.CaptionImagen = "";
-                    //this.UbicacionLogo = "";
-                    //this.TieneRegistros = "";
+
+                    this.afecta = true;
                 }
 
                 if (this.Nuevo)
@@ -266,5 +362,17 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             }
         }
         #endregion
+    }
+
+    public class OrdenVisual
+    {
+        public string idOrdenVisual { get; set; }
+        public string nombre { get; set; }
+    }
+
+    public class MostrarEn 
+    {
+        public string idMostrarEn { get; set; }
+        public string nombre { get; set; }
     }
 }

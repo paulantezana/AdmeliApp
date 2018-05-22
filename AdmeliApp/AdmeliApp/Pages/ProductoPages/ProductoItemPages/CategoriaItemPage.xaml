@@ -21,7 +21,7 @@
                         HorizontalOptions="FillAndExpand"
                         SelectedItem="{Binding CategoriaPadreSelectedItem}"
                         ItemDisplayBinding="{Binding nombreCategoria}"
-                        IsEnabled="{Binding IsEnabledStock}"
+                        IsEnabled="{Binding IsEnabled}"
                         ItemsSource="{Binding CategoriaPadreItems, Mode=TwoWay}"/>
                 </StackLayout>
 
@@ -125,21 +125,21 @@
                     <Picker
                         Title="Almacen"
                         HorizontalOptions="FillAndExpand"
-                        SelectedItem="{Binding AlmacenSelectedItem}"
+                        SelectedItem="{Binding MostrarEnSelectedItem}"
                         ItemDisplayBinding="{Binding nombre}"
                         IsEnabled="{Binding IsEnabledStock}"
-                        ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
+                        ItemsSource="{Binding MostrarEnItems, Mode=TwoWay}"/>
                 </StackLayout>
 
                 <StackLayout>
                     <Label Text="Mostrar Productos En"></Label>
                     <Picker
-                        Title="Almacen"
+                        Title="Orden Visual"
                         HorizontalOptions="FillAndExpand"
-                        SelectedItem="{Binding AlmacenSelectedItem}"
+                        SelectedItem="{Binding OrdenVisualSelectedItem}"
                         ItemDisplayBinding="{Binding nombre}"
-                        IsEnabled="{Binding IsEnabledStock}"
-                        ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
+                        IsEnabled="{Binding IsEnabled}"
+                        ItemsSource="{Binding OrdenVisualPadreItems, Mode=TwoWay}"/>
                 </StackLayout>
 
 

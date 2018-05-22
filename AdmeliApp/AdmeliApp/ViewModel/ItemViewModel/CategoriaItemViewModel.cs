@@ -79,7 +79,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         }
 
         // =======================================================================================
-        // Listar Mostrar en ----------------------------------------------------------------
+        // Listar Mostrar en ---------------------------------------------------------------------
         // =======================================================================================
         private MostrarEn _MostrarEnSelectedItem;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
@@ -130,6 +130,62 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             this.LoadOrdenVisual();
         }
 
+        private void LoadMostrarEn()
+        {
+            MostrarEnItems = new List<MostrarEn>()
+            {
+                new MostrarEn()
+                {
+                    idMostrarEn = 1,
+                    nombre = "En Cuadriculas"
+                },
+                new MostrarEn()
+                {
+                    idMostrarEn = 2,
+                    nombre = "En Listas"
+                },
+            };
+            MostrarEnSelectedItem = MostrarEnItems.Find(x => x.idMostrarEn == 1);
+        }
+
+        private void LoadOrdenVisual()
+        {
+            OrdenVisualPadreItems = new List<OrdenVisual>()
+            {
+                new OrdenVisual()
+                {
+                    idOrdenVisual = 1,
+                    nombre = "Precio: Menos a Mas"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = 2,
+                    nombre = "Precio: Mas a Menos"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = 3,
+                    nombre = "Segun Nombre"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = 4,
+                    nombre = "Fecha: Modificacion"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = 5,
+                    nombre = "Promedio de Puntuacion"
+                },
+                new OrdenVisual()
+                {
+                    idOrdenVisual = 6,
+                    nombre = "Numero de Comentarios"
+                },
+            };
+            OrdenVisualSelectedItem = OrdenVisualPadreItems.Find(x => x.idOrdenVisual == 1);
+        }
+
         private async void LoadCategorias()
         {
             try
@@ -141,7 +197,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 int CategoriaID = (idCategoria > 0) ? idCategoria : -1;
                 List<Categoria> datos = await webService.GET<List<Categoria>>("categorias21", String.Format("{0}", CategoriaID));
                 CategoriaPadreItems = datos;
-                CategoriaPadreSelectedItem = datos.Find(c => c.idCategoria == this.idCategoria); // selecciona la categoria por defecto o la categoria seleccionada
+                CategoriaPadreSelectedItem = datos.Find(c => c.idCategoria == this.idPadreCategoria); // Selecciona categoria padre por defecto
             }
             catch (Exception ex)
             {
@@ -153,60 +209,6 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsEnabled = true;
             }
         }
-
-        private void LoadMostrarEn()
-        {
-            MostrarEnItems = new List<MostrarEn>()
-            {
-                new MostrarEn()
-                {
-                    idMostrarEn = "1",
-                    nombre = "En Cuadriculas"
-                },
-                new MostrarEn()
-                {
-                    idMostrarEn = "2",
-                    nombre = "En Listas"
-                },
-            };
-        }
-
-        private void LoadOrdenVisual()
-        {
-            OrdenVisualPadreItems = new List<OrdenVisual>()
-            {
-                new OrdenVisual()
-                {
-                    idOrdenVisual = "1",
-                    nombre = "Precio: Menos a Mas"
-                },
-                new OrdenVisual()
-                {
-                    idOrdenVisual = "2",
-                    nombre = "Precio: Mas a Menos"
-                },
-                new OrdenVisual()
-                {
-                    idOrdenVisual = "3",
-                    nombre = "Segun Nombre"
-                },
-                new OrdenVisual()
-                {
-                    idOrdenVisual = "4",
-                    nombre = "Fecha: Modificacion"
-                },
-                new OrdenVisual()
-                {
-                    idOrdenVisual = "5",
-                    nombre = "Promedio de Puntuacion"
-                },
-                new OrdenVisual()
-                {
-                    idOrdenVisual = "6",
-                    nombre = "Numero de Comentarios"
-                },
-            };
-        }
         #endregion
 
         #region =============================== COMMAND EXECUTE ===============================
@@ -214,9 +216,16 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         {
             CategoriaViewModel categoriaViewModel = CategoriaViewModel.GetInstance();
             categoriaViewModel.SetCurrentCategoria(this);
+
+            App.CategoriaPage.Navigation.PushAsync(new CategoriaItemPage()); // Navegacion
+
             this.Nuevo = false; /// Importante indicaque se modificara el registro actual
             this.DeleteIsEnabled = true;
-            App.CategoriaPage.Navigation.PushAsync(new CategoriaItemPage()); // Navegacion
+
+            // Establecer valores al modificar
+            CategoriaPadreSelectedItem = CategoriaPadreItems.Find(c => c.idCategoria == this.idPadreCategoria); // selecciona la categoria por defecto o la categoria seleccionada
+            MostrarEnSelectedItem = MostrarEnItems.Find(x => x.idMostrarEn == this.mostrarProductosEn);
+            OrdenVisualSelectedItem = OrdenVisualPadreItems.Find(x => x.idOrdenVisual == this.ordenVisualizacionProductos);
         }
 
         private async void ExecuteAnular()
@@ -289,8 +298,8 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.idPadreCategoria = CategoriaPadreSelectedItem.idCategoria; // CATEGORIA PADRE
                 this.padre = CategoriaPadreSelectedItem.nombreCategoria; // CATEGORIA PADRE
 
-                this.ordenVisualizacionProductos = Convert.ToInt32(OrdenVisualSelectedItem.idOrdenVisual);
-                this.mostrarProductosEn = Convert.ToInt32(MostrarEnSelectedItem.idMostrarEn);
+                this.ordenVisualizacionProductos = OrdenVisualSelectedItem.idOrdenVisual;
+                this.mostrarProductosEn = MostrarEnSelectedItem.idMostrarEn;
 
                 this.numeroColumnas = (this.numeroColumnas == 0) ? 1 : this.numeroColumnas; // Numero de datos si es cero valor por defecto 1
                 this.orden = (this.orden == 0) ? 0 : this.orden; // Numero de orden si es 0 es 0
@@ -366,13 +375,13 @@ namespace AdmeliApp.ViewModel.ItemViewModel
 
     public class OrdenVisual
     {
-        public string idOrdenVisual { get; set; }
+        public int idOrdenVisual { get; set; }
         public string nombre { get; set; }
     }
 
     public class MostrarEn 
     {
-        public string idMostrarEn { get; set; }
+        public int idMostrarEn { get; set; }
         public string nombre { get; set; }
     }
 }

@@ -145,7 +145,6 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                     nombre = "En Listas"
                 },
             };
-            MostrarEnSelectedItem = MostrarEnItems.Find(x => x.idMostrarEn == 1);
         }
 
         private void LoadOrdenVisual()
@@ -183,7 +182,6 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                     nombre = "Numero de Comentarios"
                 },
             };
-            OrdenVisualSelectedItem = OrdenVisualPadreItems.Find(x => x.idOrdenVisual == 1);
         }
 
         private async void LoadCategorias()
@@ -197,7 +195,10 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 int CategoriaID = (idCategoria > 0) ? idCategoria : -1;
                 List<Categoria> datos = await webService.GET<List<Categoria>>("categorias21", String.Format("{0}", CategoriaID));
                 CategoriaPadreItems = datos;
+
                 CategoriaPadreSelectedItem = datos.Find(c => c.idCategoria == this.idPadreCategoria); // Selecciona categoria padre por defecto
+                OrdenVisualSelectedItem = OrdenVisualPadreItems.Find(x => x.idOrdenVisual == 1);
+                MostrarEnSelectedItem = MostrarEnItems.Find(x => x.idMostrarEn == 1);
             }
             catch (Exception ex)
             {
@@ -302,11 +303,10 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.mostrarProductosEn = MostrarEnSelectedItem.idMostrarEn;
 
                 this.numeroColumnas = (this.numeroColumnas == 0) ? 1 : this.numeroColumnas; // Numero de datos si es cero valor por defecto 1
-                this.orden = (this.orden == 0) ? 0 : this.orden; // Numero de orden si es 0 es 0
+                this.orden = (this.orden == 0) ? 1 : this.orden; // Numero de orden si es 0 es 0
 
                 if (this.Nuevo)
                 {
-
                     this.afecta = true;
                 }
 

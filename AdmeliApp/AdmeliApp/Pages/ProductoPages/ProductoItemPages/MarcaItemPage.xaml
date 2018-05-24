@@ -23,8 +23,9 @@
 
                 <StackLayout>
                     <Label Text="Descripción (Opcional)"></Label>
-                    <Editor 
+                    <Editor
                         IsEnabled="{Binding IsEnabled}"
+                        HeightRequest="100"
                         Text="{Binding Descripcion, Mode=TwoWay}"/>
                 </StackLayout>
 

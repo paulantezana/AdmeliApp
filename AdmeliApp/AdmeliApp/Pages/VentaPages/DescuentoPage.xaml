@@ -6,20 +6,16 @@
         <ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <RelativeLayout>
-
-            <!-- Listar registros en el listview -->
-            <ContentView
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
-                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
-                <StackLayout>
-                    <SearchBar
+        
+        <StackLayout>
+            
+            <SearchBar
                         Text="{Binding SearchText, Mode=TwoWay}"
                         SearchCommand="{Binding SearchCommand}"
                         Margin="0,5,0,5"
                         Placeholder="Buscar..."/>
 
-                    <ListView 
+            <ListView 
                         ItemsSource="{Binding DescuentoItems}"
                         HasUnevenRows="True"
                         IsPullToRefreshEnabled="True"
@@ -27,61 +23,61 @@
                         RefreshCommand="{Binding RefreshCommand}"
                         IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
 
-                        <!-- Template de los items -->
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                        <Label Text="{Binding descuento}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                                            <Image Source="cancel_icon.png">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding AnularCommand}"/>
-                                                </Image.GestureRecognizers>
-                                            </Image>
-                                        </StackLayout>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding EditarCommand}"/>
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-
-                        <!-- "Cargando..." se visualiza, con visibilidad vinculada a IsRunning -->
-                        <ListView.Footer>
-                            <StackLayout Padding="0,15,0,0">
-                                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                                    <Image Source="first_icon.png" IsVisible="{Binding FirstIsVisible}">
+                <!-- Template de los items -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
+                                <Label Text="{Binding descuento}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                    <Image Source="cancel_icon.png">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding FirstCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <Image Source="previous_icon.png" IsVisible="{Binding PreviousIsVisible}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding PreviousCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <Entry 
-                                        Text="{Binding CurrentPage, Mode=TwoWay}"
-                                        Keyboard="Numeric"></Entry>
-                                    <Image Source="next_icon.png" IsVisible="{Binding NextIsVisible}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding NextCommand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                    <Image Source="last_icon.png" IsVisible="{Binding LastIsVisible}">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding LastCommand}"/>
+                                            <TapGestureRecognizer Command="{Binding AnularCommand}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </StackLayout>
-                                <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource grey}" Margin="0,-5,0,5"></Label>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditarCommand}"/>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
-                        </ListView.Footer>
-                    </ListView>
-                </StackLayout>
-            </ContentView>
-        </RelativeLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <!-- "Cargando..." se visualiza, con visibilidad vinculada a IsRunning -->
+                <ListView.Footer>
+                    <StackLayout Padding="0,15,0,0">
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Image Source="first_icon.png" IsVisible="{Binding FirstIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding FirstCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image Source="previous_icon.png" IsVisible="{Binding PreviousIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PreviousCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Entry 
+                                        Text="{Binding CurrentPage, Mode=TwoWay}"
+                                        HorizontalTextAlignment="Center"
+                                        WidthRequest="30"
+                                        Keyboard="Numeric"/>
+                            <Image Source="next_icon.png" IsVisible="{Binding NextIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image Source="last_icon.png" IsVisible="{Binding LastIsVisible}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding LastCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                        <Label Text="{Binding NRegistros, Mode=TwoWay}" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource grey}" Margin="0,-5,0,5"></Label>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

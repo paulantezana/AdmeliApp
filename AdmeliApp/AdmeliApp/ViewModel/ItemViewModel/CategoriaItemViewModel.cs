@@ -259,7 +259,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 await App.Current.MainPage.DisplayAlert("Anular", response.Message, "Aceptar");
 
                 // Refrescar la lista
-                MarcaViewModel.GetInstance().ExecuteRefresh();
+                CategoriaViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {
@@ -303,7 +303,14 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.mostrarProductosEn = MostrarEnSelectedItem.idMostrarEn;
 
                 this.numeroColumnas = (this.numeroColumnas == 0) ? 1 : this.numeroColumnas; // Numero de datos si es cero valor por defecto 1
-                this.orden = (this.orden == 0) ? 1 : this.orden; // Numero de orden si es 0 es 0
+                this.orden = (this.orden == 0) ? 1 : this.orden; // Numero de orden si es 0 es 1
+
+                this.cabeceraPagina = (this.cabeceraPagina != null) ? this.cabeceraPagina : "";
+                this.metaTagsSeo = (this.metaTagsSeo != null) ? this.metaTagsSeo : "";
+                this.piePagina = (this.piePagina != null) ? this.piePagina : "";
+                this.tieneRegistros = (this.tieneRegistros != null) ? this.tieneRegistros : "";
+                this.tituloCategoriaSeo = (this.tituloCategoriaSeo != null) ? this.tituloCategoriaSeo : "";
+                this.urlCategoriaSeo = (this.urlCategoriaSeo != null) ? this.urlCategoriaSeo : "";
 
                 if (this.Nuevo)
                 {
@@ -356,7 +363,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
 
                 // Refrescar la lista
-                MarcaViewModel.GetInstance().ExecuteRefresh();
+                CategoriaViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {

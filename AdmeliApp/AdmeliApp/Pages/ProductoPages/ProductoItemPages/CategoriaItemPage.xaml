@@ -112,7 +112,7 @@
                             VerticalOptions="Center">
                         </Label>
                         <Switch
-                            IsToggled="{Binding estado, Mode=TwoWay}"
+                            IsToggled="{Binding mostrarWeb, Mode=TwoWay}"
                             IsEnabled="{Binding IsEnabled}"
                             HorizontalOptions="End">
                         </Switch>

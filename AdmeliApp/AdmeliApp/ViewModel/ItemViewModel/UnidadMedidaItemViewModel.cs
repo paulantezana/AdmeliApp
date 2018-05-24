@@ -194,7 +194,5 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             }
         }
         #endregion
-
-
     }
 }

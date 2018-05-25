@@ -5,7 +5,12 @@
              x:Class="AdmeliApp.Pages.ProductoPages.ProductoItemPages.CategoriaItemPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20,40,20,40" Spacing="30">
+            <AbsoluteLayout>
+                
+                <StackLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Padding="20,40,20,40" Spacing="30">
                 
                 <StackLayout>
                     <Label Text="Nombre Categoría"></Label>
@@ -72,13 +77,6 @@
                     <Label Text="Texto que contiene los keywords y otras descripciones(Opcional)." TextColor="{StaticResource grey-lighter}"/>
                 </StackLayout>
 
-
-
-
-
-
-
-
                 <StackLayout>
                     <Label Text="Cabecera Página"></Label>
                     <Entry 
@@ -142,9 +140,8 @@
                         ItemsSource="{Binding OrdenVisualPadreItems, Mode=TwoWay}"/>
                 </StackLayout>
 
-
                 <ActivityIndicator 
-                        IsRunning="{Binding IsRunning}">
+                    IsRunning="{Binding IsRunning}">
                     <ActivityIndicator.Color>
                         <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
                     </ActivityIndicator.Color>
@@ -152,7 +149,7 @@
 
                 <StackLayout Orientation="Horizontal">
                     <Button 
-                        Text="Guardar" 
+                        Text="Guardar"
                         Command="{Binding GuardarCommand}"
                         IsEnabled="{Binding IsEnabled}"
                         Style="{StaticResource ButtonSuccess}"
@@ -166,6 +163,7 @@
                 </StackLayout>
 
             </StackLayout>
+            </AbsoluteLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

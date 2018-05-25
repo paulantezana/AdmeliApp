@@ -5,71 +5,78 @@
              x:Class="AdmeliApp.Pages.ProductoPages.ProductoItemPages.MarcaItemPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20,40,20,40" Spacing="30">
+            <AbsoluteLayout>
+                <StackLayout 
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Padding="20,40,20,40" Spacing="30">
 
-                <StackLayout>
-                    <Label Text="Nombre marca"></Label>
-                    <Entry 
+                    <StackLayout>
+                        <Label Text="Nombre marca"></Label>
+                        <Entry 
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding NombreMarca, Mode=TwoWay}"/>
-                </StackLayout>
+                    </StackLayout>
 
-                <StackLayout>
-                    <Label Text="Sitio web (Opcional)"/>
-                    <Entry
+                    <StackLayout>
+                        <Label Text="Sitio web (Opcional)"/>
+                        <Entry
                         IsEnabled="{Binding IsEnabled}"
                         Text="{Binding SitioWeb, Mode=TwoWay}"/>
-                </StackLayout>
+                    </StackLayout>
 
-                <StackLayout>
-                    <Label Text="Descripción (Opcional)"></Label>
-                    <Editor
+                    <StackLayout>
+                        <Label Text="Descripción (Opcional)"></Label>
+                        <Editor
                         IsEnabled="{Binding IsEnabled}"
                         HeightRequest="100"
                         Text="{Binding Descripcion, Mode=TwoWay}"/>
-                </StackLayout>
+                    </StackLayout>
 
-                <StackLayout>
-                    <StackLayout
+                    <StackLayout>
+                        <StackLayout
                             Orientation="Horizontal"
                             VerticalOptions="CenterAndExpand">
-                        <Label
+                            <Label
                                 HorizontalOptions="StartAndExpand"
                                 Text="Activo"
                                 VerticalOptions="Center">
-                        </Label>
-                        <Switch
+                            </Label>
+                            <Switch
                                 IsToggled="{Binding Estado, Mode=TwoWay}"
                                 IsEnabled="{Binding IsEnabled}"
                                 HorizontalOptions="End">
-                        </Switch>
+                            </Switch>
+                        </StackLayout>
+                        <Label Text="Si esta Desmarcado, no se mostrara esta marca en la página"/>
                     </StackLayout>
-                    <Label Text="Si esta Desmarcado, no se mostrara esta marca en la página"/>
-                </StackLayout>
 
+                    <StackLayout Orientation="Horizontal">
+                        <Button 
+                            Text="Guardar" 
+                            Command="{Binding GuardarCommand}"
+                            IsEnabled="{Binding IsEnabled}"
+                            Style="{StaticResource ButtonSuccess}"
+                            HorizontalOptions="FillAndExpand"/>
+                        <Button
+                            Text="Eliminar" 
+                            Command="{Binding EliminarCommand}"
+                            IsEnabled="{Binding DeleteIsEnabled}"
+                            Style="{StaticResource ButtonAlert}"
+                            HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                </StackLayout>
+                
                 <ActivityIndicator 
-                        IsRunning="{Binding IsRunning}">
+                    AbsoluteLayout.LayoutBounds="0.5,0.5,0.2,0.2"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsRunning="{Binding IsRunning}">
                     <ActivityIndicator.Color>
                         <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
                     </ActivityIndicator.Color>
                 </ActivityIndicator>
-
-                <StackLayout Orientation="Horizontal">
-                    <Button 
-                        Text="Guardar" 
-                        Command="{Binding GuardarCommand}"
-                        IsEnabled="{Binding IsEnabled}"
-                        Style="{StaticResource ButtonSuccess}"
-                        HorizontalOptions="FillAndExpand"/>
-                    <Button
-                        Text="Eliminar" 
-                        Command="{Binding EliminarCommand}"
-                        IsEnabled="{Binding DeleteIsEnabled}"
-                        Style="{StaticResource ButtonAlert}"
-                        HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
-
-            </StackLayout>
+            </AbsoluteLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

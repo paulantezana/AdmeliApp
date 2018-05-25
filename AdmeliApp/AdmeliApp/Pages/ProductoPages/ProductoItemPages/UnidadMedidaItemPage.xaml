@@ -5,7 +5,10 @@
              x:Class="AdmeliApp.Pages.ProductoPages.ProductoItemPages.UnidadMedidaItemPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20,40,20,40" Spacing="30">
+            <AbsoluteLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Padding="20,40,20,40" Spacing="30">
 
                 <StackLayout>
                     <Label Text="Nombre unidad"/>
@@ -37,13 +40,6 @@
                     <Label Text="Si está desmarcado, no se podrá hacer operaciones con esta Unidad de Medida."/>
                 </StackLayout>
 
-                <ActivityIndicator 
-                        IsRunning="{Binding IsRunning}">
-                    <ActivityIndicator.Color>
-                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
-                    </ActivityIndicator.Color>
-                </ActivityIndicator>
-
                 <StackLayout Orientation="Horizontal">
                     <Button 
                         Text="Guardar" 
@@ -60,6 +56,16 @@
                 </StackLayout>
 
             </StackLayout>
+
+                <ActivityIndicator 
+                    AbsoluteLayout.LayoutBounds="0.5,0.5,0.2,0.2"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsRunning="{Binding IsRunning}">
+                    <ActivityIndicator.Color>
+                        <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
+                    </ActivityIndicator.Color>
+                </ActivityIndicator>
+            </AbsoluteLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

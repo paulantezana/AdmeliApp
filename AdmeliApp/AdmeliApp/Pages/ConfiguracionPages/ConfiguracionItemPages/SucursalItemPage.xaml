@@ -5,104 +5,34 @@
              x:Class="AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages.SucursalItemPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20,40,20,40" Spacing="30">
-
-                <StackLayout>
-                    <Label Text="Nombre*" TextColor="{StaticResource grey}"/>
-                    <Entry
-                        IsEnabled="{Binding IsEnabled}"
-                        Text="{Binding nombre, Mode=TwoWay}"/>
-                </StackLayout>
-
-                <StackLayout>
-                    <Label Text="Pais*" TextColor="{StaticResource grey}"></Label>
-                    <Picker
-                            Title="Pais"
+            <AbsoluteLayout>
+                <StackLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+                    <StackLayout Orientation="Horizontal">
+                        <Button 
+                            Text="Guardar" 
+                            Command="{Binding GuardarCommand}"
                             IsEnabled="{Binding IsEnabled}"
-                            SelectedItem="{Binding PaisSelectedItem}"
-                            ItemDisplayBinding="{Binding nombre}"
-                            ItemsSource="{Binding PaisItems, Mode=TwoWay}"/>
+                            Style="{StaticResource ButtonSuccess}"
+                            HorizontalOptions="FillAndExpand"/>
+                        <Button
+                            Text="Eliminar" 
+                            Command="{Binding EliminarCommand}"
+                            IsEnabled="{Binding DeleteIsEnabled}"
+                            Style="{StaticResource ButtonAlert}"
+                            HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
                 </StackLayout>
-                
-                <StackLayout>
-                    <Label Text="{Binding  Nivel1Title, Mode=TwoWay}}" IsVisible="{Binding Nivel1IsVisible}" TextColor="{StaticResource grey}"></Label>
-                    <Picker
-                            Title="{Binding  Nivel1Title, Mode=TwoWay}"
-                            IsVisible="{Binding Nivel1IsVisible}"
-                            IsEnabled="{Binding IsEnabled}"
-                            SelectedItem="{Binding Nivel1SelectedItem}"
-                            ItemDisplayBinding="{Binding nombre}"
-                            ItemsSource="{Binding Nivel1Items, Mode=TwoWay}"/>
-                </StackLayout>
-                
-                <StackLayout>
-                    <Label Text="{Binding  Nivel2Title}" IsVisible="{Binding Nivel2IsVisible}" TextColor="{StaticResource grey}"></Label>
-                    <Picker
-                            Title="{Binding  Nivel2Title}"
-                            IsVisible="{Binding Nivel2IsVisible}"
-                            IsEnabled="{Binding IsEnabled}"
-                            SelectedItem="{Binding Nivel2SelectedItem}"
-                            ItemDisplayBinding="{Binding nombre}"
-                            ItemsSource="{Binding Nivel2Items, Mode=TwoWay}"/>
-                </StackLayout>
-                
-                <StackLayout>
-                    <Label Text="{Binding  Nivel3Title}" IsVisible="{Binding Nivel3IsVisible}" TextColor="{StaticResource grey}"></Label>
-                    <Picker
-                            Title="{Binding  Nivel3Title}"
-                            IsVisible="{Binding Nivel3IsVisible}"
-                            IsEnabled="{Binding IsEnabled}"
-                            SelectedItem="{Binding Nivel3SelectedItem}"
-                            ItemDisplayBinding="{Binding nombre}"
-                            ItemsSource="{Binding Nivel3Items, Mode=TwoWay}"/>
-                </StackLayout>
-                
-                <StackLayout>
-                    <Label Text="Direcion*" TextColor="{StaticResource grey}"></Label>
-                    <Entry 
-                            IsEnabled="{Binding IsEnabled}"
-                            Text="{Binding direccion, Mode=TwoWay}"/>
-                </StackLayout>
-                
-                <StackLayout Orientation="Horizontal">
-                    <Label  HorizontalOptions="StartAndExpand" Text="Principal" TextColor="{StaticResource grey}"></Label>
-                    <Switch 
-                        IsToggled="{Binding principal, Mode=TwoWay}"
-                        IsEnabled="{Binding IsEnabled}"
-                        HorizontalOptions="EndAndExpand"/>
-                </StackLayout>
-                
-                <StackLayout Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="Activo" TextColor="{StaticResource grey}"></Label>
-                    <Switch 
-                        IsToggled="{Binding estado, Mode=TwoWay}"
-                        IsEnabled="{Binding IsEnabled}"
-                        HorizontalOptions="EndAndExpand"/>
-                </StackLayout>
-                
                 <ActivityIndicator 
-                        IsRunning="{Binding IsRunning}">
+                    AbsoluteLayout.LayoutBounds="0.5,0.5,0.2,0.2"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsRunning="{Binding IsRunning}">
                     <ActivityIndicator.Color>
                         <OnPlatform x:TypeArguments="Color" Android="{StaticResource Info}"/>
                     </ActivityIndicator.Color>
                 </ActivityIndicator>
-
-                <StackLayout Orientation="Horizontal">
-                    <Button 
-                        Text="Guardar" 
-                        Command="{Binding GuardarCommand}"
-                        IsEnabled="{Binding IsEnabled}"
-                        Style="{StaticResource ButtonSuccess}"
-                        HorizontalOptions="FillAndExpand"/>
-                    <Button
-                        Text="Eliminar" 
-                        Command="{Binding EliminarCommand}"
-                        IsEnabled="{Binding DeleteIsEnabled}"
-                        Style="{StaticResource ButtonAlert}"
-                        HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
-                
-            </StackLayout>
+            </AbsoluteLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

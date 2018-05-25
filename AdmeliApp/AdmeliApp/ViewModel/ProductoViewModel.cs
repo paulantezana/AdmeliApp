@@ -295,6 +295,10 @@ namespace AdmeliApp.ViewModel
                 stockFinanciero = p.stockFinanciero,
                 idPresentacionAfectada = p.idPresentacionAfectada,
 
+                IsVisiblePrecioVenta = (p.precioVenta != null),
+                //IsVisiblePrecioCompra = (p.precioCompra != null),
+                IsVisibleStock = (p.stock != null),
+
                 BackgroundItem = (!p.estado) ? (Color)App.Current.Resources["AlertLight"] : Color.Transparent,
                 TextColorItem = (!p.estado) ? (Color)App.Current.Resources["Alert"] : (Color)App.Current.Resources["grey"],
             });

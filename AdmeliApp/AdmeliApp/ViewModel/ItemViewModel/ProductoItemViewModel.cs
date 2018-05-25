@@ -19,6 +19,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             _ViewCommand ?? (_ViewCommand = new Command(() => ExecuteView()));
 
         private bool _IsVisiblePrecioCompra;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public bool IsVisiblePrecioCompra
         {
             get { return this._IsVisiblePrecioCompra; }
@@ -26,11 +27,21 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         }
 
         private bool _IsVisiblePrecioVenta;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public bool IsVisiblePrecioVenta
         {
             get { return this._IsVisiblePrecioVenta; }
             set { SetValue(ref this._IsVisiblePrecioVenta, value); }
         }
+
+        private bool _IsVisibleStock;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public bool IsVisibleStock
+        {
+            get { return this._IsVisibleStock; }
+            set { SetValue(ref this._IsVisibleStock, value); }
+        }
+
 
         public ProductoItemViewModel()
         {

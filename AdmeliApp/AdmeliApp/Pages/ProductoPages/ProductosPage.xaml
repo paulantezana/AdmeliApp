@@ -9,12 +9,10 @@
         <StackLayout BackgroundColor="{StaticResource white-ter}">
 
             <StackLayout
-                BackgroundColor="{StaticResource Color1}"
                 Padding="0,1,0,1">
                 <SearchBar
                     Text="{Binding SearchText, Mode=TwoWay}"
                     SearchCommand="{Binding SearchCommand}"
-                    TextColor="White"
                     Placeholder="Buscar..."/>
             </StackLayout>
 
@@ -31,7 +29,7 @@
                         Padding="0,5,0,20"
                         BackgroundColor="{StaticResource white-ter}">
                         <StackLayout
-                            Padding="20,0,15,0"
+                            Padding="10,0,10,0"
                             Orientation="Horizontal"
                             VerticalOptions="CenterAndExpand">
                             <Label
@@ -47,7 +45,7 @@
                             </Switch>
                         </StackLayout>
 
-                        <StackLayout Padding="20,0,15,0">
+                        <StackLayout Padding="10,0,10,0">
                             <!--<Picker
                                 Title="Sucursal"
                                 HorizontalOptions="FillAndExpand"
@@ -87,38 +85,33 @@
                                     <ColumnDefinition Width="2"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="2"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="1"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="2"/>
                                 </Grid.RowDefinitions>
 
                                 <!-- Start Content -->
-                                <Image Grid.Row="1" Grid.Column="1" Grid.RowSpan="1"
+                                <Image Grid.Row="1" Grid.Column="1"
                                     Source="product_image.png" WidthRequest="30" HeightRequest="30"/>
 
                                 <StackLayout Grid.Column="2" Grid.Row="1" >
                                     <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
-                                    <StackLayout Orientation="Horizontal">
+                                    <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
                                         <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
                                         <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                 </StackLayout>
 
-                                <StackLayout Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3">
-
-                                    <StackLayout Orientation="Horizontal">
-                                        <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}">
-                                            <Label Text="Precio venta: " VerticalOptions="Center" TextColor="{StaticResource Color3}"/>
-                                            <Label Text="{Binding precioVenta}" TextColor="{StaticResource Color3}" VerticalOptions="Center"/>
-                                        </StackLayout>
-                                        <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Padding="0,0,5,0" HorizontalOptions="EndAndExpand">
-                                            <Label Text="Precio compra" VerticalOptions="Center" TextColor="{StaticResource Color3}" HorizontalTextAlignment="End"/>
-                                            <Label Text="{Binding precioCompra}" TextColor="{StaticResource Color3}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                        </StackLayout>
+                                <StackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+                                    <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
+                                        <Label Text="Venta:" VerticalOptions="Center"/>
+                                        <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
                                     </StackLayout>
-
+                                    <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Orientation="Horizontal">
+                                        <Label Text="Compra: " VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                        <Label Text="{Binding precioCompra}" VerticalOptions="Center"/>
+                                    </StackLayout>
                                 </StackLayout>
 
                                 <!-- End Content -->

@@ -13,8 +13,18 @@ namespace AdmeliApp.ViewModel.ItemViewModel
     public class ProductoItemViewModel : Producto
     {
         internal WebService webService = new WebService();
+        public bool Nuevo;
+
+        private bool _DeleteIsEnabled;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public bool DeleteIsEnabled
+        {
+            get { return _DeleteIsEnabled; }
+            set { SetValue(ref _DeleteIsEnabled, value); }
+        }
 
         private ICommand _ViewCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public ICommand ViewCommand =>
             _ViewCommand ?? (_ViewCommand = new Command(() => ExecuteView()));
 

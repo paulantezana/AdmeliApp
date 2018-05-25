@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
 using AdmeliApp.Pages.ProductoPages.Util;
 using AdmeliApp.ViewModel.ItemViewModel;
 using System;
@@ -81,6 +82,10 @@ namespace AdmeliApp.ViewModel
         public ICommand FilterCommand =>
             _FilterCommand ?? (_FilterCommand = new Command(() => ExecuteFilterAsync()));
 
+        private ICommand _NuevoCommand;
+        public ICommand NuevoCommand =>
+            _NuevoCommand ?? (_NuevoCommand = new Command(() => ExecuteNuevo()));
+
         #region ============================== CONSTRUCTOR ==============================
         public ProductoViewModel()
         {
@@ -119,6 +124,12 @@ namespace AdmeliApp.ViewModel
         {
             // this.SetCurrentMarca(new MarcaItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
             App.ProductosPage.Navigation.PushAsync(new SelectableCategoriaPage()); // Navegacion
+        }
+
+        private void ExecuteNuevo()
+        {
+            this.SetCurrentProducto(new ProductoItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            App.ProductosPage.Navigation.PushAsync(new ProductoItemPage()); // Navegacion
         }
         #endregion
 

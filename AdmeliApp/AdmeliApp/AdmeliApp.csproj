@@ -218,10 +218,13 @@
     <EmbeddedResource Update="Pages\VentaPages\VentaItemPages\VentaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\VentaPages\VentaItemPages\ViewCartPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\VentaPages\VentaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\VentaPages\VentaTocuhPage.xaml">
+    <EmbeddedResource Update="Pages\VentaPages\VentaTouchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

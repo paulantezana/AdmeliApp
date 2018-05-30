@@ -10,6 +10,7 @@ using AdmeliApp.Pages.ProductoPages;
 using AdmeliApp.Pages.ProductoPages.ProductoItemPages;
 using AdmeliApp.Pages.Root;
 using AdmeliApp.Pages.VentaPages;
+using AdmeliApp.Pages.VentaPages.VentaItemPages;
 using Xamarin.Forms;
 
 namespace AdmeliApp
@@ -45,7 +46,6 @@ namespace AdmeliApp
         public static SucursalPage SucursalPage { get; internal set; }
         public static TipoCambioPage TipoCambioPage { get; internal set; }
         public static ClientePage ClientePage { get; internal set; }
-        public static VentaPage VentaPage { get; internal set; }
         public static DescuentoPage DescuentoPage { get; internal set; }
         public static CotizacionPage CotizacionPage { get; internal set; }
         public static ListarDocumentosPage TipoDocumentoPage { get; internal set; }
@@ -63,6 +63,9 @@ namespace AdmeliApp
         public static UnidadMedidaItemPage UnidadMedidaItemPage { get; internal set; }
         public static CategoriaPage CategoriaPage { get; internal set; }
         public static CategoriaItemPage CategoriaItemPage { get; internal set; }
+        public static ViewCartPage ViewCartPage { get; internal set; }
+        public static VentaTouchPage VentaTouchPage { get; internal set; }
+        public static Pages.VentaPages.VentaPage VentaPage { get; internal set; }
 
         public App ()
 		{

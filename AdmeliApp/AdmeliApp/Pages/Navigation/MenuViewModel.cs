@@ -57,7 +57,8 @@ namespace AdmeliApp.Pages.Navigation
                 new MenuTienda() { Id = 100, Icon = "guia_icon.png", Title = "Contizaciones de cliente", TargetType = typeof(VentaPages.CotizacionPage)  },
                 new MenuTienda() { Id = 101, Icon = "venta_icon.png", Title = "Ventas", TargetType = typeof(VentaPages.VentaPage)  },
                 new MenuTienda() { Id = 102, Icon = "cliente_icon.png", Title = "Clientes", TargetType = typeof(VentaPages.ClientePage)  },
-                new MenuTienda() { Id = 103, Icon = "oferta_icon.png", Title = "Descuento y oferta", TargetType = typeof(VentaPages.DescuentoPage)  }
+                new MenuTienda() { Id = 103, Icon = "oferta_icon.png", Title = "Descuento y oferta", TargetType = typeof(VentaPages.DescuentoPage)  },
+                new MenuTienda() { Id = 104, Icon = "venta_icon.png", Title = "Ventas Touch", TargetType = typeof(VentaPages.VentaTouchPage)  },
             };
 
             MenuGrouping menuCompras = new MenuGrouping("Compras")
@@ -94,30 +95,30 @@ namespace AdmeliApp.Pages.Navigation
 
             MenuGrouping menuReportes = new MenuGrouping("Reportes")
             {
-                new MenuTienda() { Id = 1, Icon = "reporteProducto_icon.png", Title = "Existencia producto",  TargetType = typeof(ReportePages.ExistenciaProductoPage) },
-                new MenuTienda() { Id = 1, Icon = "reporteIngreso_icon.png", Title = "Ingresos ventas",  TargetType = typeof(ReportePages.IngresoPage) },
-                new MenuTienda() { Id = 1, Icon = "reporteImpuesto_icon.png", Title = "Impuestos",  TargetType = typeof(ReportePages.ImpuestoPage) }
+                new MenuTienda() { Id = 601, Icon = "reporteProducto_icon.png", Title = "Existencia producto",  TargetType = typeof(ReportePages.ExistenciaProductoPage) },
+                new MenuTienda() { Id = 602, Icon = "reporteIngreso_icon.png", Title = "Ingresos ventas",  TargetType = typeof(ReportePages.IngresoPage) },
+                new MenuTienda() { Id = 603, Icon = "reporteImpuesto_icon.png", Title = "Impuestos",  TargetType = typeof(ReportePages.ImpuestoPage) }
             };
 
             MenuGrouping menuAdmin = new MenuGrouping("Configuración")
             {
-                new MenuTienda() { Id = 1, Icon = "empresa_icon.png", Title = "Datos Empresa",  TargetType = typeof(ConfiguracionPages.DatosEmpresaPage)  },
-                new MenuTienda() { Id = 1, Icon = "sucursal_icon.png", Title = "Sucursales",  TargetType = typeof(ConfiguracionPages.SucursalPage)  },
-                new MenuTienda() { Id = 1, Icon = "puntoVenta_icon.png", Title = "Punto de venta",  TargetType = typeof(ConfiguracionPages.PuntoVentaPage)  },
-                new MenuTienda() { Id = 1, Icon = "almacen_icon.png", Title = "Almacenes",  TargetType = typeof(ConfiguracionPages.AlmacenPage)  },
-                new MenuTienda() { Id = 1, Icon = "docIdentificacion_icon.png", Title = "Documentos de identificación",  TargetType = typeof(ConfiguracionPages.DenominacionPage)  },
-                new MenuTienda() { Id = 1, Icon = "personal_icon.png", Title = "Personal",  TargetType = typeof(ConfiguracionPages.PersonalPage)  },
-                new MenuTienda() { Id = 1, Icon = "documento_icon.png", Title = "Listado documentos",  TargetType = typeof(ConfiguracionPages.ListarDocumentosPage)  },
-                new MenuTienda() { Id = 1, Icon = "correlativo_icon.png", Title = "Asignar correlativos",  TargetType = typeof(ConfiguracionPages.AsignarCorrelativoPage)  },
-                //new MenuTienda() { Id = 1, Icon = "design_icon.png", Title = "Diseño personalización"},
-                new MenuTienda() { Id = 1, Icon = "moneda_icon.png", Title = "Monedas",  TargetType = typeof(ConfiguracionPages.MonedaPage)  },
-                new MenuTienda() { Id = 1, Icon = "cambioMoneda_icon.png", Title = "Tipo cambio",  TargetType = typeof(ConfiguracionPages.TipoCambioPage)  },
-                new MenuTienda() { Id = 1, Icon = "denominacion_icon.png", Title = "Denominaciones",  TargetType = typeof(ConfiguracionPages.DenominacionPage)  },
-                new MenuTienda() { Id = 1, Icon = "impuesto_icon.png", Title = "Impuestos",  TargetType = typeof(ConfiguracionPages.ImpuestoPage)  },
-                new MenuTienda() { Id = 1, Icon = "grupoCliente_icon.png", Title = "Grupos de cliente",  TargetType = typeof(ConfiguracionPages.GrupoClientePage)  },
-                new MenuTienda() { Id = 1, Icon = "caja_icon.png", Title = "Cajas inicializadas",  TargetType = typeof(ConfiguracionPages.CajaInicializadaPage)  },
-                //new MenuTienda() { Id = 1, Icon = "docImpuesto_icon.png", Title = "Impuestos documento"},
-                //new MenuTienda() { Id = 1, Icon = "codigoBarra_icon.png", Title = "Diseño de código de barras"},
+                new MenuTienda() { Id = 701, Icon = "empresa_icon.png", Title = "Datos Empresa",  TargetType = typeof(ConfiguracionPages.DatosEmpresaPage)  },
+                new MenuTienda() { Id = 702, Icon = "sucursal_icon.png", Title = "Sucursales",  TargetType = typeof(ConfiguracionPages.SucursalPage)  },
+                new MenuTienda() { Id = 703, Icon = "puntoVenta_icon.png", Title = "Punto de venta",  TargetType = typeof(ConfiguracionPages.PuntoVentaPage)  },
+                new MenuTienda() { Id = 704, Icon = "almacen_icon.png", Title = "Almacenes",  TargetType = typeof(ConfiguracionPages.AlmacenPage)  },
+                new MenuTienda() { Id = 705, Icon = "docIdentificacion_icon.png", Title = "Documentos de identificación",  TargetType = typeof(ConfiguracionPages.DenominacionPage)  },
+                new MenuTienda() { Id = 706, Icon = "personal_icon.png", Title = "Personal",  TargetType = typeof(ConfiguracionPages.PersonalPage)  },
+                new MenuTienda() { Id = 707, Icon = "documento_icon.png", Title = "Listado documentos",  TargetType = typeof(ConfiguracionPages.ListarDocumentosPage)  },
+                new MenuTienda() { Id = 708, Icon = "correlativo_icon.png", Title = "Asignar correlativos",  TargetType = typeof(ConfiguracionPages.AsignarCorrelativoPage)  },
+                //new MenuTienda() { Id = 709, Icon = "design_icon.png", Title = "Diseño personalización"},
+                new MenuTienda() { Id = 710, Icon = "moneda_icon.png", Title = "Monedas",  TargetType = typeof(ConfiguracionPages.MonedaPage)  },
+                new MenuTienda() { Id = 711, Icon = "cambioMoneda_icon.png", Title = "Tipo cambio",  TargetType = typeof(ConfiguracionPages.TipoCambioPage)  },
+                new MenuTienda() { Id = 712, Icon = "denominacion_icon.png", Title = "Denominaciones",  TargetType = typeof(ConfiguracionPages.DenominacionPage)  },
+                new MenuTienda() { Id = 713, Icon = "impuesto_icon.png", Title = "Impuestos",  TargetType = typeof(ConfiguracionPages.ImpuestoPage)  },
+                new MenuTienda() { Id = 714, Icon = "grupoCliente_icon.png", Title = "Grupos de cliente",  TargetType = typeof(ConfiguracionPages.GrupoClientePage)  },
+                new MenuTienda() { Id = 715, Icon = "caja_icon.png", Title = "Cajas inicializadas",  TargetType = typeof(ConfiguracionPages.CajaInicializadaPage)  },
+                //new MenuTienda() { Id = 716, Icon = "docImpuesto_icon.png", Title = "Impuestos documento"},
+                //new MenuTienda() { Id = 717, Icon = "codigoBarra_icon.png", Title = "Diseño de código de barras"},
             };
 
             //// Agregando los menus a la lista del menu tienda segun los permisos de login ususario

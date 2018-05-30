@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AdmeliApp.Pages.ProductoPages.ProductosPage">
+             x:Class="AdmeliApp.Pages.VentaPages.VentaTouchPage">
+    
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
-        <ToolbarItem  Icon="filter_icon.png" Command="{Binding FilterCommand}"/>
+        <ToolbarItem  Icon="shoppingCart_icon.png" Command="{Binding ViewCartCommand}"/>
     </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
 
@@ -18,53 +19,12 @@
             </StackLayout>
 
             <ListView
-                ItemsSource="{Binding ProductoItems}"
+                ItemsSource="{Binding ProductoVentaItems}"
                 IsPullToRefreshEnabled="True"
                 CachingStrategy="RecycleElement"
                 HasUnevenRows="True"
                 RefreshCommand="{Binding RefreshCommand}"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
-                <ListView.Header>
-                    <StackLayout 
-                        Padding="0,5,0,20">
-                        <StackLayout
-                            Padding="10,0,10,0"
-                            Orientation="Horizontal"
-                            VerticalOptions="CenterAndExpand">
-                            <Label
-                                HorizontalOptions="StartAndExpand"
-                                Text="Ver Stock"
-                                FontAttributes="Bold"
-                                TextColor="{StaticResource Color1}"
-                                VerticalOptions="Center">
-                            </Label>
-                            <Switch
-                                IsToggled="{Binding IsEnabledStock, Mode=TwoWay}"
-                                HorizontalOptions="End">
-                            </Switch>
-                        </StackLayout>
-
-                        <StackLayout Padding="10,0,10,0">
-                            <!--<Picker
-                                Title="Sucursal"
-                                HorizontalOptions="FillAndExpand"
-                                SelectedItem="{Binding SucursalSelectedItem}"
-                                ItemDisplayBinding="{Binding nombre}"
-                                IsEnabled="{Binding IsEnabledStock}"
-                                ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>-->
-                            <Picker
-                                Title="Almacen"
-                                HorizontalOptions="FillAndExpand"
-                                SelectedItem="{Binding AlmacenSelectedItem}"
-                                ItemDisplayBinding="{Binding nombre}"
-                                IsEnabled="{Binding IsEnabledStock}"
-                                ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
-                        </StackLayout>
-
-                    </StackLayout>
-                </ListView.Header>
-
-
                 <!-- Template de los items -->
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -81,6 +41,7 @@
                                     <ColumnDefinition Width="2"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="2"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -93,7 +54,7 @@
                                 <!-- Start Content -->
                                 <Image Grid.Row="1" Grid.Column="1"
                                     Source="product_image.png" WidthRequest="22" HeightRequest="22" VerticalOptions="Start"/>
-                                
+
                                 <StackLayout Grid.Column="2" Grid.Row="1" >
                                     <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
                                 </StackLayout>
@@ -104,20 +65,21 @@
                                         <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
                                     </StackLayout>
                                     <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
-                                        <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
                                         <Label Text="Venta:" VerticalOptions="Center"/>
                                         <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
                                     </StackLayout>
-                                    <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Orientation="Horizontal">
-                                        <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
-                                        <Label Text="Compra: " VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                        <Label Text="{Binding precioCompra}" VerticalOptions="Center"/>
-                                    </StackLayout>
                                 </StackLayout>
 
+                                <StackLayout Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
+                                    <Button
+                                        Text="Añadir" Image="shoppingCart_icon.png"
+                                        VerticalOptions="CenterAndExpand"
+                                        Command="{Binding AddCartCommand}"
+                                        Style="{StaticResource ButtonInfo}"/>
+                                </StackLayout>
                                 <!-- End Content -->
-                            </Grid>
 
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

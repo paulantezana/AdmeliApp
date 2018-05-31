@@ -69,55 +69,69 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-
-                                <!-- Events -->
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding ViewCommand}"/>
-                                </Grid.GestureRecognizers>
-
-                                <!-- Layout -->
+                            <Grid ColumnSpacing="0" RowSpacing="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2"/>
-                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2"/>
                                 </Grid.ColumnDefinitions>
+
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="5"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="5"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- Start Content -->
-                                <Image Grid.Row="1" Grid.Column="1"
-                                    Source="product_image.png" WidthRequest="22" HeightRequest="22" VerticalOptions="Start"/>
-                                
-                                <StackLayout Grid.Column="2" Grid.Row="1" >
-                                    <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
+                                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" BackgroundColor="{Binding BackgroundItem}">
+                                    <StackLayout HorizontalOptions="FillAndExpand" Padding="10,15,0,15">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="product_image.png" WidthRequest="22" HeightRequest="22" VerticalOptions="Start"/>
+                                            <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
+                                        </StackLayout>
+
+                                        <StackLayout>
+                                            <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
+                                                <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                                <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
+                                                <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
+                                                <Label Text="Venta:" VerticalOptions="Center"/>
+                                                <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Orientation="Horizontal">
+                                                <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
+                                                <Label Text="Compra: " VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                                <Label Text="{Binding precioCompra}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                        <Image Source="{Binding IconToggleOptions}">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ToggleOptionsCommand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ViewCommand}"/>
+                                    </StackLayout.GestureRecognizers>
                                 </StackLayout>
 
-                                <StackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
-                                    <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
-                                        <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                        <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource grey-lighter}" Padding="5" Orientation="Horizontal" IsVisible="{Binding ToggleOptionsIsVisible}">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="delete_icon.png"/>
+                                        <Label Text="eliminar" VerticalOptions="Center" TextColor="{StaticResource Alert}"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EliminarCommand}"/>
+                                        </StackLayout.GestureRecognizers>
                                     </StackLayout>
-                                    <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
-                                        <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
-                                        <Label Text="Venta:" VerticalOptions="Center"/>
-                                        <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
-                                    </StackLayout>
-                                    <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Orientation="Horizontal">
-                                        <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
-                                        <Label Text="Compra: " VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                        <Label Text="{Binding precioCompra}" VerticalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="view_icon.png"/>
+                                        <Label Text="editar" VerticalOptions="Center" TextColor="{StaticResource Color1}"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ViewCommand}"/>
+                                        </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </StackLayout>
-
-                                <!-- End Content -->
                             </Grid>
-
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

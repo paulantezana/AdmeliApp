@@ -18,22 +18,26 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             set { SetValue(ref this._IsVisiblePrecioVenta, value); }
         }
 
-        private bool _VentaOptionsIsVisible;
+        private bool _ToggleOptionsIsVisible;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
-        public bool VentaOptionsIsVisible
+        public bool ToggleOptionsIsVisible
         {
-            get { return _VentaOptionsIsVisible; }
-            set { SetValue(ref _VentaOptionsIsVisible, value); }
+            get { return this._ToggleOptionsIsVisible; }
+            set { SetValue(ref this._ToggleOptionsIsVisible, value); }
         }
 
+        #region =================================== COMMANDS ===================================
+        private ICommand _ToggleOptionsCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand ToggleOptionsCommand =>
+            _ToggleOptionsCommand ?? (_ToggleOptionsCommand = new Command(() => ExecuteToggleOptions()));
+        #endregion
 
-        private ICommand _AddToCartCommand;
-        public ICommand AddToCartCommand =>
-            _AddToCartCommand ?? (_AddToCartCommand = new Command(() => ExecuteAddToCart()));
-
-        private void ExecuteAddToCart()
+        #region ================================= EXECUTE COMMANDS =================================
+        private void ExecuteToggleOptions()
         {
-            VentaOptionsIsVisible = !VentaOptionsIsVisible;
-        }
+            this.ToggleOptionsIsVisible = !this.ToggleOptionsIsVisible;
+        } 
+        #endregion
     }
 }

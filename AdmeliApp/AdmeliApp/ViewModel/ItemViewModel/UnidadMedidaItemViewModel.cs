@@ -23,6 +23,22 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             set { SetValue(ref _DeleteIsEnabled, value); }
         }
 
+        private bool _ToggleOptionsIsVisible;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public bool ToggleOptionsIsVisible
+        {
+            get { return this._ToggleOptionsIsVisible; }
+            set { SetValue(ref this._ToggleOptionsIsVisible, value); }
+        }
+
+        private string _IconToggleOptions;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public string IconToggleOptions
+        {
+            get { return this._IconToggleOptions; }
+            set { SetValue(ref this._IconToggleOptions, value); }
+        }
+
         #region ================================= COMMANDS =================================
         private ICommand _GuardarCommand;
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
@@ -43,6 +59,11 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public ICommand EliminarCommand =>
             _EliminarCommand ?? (_EliminarCommand = new Command(() => ExecuteEliminar()));
+
+        private ICommand _ToggleOptionsCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public ICommand ToggleOptionsCommand =>
+            _ToggleOptionsCommand ?? (_ToggleOptionsCommand = new Command(() => ExecuteToggleOptions()));
         #endregion
 
         #region ================================ CONSTRUCTOR ================================
@@ -51,6 +72,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             // Estados
             this.IsRunning = false;
             this.IsEnabled = true;
+            this.IconToggleOptions = "expandToggle_icon.png"; //Icono por defecto para expandir la item de la lista
             this.estado = 1;
         }
         #endregion
@@ -192,6 +214,12 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = false;
                 this.IsEnabled = true;
             }
+        }
+
+        private void ExecuteToggleOptions()
+        {
+            this.ToggleOptionsIsVisible = !this.ToggleOptionsIsVisible;
+            IconToggleOptions = (ToggleOptionsIsVisible) ? "collapseToggle_icon.png" : "expandToggle_icon.png"; //Cambiando los iconos en tiempo real
         }
         #endregion
     }

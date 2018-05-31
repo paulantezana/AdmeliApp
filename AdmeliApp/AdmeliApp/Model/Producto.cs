@@ -42,19 +42,8 @@ namespace AdmeliApp.Model
         public string stockFinanciero { get; set; }
 
         private string estadoString;
-        public string EstadoString
-        {
-            get
-            {
-                if (estado == true) { return "Activo"; }
-                else { return "Anulado"; }
-            }
-            set
-            {
-                estadoString = value;
-            }
-        }
-
         public int idPresentacionAfectada { get; set; }
+        public int idAlmacen { get; set; }
+        public string nombreAlmacen { get; set; }
     }
 }

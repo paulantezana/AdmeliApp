@@ -17,7 +17,7 @@
             <Color x:Key="InfoLight">#209CEF</Color>
             <Color x:Key="Success">#23D260</Color>
             <Color x:Key="SuccessLight">#23D260</Color>
-            <Color x:Key="Warning">#FFDE57</Color>
+            <Color x:Key="Warning">#FFFF8400</Color>
             <Color x:Key="WarningLight">#FFDE57</Color>
 
             <!-- Scala de grises -->

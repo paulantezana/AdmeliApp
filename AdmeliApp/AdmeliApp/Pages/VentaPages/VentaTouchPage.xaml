@@ -29,94 +29,90 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-
-                                <!-- Events -->
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding ViewCommand}"/>
-                                </Grid.GestureRecognizers>
-
-                                <!-- Layout -->
+                            <Grid ColumnSpacing="0" RowSpacing="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2"/>
-                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="2"/>
                                 </Grid.ColumnDefinitions>
+
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="5"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="5"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- Start Content -->
-                                <Image Grid.Row="1" Grid.Column="1"
-                                    Source="product_image.png" WidthRequest="22" HeightRequest="22" VerticalOptions="Start"/>
+                                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" BackgroundColor="{Binding BackgroundItem}">
+                                    <StackLayout HorizontalOptions="FillAndExpand" Padding="10,15,0,15">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="product_image.png" WidthRequest="22" HeightRequest="22" VerticalOptions="Start"/>
+                                            <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
+                                        </StackLayout>
 
-                                <StackLayout Grid.Column="2" Grid.Row="1" >
-                                    <Label Text="{Binding nombreProducto}" TextColor="{Binding TextColorItem}" VerticalOptions="Center" FontAttributes="Bold"/>
-                                </StackLayout>
-
-                                <StackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
-                                    <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
-                                        <Label Text="Venta:" VerticalOptions="Center"/>
-                                        <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
+                                        <StackLayout>
+                                            <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
+                                                <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                                <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
+                                                <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
+                                                <Label Text="Venta:" VerticalOptions="Center"/>
+                                                <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Orientation="Horizontal">
+                                                <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
+                                                <Label Text="Compra: " VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                                <Label Text="{Binding precioCompra}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                        </StackLayout>
                                     </StackLayout>
-                                    <!--<StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
-                                        <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                        <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                    </StackLayout>-->
-                                    
-                                </StackLayout>
-                                
-                                <StackLayout Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" >
-                                    <Button
-                                        Text="Añadir" Image="shoppingCart_icon.png"
-                                        VerticalOptions="CenterAndExpand"
-                                        Command="{Binding AddToCartCommand}"
-                                        Style="{StaticResource ButtonInfo}"/>
-                                </StackLayout>
-                                
-                                <StackLayout Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" IsVisible="{Binding VentaOptionsIsVisible}">
-                                        
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="2"/>
-                                            </Grid.ColumnDefinitions>
-                                            
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="5"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="5"/>
-                                            </Grid.RowDefinitions>
-                                            
-                                            <Label Grid.Row="1" Grid.Column="1" Text="Cantidad:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
-                                            <Entry Grid.Row="1" Grid.Column="2" Keyboard="Numeric"/>
-
-                                            <Label Grid.Row="2" Grid.Column="1" Text="Precio Unitario:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
-                                            <Entry Grid.Row="2" Grid.Column="2" Keyboard="Numeric"/>
-
-                                            <Label Grid.Row="3" Grid.Column="1" Text="Descuento:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
-                                            <Entry Grid.Row="3" Grid.Column="2" Keyboard="Numeric"/>
-
-                                            <Label Grid.Row="4" Grid.Column="1" Text="Total:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
-                                            <Entry Grid.Row="4" Grid.Column="2" Keyboard="Numeric"/>
-                                        </Grid>
-                                       
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                        <Image Source="shoping_icon.png">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ToggleOptionsCommand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
                                     </StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ViewCommand}"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
 
-                                <!-- End Content -->
+                                <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource grey-lighter}" Padding="5" Orientation="Horizontal" IsVisible="{Binding ToggleOptionsIsVisible}">
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="2"/>
+                                        </Grid.ColumnDefinitions>
 
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="1" Grid.Column="1" Text="Cantidad:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                        <Entry Grid.Row="1" Grid.Column="2" Keyboard="Numeric"/>
+
+                                        <Label Grid.Row="2" Grid.Column="1" Text="Precio Unitario:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                        <Entry Grid.Row="2" Grid.Column="2" Keyboard="Numeric"/>
+
+                                        <Label Grid.Row="3" Grid.Column="1" Text="Descuento:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                        <Entry Grid.Row="3" Grid.Column="2" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+
+                                        <Label Grid.Row="4" Grid.Column="1" Text="Total:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                        <Entry Grid.Row="4" Grid.Column="2" Keyboard="Numeric" HorizontalOptions="Fill"/>
+                                    </Grid>
+                                    <StackLayout HorizontalOptions="End" VerticalOptions="End">
+                                        <Button
+                                            Text="Añadir" 
+                                            Image="shoppingCart_icon.png"
+                                            Style="{StaticResource ButtonInfo}"/>
+                                    </StackLayout>
+                                </StackLayout>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -61,6 +61,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             _EliminarCommand ?? (_EliminarCommand = new Command(() => ExecuteEliminar()));
 
         private ICommand _ToggleOptionsCommand;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
         public ICommand ToggleOptionsCommand =>
             _ToggleOptionsCommand ?? (_ToggleOptionsCommand = new Command(() => ExecuteToggleOptions()));
         #endregion
@@ -71,7 +72,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             // Estados
             this.IsRunning = false;
             this.IsEnabled = true;
-            this.IconToggleOptions = "expandToggle_icon.png";
+            this.IconToggleOptions = "expandToggle_icon.png"; //Icono por defecto para expandir la item de la lista
             this.Estado = 1;
         } 
         #endregion

@@ -56,7 +56,7 @@
                                 <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource grey-lighter}" Padding="5" Orientation="Horizontal" IsVisible="{Binding ToggleOptionsIsVisible}">
                                     <StackLayout Orientation="Horizontal">
                                         <Image Source="cancel_icon.png"/>
-                                        <Label Text="anular" VerticalOptions="Center" TextColor="#FFFF8400"/>
+                                        <Label Text="anular" VerticalOptions="Center" TextColor="{StaticResource Warning}"/>
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer  Command="{Binding AnularCommand}"/>
                                         </StackLayout.GestureRecognizers>
@@ -76,7 +76,6 @@
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </StackLayout>
-
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

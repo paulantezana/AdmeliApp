@@ -31,20 +31,57 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Padding="15,0,0,0" BackgroundColor="{Binding BackgroundItem}" Orientation="Horizontal">
-                                        <Label Text="{Binding nombre}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                        <Label Text="{Binding direccion}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                                            <Image Source="cancel_icon.png">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding AnularCommand}"/>
-                                                </Image.GestureRecognizers>
-                                            </Image>
+                                    <Grid ColumnSpacing="0" RowSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" BackgroundColor="{Binding BackgroundItem}">
+                                            <StackLayout HorizontalOptions="FillAndExpand" Padding="5">
+                                                <Label Text="{Binding nombre}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                                <Label Text="{Binding direccion}" TextColor="{Binding TextColorItem}" VerticalOptions="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                                <Image Source="{Binding IconToggleOptions}">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding ToggleOptionsCommand}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding EditarCommand}"/>
+                                            </StackLayout.GestureRecognizers>
                                         </StackLayout>
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding EditarCommand}"/>
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
+
+                                        <StackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource grey-lighter}" Padding="5" Orientation="Horizontal" IsVisible="{Binding ToggleOptionsIsVisible}">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="cancel_icon.png"/>
+                                                <Label Text="anular" VerticalOptions="Center" TextColor="{StaticResource Warning}"/>
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer  Command="{Binding AnularCommand}"/>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="delete_icon.png"/>
+                                                <Label Text="eliminar" VerticalOptions="Center" TextColor="{StaticResource Alert}"/>
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding EliminarCommand}"/>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="edit_icon.png"/>
+                                                <Label Text="editar" VerticalOptions="Center" TextColor="{StaticResource Color1}"/>
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding EditarCommand}"/>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

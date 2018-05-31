@@ -4,7 +4,7 @@
              x:Class="AdmeliApp.Pages.VentaPages.VentaTouchPage">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Icon="shoppingCart_icon.png" Command="{Binding ViewCartCommand}"/>
+        <ToolbarItem  Icon="shoppingCart_icon.png" Command="{Binding ViewCartCommand}" Text="5"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -48,6 +48,7 @@
                                     <RowDefinition Height="5"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="5"/>
                                 </Grid.RowDefinitions>
 
@@ -60,23 +61,60 @@
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
-                                    <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
-                                        <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                        <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                    </StackLayout>
                                     <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
                                         <Label Text="Venta:" VerticalOptions="Center"/>
                                         <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
                                     </StackLayout>
+                                    <!--<StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
+                                        <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                        <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                    </StackLayout>-->
+                                    
                                 </StackLayout>
-
-                                <StackLayout Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
+                                
+                                <StackLayout Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" >
                                     <Button
                                         Text="Añadir" Image="shoppingCart_icon.png"
                                         VerticalOptions="CenterAndExpand"
-                                        Command="{Binding AddCartCommand}"
+                                        Command="{Binding AddToCartCommand}"
                                         Style="{StaticResource ButtonInfo}"/>
                                 </StackLayout>
+                                
+                                <StackLayout Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" IsVisible="{Binding VentaOptionsIsVisible}">
+                                        
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="2"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="5"/>
+                                            </Grid.RowDefinitions>
+                                            
+                                            <Label Grid.Row="1" Grid.Column="1" Text="Cantidad:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                            <Entry Grid.Row="1" Grid.Column="2" Keyboard="Numeric"/>
+
+                                            <Label Grid.Row="2" Grid.Column="1" Text="Precio Unitario:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                            <Entry Grid.Row="2" Grid.Column="2" Keyboard="Numeric"/>
+
+                                            <Label Grid.Row="3" Grid.Column="1" Text="Descuento:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                            <Entry Grid.Row="3" Grid.Column="2" Keyboard="Numeric"/>
+
+                                            <Label Grid.Row="4" Grid.Column="1" Text="Total:" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                            <Entry Grid.Row="4" Grid.Column="2" Keyboard="Numeric"/>
+                                        </Grid>
+                                       
+                                    </StackLayout>
+
                                 <!-- End Content -->
 
                             </Grid>

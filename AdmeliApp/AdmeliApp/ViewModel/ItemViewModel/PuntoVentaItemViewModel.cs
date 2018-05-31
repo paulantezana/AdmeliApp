@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace AdmeliApp.ViewModel.ItemViewModel
 {
@@ -19,5 +21,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             get { return _DeleteIsEnabled; }
             set { SetValue(ref _DeleteIsEnabled, value); }
         }
+
+
     }
 }

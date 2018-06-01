@@ -66,6 +66,18 @@ namespace AdmeliApp
         public static ViewCartPage ViewCartPage { get; internal set; }
         public static VentaTouchPage VentaTouchPage { get; internal set; }
         public static Pages.VentaPages.VentaPage VentaPage { get; internal set; }
+        public static MonedaItemPage MonedaItemPage { get; internal set; }
+        public static DocIdentificacionItemPage DocIdentificacionItemPage { get; internal set; }
+        public static AlmacenItemPage AlmacenItemPage { get; internal set; }
+        public static AsignarCorrelativoItemPage AsignarCorrelativoItemPage { get; internal set; }
+        public static CajaInicializadaItemPage CajaInicializadaItemPage { get; internal set; }
+        public static DenominacionItemPage DenominacionItemPage { get; internal set; }
+        public static GrupoClienteItemPage GrupoClienteItemPage { get; internal set; }
+        public static ImpuestoItemPage ImpuestoItemPage { get; internal set; }
+        public static ListarDocumentosItemPage ListarDocumentosItemPage { get; internal set; }
+        public static PersonalItemPage PersonalItemPage { get; internal set; }
+        public static PuntoVentaItemPage PuntoVentaItemPage { get; internal set; }
+        public static TipoCambioItemPage TipoCambioItemPage { get; internal set; }
 
         public App ()
 		{

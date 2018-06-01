@@ -8,6 +8,24 @@
                 <StackLayout
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
+                    
+                    <StackLayout>
+                        <Label Text="Nombre"></Label>
+                        <Entry  IsEnabled="{Binding IsEnabled}" Text="{Binding nombre, Mode=TwoWay}"/>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Nombre Label"></Label>
+                        <Entry  IsEnabled="{Binding IsEnabled}" Text="{Binding nombre, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="StartAndExpand" Text="Activo" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding estado, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" HorizontalOptions="End"/>
+                    </StackLayout>
+
+                    <Label Text="Es el documento que emite el Remitente para sustentar el traslado de bienes con motivo de su compra o venta."/>
+
                     <StackLayout Orientation="Horizontal">
                         <Button 
                             Text="Guardar" 

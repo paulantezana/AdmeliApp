@@ -8,6 +8,28 @@
                 <StackLayout
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
+
+                    <StackLayout>
+                        <Label Text="Nombre de moneda"></Label>
+                        <Entry  IsEnabled="{Binding IsEnabled}" Text="{Binding moneda, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Símbolo"></Label>
+                        <Entry IsEnabled="{Binding IsEnabled}" Text="{Binding simbolo, Mode=TwoWay}"/>
+                        <Label Text="Símbolo o abreviación de la moneda"  TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="StartAndExpand" Text="Por Defecto" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding porDefecto, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" HorizontalOptions="End"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="StartAndExpand" Text="Activo" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding estado, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" HorizontalOptions="End"/>
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal">
                         <Button 
                             Text="Guardar" 
@@ -22,6 +44,7 @@
                             Style="{StaticResource ButtonAlert}"
                             HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
+                    
                 </StackLayout>
                 <ActivityIndicator 
                     AbsoluteLayout.LayoutBounds="0.5,0.5,0.2,0.2"

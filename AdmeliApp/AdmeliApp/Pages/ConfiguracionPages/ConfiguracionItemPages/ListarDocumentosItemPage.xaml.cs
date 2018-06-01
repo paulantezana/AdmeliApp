@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,14 @@ namespace AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages
 		public ListarDocumentosItemPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            ListarDocumentosViewModel listarDocumentosViewModel = ListarDocumentosViewModel.GetInstance();
+            BindingContext = listarDocumentosViewModel.CurrentListarDocumentos;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.ListarDocumentosItemPage = this;
+        }
+    }
 }

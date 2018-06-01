@@ -9,6 +9,47 @@
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
 
+                    <StackLayout>
+                        <Label HorizontalOptions="StartAndExpand" Text="Moneda" VerticalOptions="Center"/>
+                        <Picker
+                            Title="Moneda"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            IsEnabled="{Binding IsEnabledStock}"
+                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                        <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label HorizontalOptions="StartAndExpand" Text="Tipo moneda" VerticalOptions="Center"/>
+                        <Picker
+                            Title="Tipo moneda"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            IsEnabled="{Binding IsEnabledStock}"
+                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                        <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Nombre"/>
+                        <Entry IsEnabled="{Binding IsEnabled}" Text="{Binding nombre, Mode=TwoWay}"/>
+                        <Label Text="Ej. 1 DOLAR"  TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+                    
+                    <StackLayout>
+                        <Label Text="Valor"/>
+                        <Entry IsEnabled="{Binding IsEnabled}" Text="{Binding valor, Mode=TwoWay}"/>
+                        <Label Text="Valor de la denominación"  TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="StartAndExpand" Text="Activo" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding estado, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" HorizontalOptions="End"/>
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal">
                         <Button 
                             Text="Guardar" 

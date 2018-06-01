@@ -8,6 +8,27 @@
                 <StackLayout
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
+
+                    <StackLayout>
+                        <Label Text="Nombre Grupo"/>
+                        <Entry IsEnabled="{Binding IsEnabled}" Text="{Binding nombreGrupo, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Descripción"/>
+                        <Editor IsEnabled="{Binding IsEnabled}" Text="{Binding descripcion, Mode=TwoWay}" HeightRequest="100"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Mínimo Orden"/>
+                        <Entry IsEnabled="{Binding IsEnabled}" Text="{Binding minimoOrden, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="StartAndExpand" Text="Activo" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding estado, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" HorizontalOptions="End"/>
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal">
                         <Button 
                             Text="Guardar" 

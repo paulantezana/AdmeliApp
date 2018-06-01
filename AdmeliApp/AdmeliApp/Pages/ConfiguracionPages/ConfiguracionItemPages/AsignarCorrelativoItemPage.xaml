@@ -9,6 +9,69 @@
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
 
+                    <StackLayout>
+                        <Label HorizontalOptions="StartAndExpand" Text="Tipo Documento" VerticalOptions="Center"/>
+                        <Picker
+                            Title="Tipo Documento"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            IsEnabled="{Binding IsEnabledStock}"
+                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                        <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label HorizontalOptions="StartAndExpand" Text="Tipo Documento" VerticalOptions="Center"/>
+                        <Picker
+                            Title="Tipo Documento"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            IsEnabled="{Binding IsEnabledStock}"
+                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                        <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label HorizontalOptions="StartAndExpand" Text="Tipo Documento" VerticalOptions="Center"/>
+                        <Picker
+                            Title="Tipo Documento"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            IsEnabled="{Binding IsEnabledStock}"
+                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                        <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label HorizontalOptions="StartAndExpand" Text="Tipo Documento" VerticalOptions="Center"/>
+                        <Picker
+                            Title="Tipo Documento"
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            ItemDisplayBinding="{Binding nombre}"
+                            IsEnabled="{Binding IsEnabledStock}"
+                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                        <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Nombre de moneda"></Label>
+                        <Entry  IsEnabled="{Binding IsEnabled}" Text="{Binding moneda, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Nombre de moneda"></Label>
+                        <Entry  IsEnabled="{Binding IsEnabled}" Text="{Binding moneda, Mode=TwoWay}"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Label HorizontalOptions="StartAndExpand" Text="Activo" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding estado, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" HorizontalOptions="End"/>
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal">
                         <Button 
                             Text="Guardar" 

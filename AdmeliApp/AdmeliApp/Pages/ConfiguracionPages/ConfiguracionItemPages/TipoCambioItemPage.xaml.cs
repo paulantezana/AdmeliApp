@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdmeliApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,14 @@ namespace AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages
 		public TipoCambioItemPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            TipoCambioViewModel tipoCambioViewModel = TipoCambioViewModel.GetInstance();
+            BindingContext = tipoCambioViewModel.CurrentTipoCambio;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.TipoCambioItemPage = this;
+        }
+    }
 }

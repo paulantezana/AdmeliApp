@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -79,11 +80,11 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         #region =============================== COMMAND EXECUTE ===============================
         private void ExecuteEditar()
         {
-            //MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
-            //marcaViewModel.SetCurrentMarca(this);
-            //this.Nuevo = false; /// Importante indicaque se modificara el registro actual
-            //this.DeleteIsEnabled = true;
-            //App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
+            ImpuestoViewModel impuestoViewModel = ImpuestoViewModel.GetInstance();
+            impuestoViewModel.SetCurrentImpuesto(this);
+            this.Nuevo = false; /// Importante indicaque se modificara el registro actual
+            this.DeleteIsEnabled = true;
+            App.ImpuestoPage.Navigation.PushAsync(new ImpuestoItemPage()); // Navegacion
         }
 
         private async void ExecuteAnular()
@@ -94,29 +95,29 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = true;
                 this.IsEnabled = false;
 
-                ///// Verificacion si el registro esta anulado
-                //if (this.Estado == 0)
-                //{
-                //    await App.Current.MainPage.DisplayAlert("Anular", "Este registro ya esta anulado \n" + this.NombreMarca, "Aceptar");
-                //    return;
-                //}
+                // Verificacion si el registro esta anulado
+                if (this.estado == 0)
+                {
+                    await App.Current.MainPage.DisplayAlert("Anular", "Este registro ya esta anulado \n" + this.nombreImpuesto, "Aceptar");
+                    return;
+                }
 
-                ///// pregunta al usuario (Confirmacion)
-                //if (await App.Current.MainPage.DisplayAlert("Anular", "¿esta seguro de anular este registro? \n" + this.NombreMarca, "Aceptar", "Cancelar") == false) return;
+                // pregunta al usuario (Confirmacion)
+                if (await App.Current.MainPage.DisplayAlert("Anular", "¿esta seguro de anular este registro? \n" + this.nombreImpuesto, "Aceptar", "Cancelar") == false) return;
 
-                ///// Preparando el objeto para enviar
-                //Marca marca = new Marca();
-                //marca.IdMarca = this.IdMarca;
+                // Preparando el objeto para enviar
+                Impuesto impuesto = new Impuesto();
+                impuesto.idImpuesto = this.idImpuesto;
 
-                ///// Ejecutando el webservice
-                //// localhost:8080/admeli/xcore2/xcore/services.php/marca/desactivar
-                //Response response = await webService.POST<Marca, Response>("marca", "desactivar", marca);
+                // Ejecutando el webservice
+                // localhost:8080/admeli/xcore2/xcore/services.php/impuesto/desactivar
+                Response response = await webService.POST<Impuesto, Response>("impuesto", "desactivar", impuesto);
 
-                //// Message response
-                //await App.Current.MainPage.DisplayAlert("Anular", response.Message, "Aceptar");
+                // Message response
+                await App.Current.MainPage.DisplayAlert("Anular", response.Message, "Aceptar");
 
-                //// Refrescar la lista
-                //MarcaViewModel.GetInstance().ExecuteRefresh();
+                // Refrescar la lista
+                ImpuestoViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {
@@ -135,41 +136,44 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         {
             try
             {
-                ///// validacion de los campos
-                //if (string.IsNullOrEmpty(this.NombreMarca))
-                //{
-                //    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo obligatoria", "Aceptar");
-                //    return;
-                //}
+                // validacion de los campos
+                if (string.IsNullOrEmpty(this.nombreImpuesto))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo nombre impuesto obligatoria", "Aceptar");
+                    return;
+                }
 
-                //// Estados
-                //this.IsRunning = true;
-                //this.IsEnabled = false;
+                if (string.IsNullOrEmpty(this.valorImpuesto))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo valor impuesto obligatoria", "Aceptar");
+                    return;
+                }
 
-                //// Preparando el objeto para enviar
-                //if (this.Nuevo)
-                //{
-                //    this.CaptionImagen = "";
-                //    this.UbicacionLogo = "";
-                //    this.TieneRegistros = "";
-                //}
+                // Estados
+                this.IsRunning = true;
+                this.IsEnabled = false;
 
-                //if (this.Nuevo)
-                //{
-                //    // localhost:8080/admeli/xcore2/xcore/services.php/marca/guardar
-                //    Response response = await webService.POST<Marca, Response>("marca", "guardar", (Marca)this);
-                //    await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
-                //}
-                //else
-                //{
-                //    // localhost:8080/admeli/xcore2/xcore/services.php/marca/modificar
-                //    Response response = await webService.POST<Marca, Response>("marca", "modificar", (Marca)this);
-                //    await App.Current.MainPage.DisplayAlert("Modificar", response.Message, "Aceptar");
-                //}
+                // Preparando el objeto para enviar
+                if (this.Nuevo)
+                {
+                }
 
-                //// Refrescar y regresar a la pagina anterior
-                //MarcaViewModel.GetInstance().ExecuteRefresh();
-                //await App.MarcaItemPage.Navigation.PopAsync();
+                if (this.Nuevo)
+                {
+                    // localhost:8080/admeli/xcore2/xcore/services.php/impuesto/guardar
+                    Response response = await webService.POST<Impuesto, Response>("impuesto", "guardar", (Impuesto)this);
+                    await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
+                }
+                else
+                {
+                    // localhost:8080/admeli/xcore2/xcore/services.php/impuesto/modificar
+                    Response response = await webService.POST<Impuesto, Response>("impuesto", "modificar", (Impuesto)this);
+                    await App.Current.MainPage.DisplayAlert("Modificar", response.Message, "Aceptar");
+                }
+
+                // Refrescar y regresar a la pagina anterior
+                ImpuestoViewModel.GetInstance().ExecuteRefresh();
+                await App.ImpuestoItemPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
@@ -192,15 +196,19 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = true;
                 this.IsEnabled = false;
 
-                ///// pregunta al usuario (Confirmacion)
-                //if (await App.Current.MainPage.DisplayAlert("Eliminar", "¿esta seguro de eliminar este registro? \n" + this.NombreMarca, "Aceptar", "Cancelar") == false) return;
+                // pregunta al usuario (Confirmacion)
+                if (await App.Current.MainPage.DisplayAlert("Eliminar", "¿esta seguro de eliminar este registro? \n" + this.nombreImpuesto, "Aceptar", "Cancelar") == false) return;
 
-                //// localhost:8080/admeli/xcore2/xcore/services.php/marca/eliminar
-                //Response response = await webService.POST<Marca, Response>("marca", "eliminar", (Marca)this);
-                //await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
+                // Preparando el objeto para enviar
+                Impuesto impuesto = new Impuesto();
+                impuesto.idImpuesto = this.idImpuesto;
 
-                //// Refrescar la lista
-                //MarcaViewModel.GetInstance().ExecuteRefresh();
+                // localhost:8080/admeli/xcore2/xcore/services.php/impuesto/eliminar
+                Response response = await webService.POST<Impuesto, Response>("impuesto", "eliminar", impuesto);
+                await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
+
+                // Refrescar la lista
+                ImpuestoViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {

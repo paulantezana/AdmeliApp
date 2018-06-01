@@ -84,6 +84,7 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             marcaViewModel.SetCurrentMarca(this);
             this.Nuevo = false; /// Importante indicaque se modificara el registro actual
             this.DeleteIsEnabled = true;
+
             App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
         }
 

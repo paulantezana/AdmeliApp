@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -79,11 +80,11 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         #region =============================== COMMAND EXECUTE ===============================
         private void ExecuteEditar()
         {
-            //MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
-            //marcaViewModel.SetCurrentMarca(this);
-            //this.Nuevo = false; /// Importante indicaque se modificara el registro actual
-            //this.DeleteIsEnabled = true;
-            //App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
+            GrupoClienteViewModel grupoClienteViewModel = GrupoClienteViewModel.GetInstance();
+            grupoClienteViewModel.SetCurrentGrupoCliente(this);
+            this.Nuevo = false; /// Importante indicaque se modificara el registro actual
+            this.DeleteIsEnabled = true;
+            App.GrupoClientePage.Navigation.PushAsync(new GrupoClienteItemPage()); // Navegacion
         }
 
         private async void ExecuteAnular()
@@ -94,29 +95,29 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = true;
                 this.IsEnabled = false;
 
-                ///// Verificacion si el registro esta anulado
-                //if (this.Estado == 0)
-                //{
-                //    await App.Current.MainPage.DisplayAlert("Anular", "Este registro ya esta anulado \n" + this.NombreMarca, "Aceptar");
-                //    return;
-                //}
+                /// Verificacion si el registro esta anulado
+                if (this.estado == 0)
+                {
+                    await App.Current.MainPage.DisplayAlert("Anular", "Este registro ya esta anulado \n" + this.nombreGrupo, "Aceptar");
+                    return;
+                }
 
-                ///// pregunta al usuario (Confirmacion)
-                //if (await App.Current.MainPage.DisplayAlert("Anular", "¿esta seguro de anular este registro? \n" + this.NombreMarca, "Aceptar", "Cancelar") == false) return;
+                // pregunta al usuario (Confirmacion)
+                if (await App.Current.MainPage.DisplayAlert("Anular", "¿esta seguro de anular este registro? \n" + this.nombreGrupo, "Aceptar", "Cancelar") == false) return;
 
-                ///// Preparando el objeto para enviar
-                //Marca marca = new Marca();
-                //marca.IdMarca = this.IdMarca;
+                // Preparando el objeto para enviar
+                GrupoCliente grupoCliente = new GrupoCliente();
+                grupoCliente.idGrupoCliente = this.idGrupoCliente;
 
-                ///// Ejecutando el webservice
-                //// localhost:8080/admeli/xcore2/xcore/services.php/marca/desactivar
-                //Response response = await webService.POST<Marca, Response>("marca", "desactivar", marca);
+                /// Ejecutando el webservice
+                // localhost:8080/admeli/xcore2/xcore/services.php/gcliente/desactivar
+                Response response = await webService.POST<GrupoCliente, Response>("gcliente", "desactivar", grupoCliente);
 
-                //// Message response
-                //await App.Current.MainPage.DisplayAlert("Anular", response.Message, "Aceptar");
+                // Message response
+                await App.Current.MainPage.DisplayAlert("Anular", response.Message, "Aceptar");
 
-                //// Refrescar la lista
-                //MarcaViewModel.GetInstance().ExecuteRefresh();
+                // Refrescar la lista
+                GrupoClienteViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {
@@ -135,41 +136,35 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         {
             try
             {
-                ///// validacion de los campos
-                //if (string.IsNullOrEmpty(this.NombreMarca))
-                //{
-                //    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo obligatoria", "Aceptar");
-                //    return;
-                //}
+                // validacion de los campos
+                if (string.IsNullOrEmpty(this.nombreGrupo))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Campo Nombre Grupo obligatoria", "Aceptar");
+                    return;
+                }
 
-                //// Estados
-                //this.IsRunning = true;
-                //this.IsEnabled = false;
+                // Estados
+                this.IsRunning = true;
+                this.IsEnabled = false;
 
-                //// Preparando el objeto para enviar
-                //if (this.Nuevo)
-                //{
-                //    this.CaptionImagen = "";
-                //    this.UbicacionLogo = "";
-                //    this.TieneRegistros = "";
-                //}
+                // Preparando el objeto para enviar
 
-                //if (this.Nuevo)
-                //{
-                //    // localhost:8080/admeli/xcore2/xcore/services.php/marca/guardar
-                //    Response response = await webService.POST<Marca, Response>("marca", "guardar", (Marca)this);
-                //    await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
-                //}
-                //else
-                //{
-                //    // localhost:8080/admeli/xcore2/xcore/services.php/marca/modificar
-                //    Response response = await webService.POST<Marca, Response>("marca", "modificar", (Marca)this);
-                //    await App.Current.MainPage.DisplayAlert("Modificar", response.Message, "Aceptar");
-                //}
+                if (this.Nuevo)
+                {
+                    // localhost:8080/admeli/xcore2/xcore/services.php/gcliente/guardar
+                    Response response = await webService.POST<GrupoCliente, Response>("gcliente", "guardar", (GrupoCliente)this);
+                    await App.Current.MainPage.DisplayAlert("Guardar", response.Message, "Aceptar");
+                }
+                else
+                {
+                    // localhost:8080/admeli/xcore2/xcore/services.php/gcliente/modificar
+                    Response response = await webService.POST<GrupoCliente, Response>("gcliente", "modificar", (GrupoCliente)this);
+                    await App.Current.MainPage.DisplayAlert("Modificar", response.Message, "Aceptar");
+                }
 
-                //// Refrescar y regresar a la pagina anterior
-                //MarcaViewModel.GetInstance().ExecuteRefresh();
-                //await App.MarcaItemPage.Navigation.PopAsync();
+                // Refrescar y regresar a la pagina anterior
+                GrupoClienteViewModel.GetInstance().ExecuteRefresh();
+                await App.GrupoClienteItemPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
@@ -192,15 +187,19 @@ namespace AdmeliApp.ViewModel.ItemViewModel
                 this.IsRunning = true;
                 this.IsEnabled = false;
 
-                ///// pregunta al usuario (Confirmacion)
-                //if (await App.Current.MainPage.DisplayAlert("Eliminar", "¿esta seguro de eliminar este registro? \n" + this.NombreMarca, "Aceptar", "Cancelar") == false) return;
+                // pregunta al usuario (Confirmacion)
+                if (await App.Current.MainPage.DisplayAlert("Eliminar", "¿esta seguro de eliminar este registro? \n" + this.idGrupoCliente, "Aceptar", "Cancelar") == false) return;
 
-                //// localhost:8080/admeli/xcore2/xcore/services.php/marca/eliminar
-                //Response response = await webService.POST<Marca, Response>("marca", "eliminar", (Marca)this);
-                //await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
+                // Preparando el objeto para enviar
+                GrupoCliente grupoCliente = new GrupoCliente();
+                grupoCliente.idGrupoCliente = this.idGrupoCliente;
 
-                //// Refrescar la lista
-                //MarcaViewModel.GetInstance().ExecuteRefresh();
+                // localhost:8080/admeli/xcore2/xcore/services.php/marca/eliminar
+                Response response = await webService.POST<GrupoCliente, Response>("gcliente", "eliminar", grupoCliente);
+                await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
+
+                // Refrescar la lista
+                GrupoClienteViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {

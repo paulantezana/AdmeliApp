@@ -84,7 +84,7 @@ namespace AdmeliApp.ViewModel
 
         private void ExecuteNuevo()
         {
-            this.SetCurrentPuntoVenta(new CajasInicializadasItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
+            this.SetCurrentCajasInicializada(new CajasInicializadasItemViewModel() { Nuevo = true, DeleteIsEnabled = false });
             App.PuntoVentaPage.Navigation.PushAsync(new CajaInicializadaPage());
         }
         #endregion
@@ -149,7 +149,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentPuntoVenta(CajasInicializadasItemViewModel cajasInicializadasItemViewModel)
+        internal void SetCurrentCajasInicializada(CajasInicializadasItemViewModel cajasInicializadasItemViewModel)
         {
             this.CurrentCajasInicializadas = cajasInicializadasItemViewModel;
         }

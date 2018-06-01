@@ -1,5 +1,6 @@
 ﻿using AdmeliApp.Helpers;
 using AdmeliApp.Model;
+using AdmeliApp.Pages.ConfiguracionPages.ConfiguracionItemPages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -79,11 +80,11 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         #region =============================== COMMAND EXECUTE ===============================
         private void ExecuteEditar()
         {
-            //MarcaViewModel marcaViewModel = MarcaViewModel.GetInstance();
-            //marcaViewModel.SetCurrentMarca(this);
-            //this.Nuevo = false; /// Importante indicaque se modificara el registro actual
-            //this.DeleteIsEnabled = true;
-            //App.MarcaPage.Navigation.PushAsync(new MarcaItemPage()); // Navegacion
+            DenominacionViewModel denominacionViewModel = DenominacionViewModel.GetInstance();
+            denominacionViewModel.SetCurrentDenominacion(this);
+            this.Nuevo = false; /// Importante indicaque se modificara el registro actual
+            this.DeleteIsEnabled = true;
+            App.DenominacionPage.Navigation.PushAsync(new DenominacionItemPage()); // Navegacion
         }
 
         private async void ExecuteAnular()

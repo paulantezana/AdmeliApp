@@ -95,7 +95,7 @@ namespace AdmeliApp.ViewModel
             }
         }
 
-        internal void SetCurrentMarca(PersonalItemViewModel personalItemViewModel)
+        internal void SetCurrentPersonal(PersonalItemViewModel personalItemViewModel)
         {
             this.CurrentPersonal = personalItemViewModel;
         }

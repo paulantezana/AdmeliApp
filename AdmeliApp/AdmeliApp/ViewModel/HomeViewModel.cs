@@ -27,6 +27,22 @@ namespace AdmeliApp.ViewModel
             set { SetValue(ref this._VentaMensualChart, value); }
         }
 
+        #region =============================================== LIST PERMISOS ===============================================
+        private bool _CompraIsVisible;
+        public bool CompraIsVisible
+        {
+            get { return this._CompraIsVisible; }
+            set { SetValue(ref this._CompraIsVisible, value); }
+        }
+
+        private bool _VentaIsVisible;
+        public bool VentaIsVisible
+        {
+            get { return this._VentaIsVisible; }
+            set { SetValue(ref this._VentaIsVisible, value); }
+        } 
+        #endregion
+
 
         #region ======================= COMMANDS =======================
         private ICommand _ProductoCommand;
@@ -60,6 +76,11 @@ namespace AdmeliApp.ViewModel
             this.IsEnabled = true;
 
             loadVentasMensules();
+
+            // PERMISOS DE LOS AUSARIOS
+            VentaIsVisible = (App.asignacionPersonal.idAsignarPuntoVenta > 0);
+            CompraIsVisible = (App.asignacionPersonal.idAsignarPuntoCompra > 0);
+
             //loadIngresoMoneda();
         }
         #endregion

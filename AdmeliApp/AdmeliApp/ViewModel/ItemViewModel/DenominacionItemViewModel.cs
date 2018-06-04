@@ -74,6 +74,106 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             this.IsEnabled = true;
             this.IconToggleOptions = "expandToggle_icon.png"; //Icono por defecto para expandir la item de la lista
             this.estado = 1;
+            RootLoad(); 
+        }
+        #endregion
+
+        #region =================================== LISTS ===================================
+        // =======================================================================================
+        // Listar Moneda ----------------------------------------------------------------
+        // =======================================================================================
+        private Moneda _MonedaSelectedItem;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public Moneda MonedaSelectedItem
+        {
+            get { return this._MonedaSelectedItem; }
+            set
+            {
+                SetValue(ref this._MonedaSelectedItem, value);
+            }
+        }
+
+        private List<Moneda> _MonedaItems;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public List<Moneda> MonedaItems
+        {
+            get { return this._MonedaItems; }
+            set { SetValue(ref this._MonedaItems, value); }
+        }
+
+        // =======================================================================================
+        // Listar tipo moneda ----------------------------------------------------------------
+        // =======================================================================================
+        private TipoMonedaI _TipoMonedaSelectedItem;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public TipoMonedaI TipoMonedaSelectedItem
+        {
+            get { return this._TipoMonedaSelectedItem; }
+            set
+            {
+                SetValue(ref this._TipoMonedaSelectedItem, value);
+            }
+        }
+
+        private List<TipoMonedaI> _TipoMonedaItems;
+        [JsonIgnore] /// Con esta linea se ignora en la serializacion con el web service
+        public List<TipoMonedaI> TipoMonedaItems
+        {
+            get { return this._TipoMonedaItems; }
+            set { SetValue(ref this._TipoMonedaItems, value); }
+        }
+        #endregion
+
+        #region ================================== LOADS ==================================
+        private void RootLoad()
+        {
+            LoadMoneda();
+            LoadTipoMoneda();
+        }
+        private void LoadTipoMoneda()
+        {
+            TipoMonedaItems = new List<TipoMonedaI>()
+            {
+                new TipoMonedaI()
+                {
+                    idTipoMoneda = "1",
+                    nombre = "BILLETE"
+                },
+                new TipoMonedaI()
+                {
+                    idTipoMoneda = "2",
+                    nombre = "MONEDA"
+                },
+            };
+        }
+
+        private async void LoadMoneda()
+        {
+            try
+            {
+                this.IsRefreshing = true;
+                this.IsEnabled = false;
+
+                // www.lineatienda.com/services.php/monedas/estado/1
+                List<Moneda> list = await webService.GET<List<Moneda>>("monedas", String.Format("estado/{0}", estado));
+
+                // www.lineatienda.com/services.php/categorias21/-1
+                int MonedaID = (idMoneda > 0) ? idMoneda : -1;
+                List<Moneda> datos = await webService.GET<List<Moneda>>("monedas", String.Format("estado/{0}", estado));
+                MonedaItems = datos;
+
+                MonedaSelectedItem = datos.Find(c => c.idMoneda == this.idMoneda); // Selecciona la moneda
+                TipoMonedaSelectedItem = TipoMonedaItems.Find(x => x.idTipoMoneda == "1");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+            finally
+            {
+                this.IsRefreshing = false;
+                this.IsEnabled = true;
+            }
         }
         #endregion
 
@@ -85,6 +185,10 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             this.Nuevo = false; /// Importante indicaque se modificara el registro actual
             this.DeleteIsEnabled = true;
             App.DenominacionPage.Navigation.PushAsync(new DenominacionItemPage()); // Navegacion
+
+            // Editar seleccionar los datos en el picker
+            MonedaSelectedItem = MonedaItems.Find(m => m.idMoneda == this.idMoneda);
+            TipoMonedaSelectedItem = TipoMonedaItems.Find(m => m.idTipoMoneda == this.tipoMoneda);
         }
 
         private async void ExecuteAnular()
@@ -222,5 +326,11 @@ namespace AdmeliApp.ViewModel.ItemViewModel
             IconToggleOptions = (ToggleOptionsIsVisible) ? "collapseToggle_icon.png" : "expandToggle_icon.png"; //Cambiando los iconos en tiempo real
         }
         #endregion
+    }
+
+    public class TipoMonedaI
+    {
+        public string idTipoMoneda { get; set; }
+        public string nombre { get; set; }
     }
 }

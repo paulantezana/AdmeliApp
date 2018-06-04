@@ -25,7 +25,7 @@ namespace AdmeliApp
         internal static bool cajaIniciada;
         internal static CajaSesion cajaSesion;
         internal static List<PuntoVenta> puntosDeVenta;
-        internal static List<Almacen> alamacenes;
+        internal static List<Almacen> almacenes;
         internal static List<TipoDocumento> tipoDocumentos;
         internal static List<TipoCambioMoneda> tipoCambioMonedas;
         internal static List<Moneda> monedas;

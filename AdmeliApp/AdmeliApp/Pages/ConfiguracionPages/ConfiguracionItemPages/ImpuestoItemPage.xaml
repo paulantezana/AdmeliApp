@@ -27,7 +27,7 @@
 
                     <StackLayout>
                         <Label Text="Valor Impuesto"/>
-                        <Entry IsEnabled="{Binding IsEnabled}" Text="{Binding valorImpuesto, Mode=TwoWay}"/>
+                        <Entry IsEnabled="{Binding IsEnabled}" Text="{Binding valorImpuesto, Mode=TwoWay}" Keyboard="Numeric"/>
                         <Label Text="Valor decimal del impuesto (ejm. 18.5)."  TextColor="{StaticResource grey-lighter}"/>
                     </StackLayout>
 

@@ -83,7 +83,6 @@ namespace AdmeliApp.ViewModel
             get { return this._EstadolItems; }
             set { SetValue(ref this._EstadolItems, value); }
         }
-        // --
 
         // Lista principal
         private List<Venta> VentaList { get; set; }

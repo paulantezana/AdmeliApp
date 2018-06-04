@@ -14,10 +14,10 @@
                         <Picker
                             Title="Moneda"
                             HorizontalOptions="FillAndExpand"
-                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            SelectedItem="{Binding MonedaSelectedItem}"
                             ItemDisplayBinding="{Binding nombre}"
                             IsEnabled="{Binding IsEnabledStock}"
-                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                            ItemsSource="{Binding MonedaItems, Mode=TwoWay}"/>
                         <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
                     </StackLayout>
 
@@ -26,10 +26,10 @@
                         <Picker
                             Title="Tipo moneda"
                             HorizontalOptions="FillAndExpand"
-                            SelectedItem="{Binding TipoDocumentoSelectedItem}"
+                            SelectedItem="{Binding TipoMonedaSelectedItem}"
                             ItemDisplayBinding="{Binding nombre}"
                             IsEnabled="{Binding IsEnabledStock}"
-                            ItemsSource="{Binding TipoDocumentoItems, Mode=TwoWay}"/>
+                            ItemsSource="{Binding TipoMonedaItems, Mode=TwoWay}"/>
                         <Label Text="Natural: para persona común. o  Jurídico: para empresas." TextColor="{StaticResource grey-lighter}"/>
                     </StackLayout>
 

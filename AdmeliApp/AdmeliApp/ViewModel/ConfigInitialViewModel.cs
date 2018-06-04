@@ -48,10 +48,10 @@ namespace AdmeliApp.ViewModel
             this.IsEnabled = true;
 
             PuntoVentaItems = App.puntosDeVenta;
-            AlmacenItems = App.alamacenes;
+            AlmacenItems = App.almacenes;
 
-            PuntoVentaSelectedItem = PuntoVentaItems[0];
-            AlmacenSelectedItem = AlmacenItems[0];
+            PuntoVentaSelectedItem = (PuntoVentaItems.Count > 0) ? PuntoVentaItems[0] : null;
+            AlmacenSelectedItem = (AlmacenItems.Count > 0) ? AlmacenItems[0] : null;
         }
 
         // COMMANDS

@@ -128,15 +128,15 @@ namespace AdmeliApp.ViewModel
                 });
 
                 // Compronbando la asignacion
-                if (App.alamacenes.Count > 1 || App.puntosDeVenta.Count > 1)
+                if (App.almacenes.Count > 1 || App.puntosDeVenta.Count > 1)
                 {
                     App.Current.MainPage = new AdmeliApp.Pages.Root.ConfigInitialPage();
                 }
                 else
                 {
                     // asignando los id principales de almacen y id punto de venta
-                    App.currentIdAlmacen = App.alamacenes[0].idAlmacen;
-                    App.currentIdPuntoVenta = App.puntosDeVenta[0].idAsignarPuntoVenta;
+                    App.currentIdAlmacen = (App.almacenes.Count > 0 ) ? App.almacenes[0].idAlmacen : 0;
+                    App.currentIdPuntoVenta = (App.puntosDeVenta.Count > 0) ? App.puntosDeVenta[0].idAsignarPuntoVenta : 0;
 
                     // Mostrando la pagina principal
                     App.Current.MainPage = new AdmeliApp.Pages.Root.RootPage();
@@ -231,7 +231,7 @@ namespace AdmeliApp.ViewModel
         private async void loadAlmacenes()
         {
             // www.lineatienda.com/services.php/personalalmacenes/per/8/suc/1
-            App.alamacenes = await webService.GET<List<Almacen>>("personalalmacenes", String.Format("per/{0}/suc/{1}", App.personal.idPersonal, App.sucursal.idSucursal));
+            App.almacenes = await webService.GET<List<Almacen>>("personalalmacenes", String.Format("per/{0}/suc/{1}", App.personal.idPersonal, App.sucursal.idSucursal));
 
             this.nLoads++;
             //loadState("almacenes");

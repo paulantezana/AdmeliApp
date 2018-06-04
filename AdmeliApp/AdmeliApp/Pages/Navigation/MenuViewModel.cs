@@ -121,14 +121,37 @@ namespace AdmeliApp.Pages.Navigation
                 //new MenuTienda() { Id = 717, Icon = "codigoBarra_icon.png", Title = "Diseño de código de barras"},
             };
 
-            //// Agregando los menus a la lista del menu tienda segun los permisos de login ususario
-            MenuTiendaItems.Add(menuVentas);
-            MenuTiendaItems.Add(menuCompras);
-            MenuTiendaItems.Add(menuProductos);
-            MenuTiendaItems.Add(menuAlmacen);
-            MenuTiendaItems.Add(menuCaja);
-            MenuTiendaItems.Add(menuReportes);
+            // =====================================================================================================================================
+            // PERMISOS DE USUARIO
+            // Agregando los menus a la lista del menu tienda segun los permisos de login ususario
+            // =====================================================================================================================================
+            if (App.asignacionPersonal.idAsignarPuntoVenta > 0)
+            {
+                MenuTiendaItems.Add(menuVentas);
+            }
+
+            if (App.asignacionPersonal.idAsignarPuntoCompra > 0)
+            {
+                MenuTiendaItems.Add(menuCompras);
+            }
+
+            if (App.almacenes.Count > 0)
+            {
+                MenuTiendaItems.Add(menuProductos);
+                MenuTiendaItems.Add(menuAlmacen);
+            }
+
+            if (App.asignacionPersonal.idAsignarCaja > 0)
+            {
+                MenuTiendaItems.Add(menuCaja);
+            }
+
             if (App.asignacionPersonal.idAsignarPuntoAdministracion > 0)
+            {
+                MenuTiendaItems.Add(menuReportes);
+            }
+
+            if (App.asignacionPersonal.idAsignarPuntoAdministracion > 0 || App.asignacionPersonal.idAsignarPuntoGerencia > 0)
             {
                 MenuTiendaItems.Add(menuAdmin);
             }

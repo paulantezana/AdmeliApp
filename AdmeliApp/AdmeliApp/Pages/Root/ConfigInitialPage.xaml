@@ -10,7 +10,7 @@
                 <Image Source="LoginHeader.png"></Image>
 
                 <StackLayout IsVisible="{Binding AlmacenIsVisible}">
-                    <Label Text="Seleccionar Almacén" TextColor="White"/>
+                    <Label Text="Seleccionar Almacén"/>
                     <Picker
                         Title="Almacen"
                         HorizontalOptions="FillAndExpand"
@@ -21,7 +21,7 @@
                 </StackLayout>
 
                 <StackLayout IsVisible="{Binding PuntoVentaIsVisible}">
-                    <Label Text="Seleccionar punto de venta" TextColor="White"/>
+                    <Label Text="Seleccionar punto de venta"/>
                     <Picker
                         Title="Punto de venta"
                         HorizontalOptions="FillAndExpand"

@@ -231,7 +231,7 @@ namespace AdmeliApp.ViewModel
         private async void loadAlmacenes()
         {
             // www.lineatienda.com/services.php/personalalmacenes/per/8/suc/1
-            App.almacenes = await webService.GET<List<Almacen>>("personalalmacenes", String.Format("per/{0}/suc/{1}", App.personal.idPersonal, App.sucursal.idSucursal));
+            App.almacenes = await webService.GET<List<Almacen>>("personalalmacenes", String.Format("per/{0}/suc/{1}", App.personal.idPersonal, 0)); // se esta enviando como parametro 0 que corresponde al sucursal
 
             this.nLoads++;
             //loadState("almacenes");

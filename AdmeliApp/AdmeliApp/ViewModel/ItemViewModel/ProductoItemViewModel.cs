@@ -105,36 +105,36 @@ namespace AdmeliApp.ViewModel.ItemViewModel
         {
             try
             {
-                // Estados
-                this.IsRunning = true;
-                this.IsEnabled = false;
+                //// Estados
+                //this.IsRunning = true;
+                //this.IsEnabled = false;
 
-                if(this.enUso == true)
-                {
-                    // pregunta al usuario (Confirmacion)
-                    if (await App.Current.MainPage.DisplayAlert("Inhabilitar", "¿Está seguro de inhabilitar este registro? \n" + this.nombreProducto, "Aceptar", "Cancelar") == false) return;
-                    Producto currentProducto = new Producto(); //creando una instancia del objeto categoria
-                    currentProducto.idProducto = idProducto;
+                //if(this.enUso == true)
+                //{
+                //    // pregunta al usuario (Confirmacion)
+                //    if (await App.Current.MainPage.DisplayAlert("Inhabilitar", "¿Está seguro de inhabilitar este registro? \n" + this.nombreProducto, "Aceptar", "Cancelar") == false) return;
+                //    Producto currentProducto = new Producto(); //creando una instancia del objeto categoria
+                //    currentProducto.idProducto = idProducto;
 
-                    //localhost:8085/ad_meli/xcore/services.php/producto/inhabilitar
-                    Response response = await webService.POST<Producto, Response>("producto", "inhabilitar", currentProducto);
-                    await App.Current.MainPage.DisplayAlert("Inhabilitar", response.Message, "Aceptar");
-                }
-                else
-                {
-                    // pregunta al usuario (Confirmacion)
-                    if (await App.Current.MainPage.DisplayAlert("Eliminar", "¿Está seguro de eliminar este registro? \n" + this.nombreProducto, "Aceptar", "Cancelar") == false) return;
-                    Producto currentProducto = new Producto(); //creando una instancia del objeto categoria
-                    currentProducto.idProducto = idProducto;
+                //    //localhost:8085/ad_meli/xcore/services.php/producto/inhabilitar
+                //    Response response = await webService.POST<Producto, Response>("producto", "inhabilitar", currentProducto);
+                //    await App.Current.MainPage.DisplayAlert("Inhabilitar", response.Message, "Aceptar");
+                //}
+                //else
+                //{
+                //    // pregunta al usuario (Confirmacion)
+                //    if (await App.Current.MainPage.DisplayAlert("Eliminar", "¿Está seguro de eliminar este registro? \n" + this.nombreProducto, "Aceptar", "Cancelar") == false) return;
+                //    Producto currentProducto = new Producto(); //creando una instancia del objeto categoria
+                //    currentProducto.idProducto = idProducto;
 
-                    // localhost/admeli/xcore/services.php/producto/eliminar
-                    Response response = await webService.POST<Producto, Response>("producto", "eliminar", currentProducto);
-                    await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
+                //    // localhost/admeli/xcore/services.php/producto/eliminar
+                //    Response response = await webService.POST<Producto, Response>("producto", "eliminar", currentProducto);
+                //    await App.Current.MainPage.DisplayAlert("Eliminar", response.Message, "Aceptar");
 
-                }
+                //}
 
-                // Refrescar la lista
-                MarcaViewModel.GetInstance().ExecuteRefresh();
+                //// Refrescar la lista
+                //MarcaViewModel.GetInstance().ExecuteRefresh();
             }
             catch (Exception ex)
             {

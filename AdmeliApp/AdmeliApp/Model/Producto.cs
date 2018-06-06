@@ -9,7 +9,9 @@ namespace AdmeliApp.Model
 {
     public class Producto : BaseModel
     {
-        public int idProducto { get; set; }
+        //Compra,Venta,Stock cambiado el tipo de string a Decimal
+        public int idProducto { get; set; }   // porque haci  manda desde el servicio modificado 
+        public string idPresentacion { get; set; }
         public bool cantidadFraccion { get; set; }
         public string codigoBarras { get; set; }
         public string codigoProducto { get; set; }
@@ -31,19 +33,50 @@ namespace AdmeliApp.Model
         public string nombreMarca { get; set; }
         public string nombreProducto { get; set; }
         public string nombreUnidad { get; set; }
-        public dynamic precioCompra { get; set; }
+        public Decimal precioCompra { get; set; }
         public string urlVideo { get; set; }
         public bool ventaVarianteSinStock { get; set; }
         public string nombre { get; set; }
         public string codigo { get; set; }
-
-        public string precioVenta { get; set; }
-        public string stock { get; set; }
-        public string stockFinanciero { get; set; }
-
         private string estadoString;
+
+        public string EstadoString
+        {
+            get
+            {
+                if (estado == true) { return "Activo"; }
+                else { return "Anulado"; }
+            }
+            set
+            {
+                estadoString = value;
+            }
+        }
+        public Decimal precioVenta { get; set; }
+        public Decimal stock { get; set; }
+        public string stockFinanciero { get; set; }
         public int idPresentacionAfectada { get; set; }
         public int idAlmacen { get; set; }
         public string nombreAlmacen { get; set; }
+
+        private int idPresentacionint;
+        public int IdPresentacionint
+        {
+            get
+            {
+                if (idPresentacion == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Int32.Parse(idPresentacion);
+                }
+            }
+            set
+            {
+                idPresentacion = value.ToString();
+            }
+        }
     }
 }

@@ -43,24 +43,6 @@
                                 HorizontalOptions="End">
                             </Switch>
                         </StackLayout>
-
-                        <StackLayout Padding="10,0,10,0">
-                            <!--<Picker
-                                Title="Sucursal"
-                                HorizontalOptions="FillAndExpand"
-                                SelectedItem="{Binding SucursalSelectedItem}"
-                                ItemDisplayBinding="{Binding nombre}"
-                                IsEnabled="{Binding IsEnabledStock}"
-                                ItemsSource="{Binding SucursalItems, Mode=TwoWay}"/>-->
-                            <Picker
-                                Title="Almacen"
-                                HorizontalOptions="FillAndExpand"
-                                SelectedItem="{Binding AlmacenSelectedItem}"
-                                ItemDisplayBinding="{Binding nombre}"
-                                IsEnabled="{Binding IsEnabledStock}"
-                                ItemsSource="{Binding AlmacenItems, Mode=TwoWay}"/>
-                        </StackLayout>
-
                     </StackLayout>
                 </ListView.Header>
 
@@ -91,6 +73,12 @@
                                                 <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
                                                 <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
                                             </StackLayout>
+
+                                            <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
+                                                <Label Text="Almacen" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                                <Label Text="{Binding nombreAlmacen}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                            </StackLayout>
+
                                             <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
                                                 <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
                                                 <Label Text="Venta:" VerticalOptions="Center"/>

@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdmeliApp.Pages.ProductoPages.ProductosPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
-        <ToolbarItem  Icon="filter_icon.png" Command="{Binding FilterCommand}"/>
+        <!--<ToolbarItem  Icon="floatAdd_icon.png" Command="{Binding NuevoCommand}"/>
+        <ToolbarItem  Icon="filter_icon.png" Command="{Binding FilterCommand}"/>-->
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -71,7 +71,7 @@
                                         <StackLayout>
                                             <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
                                                 <Label Text="Stock" TextColor="{Binding TextColorItem}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                                <Label Text="{Binding stock}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
+                                                <Label Text="{Binding stock, StringFormat='{0:F0}'}" VerticalOptions="Center" HorizontalTextAlignment="End"/>
                                             </StackLayout>
 
                                             <StackLayout IsVisible="{Binding IsVisibleStock}" Orientation="Horizontal">
@@ -82,12 +82,12 @@
                                             <StackLayout IsVisible="{Binding IsVisiblePrecioVenta}" Orientation="Horizontal">
                                                 <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
                                                 <Label Text="Venta:" VerticalOptions="Center"/>
-                                                <Label Text="{Binding precioVenta}" VerticalOptions="Center"/>
+                                                <Label Text="{Binding precioVenta, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
                                             </StackLayout>
                                             <StackLayout IsVisible="{Binding IsVisiblePrecioCompra}" Orientation="Horizontal">
                                                 <!--<Image Source="price_icon.png" WidthRequest="16" HeightRequest="16" VerticalOptions="Start"/>-->
                                                 <Label Text="Compra: " VerticalOptions="Center" HorizontalTextAlignment="End"/>
-                                                <Label Text="{Binding precioCompra}" VerticalOptions="Center"/>
+                                                <Label Text="{Binding precioCompra, StringFormat='{0:F2}'}" VerticalOptions="Center"/>
                                             </StackLayout>
                                         </StackLayout>
                                     </StackLayout>

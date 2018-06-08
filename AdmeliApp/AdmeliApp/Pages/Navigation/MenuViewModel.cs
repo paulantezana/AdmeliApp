@@ -135,7 +135,7 @@ namespace AdmeliApp.Pages.Navigation
                 MenuTiendaItems.Add(menuCompras);
             }
 
-            if (App.almacenes.Count > 0)
+            if (App.asignacionPersonal.idAlmacen > 0)
             {
                 MenuTiendaItems.Add(menuProductos);
                 MenuTiendaItems.Add(menuAlmacen);
